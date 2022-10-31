@@ -1,5 +1,5 @@
 import { User, validate } from "#models/UserModel/user"
-import { UserVerification } from "#models/UserModel/UserVerification"
+import { UserVerification } from "#models/UserModel/userverification"
 import asyncHandler from "#middlewares/asyncHandler";
 import bcrypt from "bcrypt";
 
