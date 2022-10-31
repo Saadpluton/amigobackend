@@ -3,8 +3,8 @@ import {multerUpload} from "#utils/multer";
 
 import validateObjectId from "#middlewares/validateObjectId";
 
-import { createAlbum } from "#controllers/albumController/CreateAlbum";
-import { getAlbums } from "#controllers/albumController/GetAlbum";
+import { createAlbum } from "#controllers/AlbumController/CreateAlbum";
+import { getAlbums } from "#controllers/AlbumController/GetAlbum";
 import { getOneAlbum } from "#controllers/AlbumController/GetOneAlbum";
 import { updateAlbum } from "#controllers/AlbumController/updateAlbum";
 import { suspendAlbum } from "#controllers/AlbumController/suspendAlbum";
