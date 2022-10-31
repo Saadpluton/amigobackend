@@ -6,11 +6,7 @@
   "license": "MIT",
   "private": true,
   "type": "module",
-  "engines": {
-    "node": "16.x"
-  },
   "dependencies": {
-    "audic": "^3.0.1",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
