@@ -21,18 +21,13 @@ export const createArtist = asyncHandler(async (req, res) => {
     {
       return res.status(400).send({status : false , message : error?.details[0]?.message});
     }
-    const account = await Account.findById(req.body.accountId);
 
-    // if (!account) {
-    //     return res.status(404).json({ status: false, message: "account record not found" })
-    // }
-    
     if(!req.file?.filename)
     {
       return res.status(400).json({ status: false, message: "Please Select the Image" })    
     }
 
-    let artist = new Artist(_.pick(req.body, ['name','country','accountId','image']))
+    let artist = new Artist(_.pick(req.body, ['name','country','image']))
     artist.image = `uploads/${req.file?.filename}`
     artist = await artist.save();
 

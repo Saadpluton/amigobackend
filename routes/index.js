@@ -12,6 +12,8 @@ import PlaylistRoute from "#routes/PlaylistRoutes/playlist_route";
 import PerformOnSong from "#routes/PerformOnSongRoutes/performOnSong_route";
 import LikesRoute from "#routes/LikesRoutes/likes_route";
 import SharesRoute from "#routes/SharesRoutes/shares_route";
+import GenreRoute from "#routes/GenreRoutes/genre_route";
+import ListenerRoute from "#routes/ListenerRoutes/listeners_route";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
@@ -51,6 +53,13 @@ const routes = (app) => {
 
   //Shares
   app.use("/api", SharesRoute);
+
+  //Genre
+  app.use("/api", GenreRoute);
+
+  //Listener
+  app.use("/api", ListenerRoute);
+
 
   app.use(error);
 };

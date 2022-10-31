@@ -24,6 +24,14 @@ const AlbumSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  totalComments: {
+    type: Number,
+    default: 0
+  },
+  totalShares: {
+    type: Number,
+    default: 0
+  },
   isSuspend: {
     type: Boolean,
     default: false,

@@ -15,7 +15,7 @@ export const trackLikes = asyncHandler(async (req, res) => {
       .status(404)
       .json({ status: false, message: "User record not found" });
   }
-  const song = await Song.findById(req.body.songId);
+  const song = await Song.findById(req.body.trackId);
 
   if (!song) {
     return res
@@ -24,24 +24,24 @@ export const trackLikes = asyncHandler(async (req, res) => {
   }
   const likesValid = await Likes.findOne({
     userId: req.params.id,
-    songId: req.body.songId,
+    trackId: req.body.trackId,
   });
 
   if (likesValid) {
     await Likes.findOneAndDelete({
       userId: req.params.id,
-      songId: req.body.songId,
+      trackId: req.body.trackId,
     });
-    await Song.findByIdAndUpdate(req.body.songId, {
+    await Song.findByIdAndUpdate(req.body.trackId, {
       totalLikes: song.totalLikes - 1,
     });
     return res
       .status(200)
       .json({ status: false, message: "likes remove successfully" });
   } else {
-    let likes = new Likes({ userId: req.params.id, songId: req.body.songId });
+    let likes = new Likes({ userId: req.params.id, trackId: req.body.trackId });
     await likes.save();
-    await Song.findByIdAndUpdate(req.body.songId, {
+    await Song.findByIdAndUpdate(req.body.trackId, {
       totalLikes: song.totalLikes + 1,
     });
     return res

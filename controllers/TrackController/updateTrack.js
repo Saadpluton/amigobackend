@@ -42,51 +42,68 @@ export const updateTrack = asyncHandler(async (req, res) => {
       message: "Upload audio type should be mp3, mpeg",
     });
   }
-  let parser = musicData(
-    fs.createReadStream(`uploads/${audio?.filename}`),
-    { duration: true },
-    function (err, metadata) {
-      let fixedCurrentTime;
-      let duration = 0;
-      if (err) {
-        console.log("err:", err);
-      } else {
-        duration = metadata.duration;
 
-        //console.log(duration);
+  let image1 = req.files ? `uploads/${file?.filename}` : undefined
 
-        var seconds = duration % 60;
-        var foo = duration - seconds;
-        var minutes = foo / 60;
-        var hour = Math.floor(minutes / 60);
+  let audio1 = req.files ? `uploads/${audio?.filename}` : undefined
 
-        if (seconds < 10) {
-          seconds = "0" + seconds.toString();
-        }
-
-        if (hour > 0) {
-          fixedCurrentTime = hour + ":" + minutes + ":" + seconds;
+  if (audio1) {
+    let parser = musicData(
+      fs.createReadStream(`uploads/${audio?.filename}`),
+      { duration: true },
+      function (err, metadata) {
+        let fixedCurrentTime;
+        let duration = 0;
+        if (err) {
+          console.log("err:", err);
         } else {
-          fixedCurrentTime = minutes + ":" + seconds;
-        }
-        //console.log(fixedCurrentTime);
+          duration = metadata.duration;
 
-        const update = Song.findByIdAndUpdate(req.params.id, {
-          $set: {
-            ...req.body,
-            duration: fixedCurrentTime,
-            image: `uploads/${file?.filename}`,
-            audio: `uploads/${audio?.filename}`,
-          },
-        }).then((res) => {
-          if (res) {
-            true;
+          //console.log(duration);
+
+          var seconds = duration % 60;
+          var foo = duration - seconds;
+          var minutes = foo / 60;
+          var hour = Math.floor(minutes / 60);
+
+          if (seconds < 10) {
+            seconds = "0" + seconds.toString();
           }
-        });
-      }
-    }
-  );
 
+          if (hour > 0) {
+            fixedCurrentTime = hour + ":" + minutes + ":" + seconds;
+          } else {
+            fixedCurrentTime = minutes + ":" + seconds;
+          }
+          //console.log(fixedCurrentTime);
+
+          const update = Song.findByIdAndUpdate(req.params.id, {
+            $set: {
+              ...req.body,
+              duration: fixedCurrentTime,
+              image: image1,
+              audio: audio1,
+            },
+          }).then((res) => {
+            if (res) {
+              true;
+            }
+          });
+        }
+      }
+    );
+
+  }
+  else {
+    const update = Song.findByIdAndUpdate(req.params.id, {
+      $set: {
+        ...req.body,
+        duration: fixedCurrentTime,
+        image: image1,
+      },
+    })
+
+  }
   return res
     .status(200)
     .json({ status: true, message: "Song updated successfully" });

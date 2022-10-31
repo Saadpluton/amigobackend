@@ -1,9 +1,6 @@
 import mongoose from "mongoose";
 
-const sharesSchema = new mongoose.Schema({
-  likes: {
-    type : Boolean,
-  },
+const shareSchema = new mongoose.Schema({
   userId :{
     type: mongoose.Schema.Types.ObjectId,
     ref: "User" ,
@@ -12,8 +9,17 @@ const sharesSchema = new mongoose.Schema({
   artistId :{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Artist" ,
-    required : [true ,"userId field is required"]
+  },
+  albumId :{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Album" ,
+    //required : [true ,"artistId field is required"]
+  },
+  trackId :{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Song" ,
+    //required : [true ,"artistId field is required"]
   },
 });
 
-export const Shares =  mongoose.model("Share", sharesSchema)
+export const Shares =  mongoose.model("Share", shareSchema)

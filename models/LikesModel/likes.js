@@ -15,7 +15,7 @@ const likesSchema = new mongoose.Schema({
     ref: "Album" ,
     //required : [true ,"artistId field is required"]
   },
-  songId :{
+  trackId :{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Song" ,
     //required : [true ,"artistId field is required"]

@@ -12,16 +12,10 @@ export const updateArtistProfile = asyncHandler(async (req, res) => {
 
 
     const artist = await Artist.findById(req.params.id);
-    
-    const account = await Account.findById(req.body.accountId);
-      
+     
     if (!artist) {
         return res.status(404).json({ status: false, message: "Artist record not found" })
     }
-
-    // if (!account && req.body.accountId) {
-    //     return res.status(404).json({ status: false, message: "account record not found" })
-    // }
 
     const update = await Artist.findByIdAndUpdate(req.params.id,{$set : {...req.body,image : `uploads/${req.file?.filename}`}})
 
