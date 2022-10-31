@@ -27,7 +27,7 @@ export const createArtist = asyncHandler(async (req, res) => {
       return res.status(400).json({ status: false, message: "Please Select the Image" })    
     }
 
-    let artist = new Artist(_.pick(req.body, ['name','country','image']))
+    let artist = new Artist(_.pick(req.body, ['name','country','image','description']))
     artist.image = `uploads/${req.file?.filename}`
     artist = await artist.save();
 

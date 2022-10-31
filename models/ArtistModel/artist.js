@@ -12,6 +12,10 @@ const ArtistSchema = new mongoose.Schema({
     type: String,
     required: [true, "country field is required"],
   },
+  description:{
+    type: String,
+    required: [true, "description field is required"],   
+  },
   totalLikes: {
     type: Number,
     default: 0
@@ -37,6 +41,8 @@ function validateArtist(user) {
   const schema = Joi.object({
     name: Joi.string().min(5).max(50).required(),
     country: Joi.string().required(),
+    description: Joi.string().required(),
+    image: Joi.string(),
   });
 
   return schema.validate(user);

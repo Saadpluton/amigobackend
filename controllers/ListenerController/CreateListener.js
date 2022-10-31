@@ -13,7 +13,7 @@ export const createListener = asyncHandler(async (req, res) => {
   if (!user) {
     return res
       .status(404)
-      .json({ status: false, message: "User record not found" });
+      .json({ status: false, message: "User record not found"});
   }
   const track = await Song.findById(req.body.trackId);
 

@@ -18,12 +18,12 @@ export const createAlbumTrack = asyncHandler(async (req, res) => {
     {
       return res.status(400).send({status : false , message : error?.details[0]?.message});
     }
-    const song = await Song.findById(req.body.songId);
+    const track = await Song.findById(req.body.songId);
     const album = await Album.findById(req.body.albumId);
 
-    // if (!song) {
-    //     return res.status(404).json({ status: false, message: "Song record not found" })
-    // }
+    if (!track) {
+        return res.status(404).json({ status: false, message: "Track record not found" })
+    }
     
     if (!album) {
         return res.status(404).json({ status: false, message: "Album record not found" })
