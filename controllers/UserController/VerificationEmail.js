@@ -1,5 +1,5 @@
 import { User, validate } from "#models/UserModel/user"
-import { UserVerification } from "#models/UserModel/userverification"
+import { UserVerification } from "#models/UserModel/userVerification"
 import asyncHandler from "#middlewares/asyncHandler";
 
 
