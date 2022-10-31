@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 6000;
 app.use(cors());
 app.use(express.json());
 app.use(BodyParser.urlencoded({ extended: false }));
-
+app.use('/uploads', express.static('upload'));
 routes(app);
 
 app.listen(PORT, () => winston.info(`Server is Listening on port ${PORT}.`));
