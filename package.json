@@ -1,0 +1,42 @@
+{
+  "name": "node-biolerplate",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "Junaid Sikander",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "audic": "^3.0.1",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "ffmpeg": "^0.0.4",
+    "ffprobe": "^1.1.2",
+    "get-audio-duration": "^3.1.1",
+    "joi": "^17.6.4",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.6.7",
+    "multer": "^1.4.5-lts.1",
+    "musicmetadata": "^2.0.5",
+    "nodemailer": "^6.8.0",
+    "otp": "^1.1.0",
+    "otp-generator": "^4.0.0",
+    "winston": "^3.8.2",
+    "winston-mongodb": "^5.1.0"
+  },
+  "imports": {
+    "#config/*": "./config/*.js",
+    "#constants/*": "./constants/*.js",
+    "#controllers/*": "./controllers/*.js",
+    "#middlewares/*": "./middlewares/*.js",
+    "#models/*": "./models/*.js",
+    "#routes/*": "./routes/*.js",
+    "#utils/*": "./utils/*.js",
+    "#constant/*": "./constant/*.js"
+  }
+}
