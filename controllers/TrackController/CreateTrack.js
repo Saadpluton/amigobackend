@@ -5,7 +5,6 @@ import { PNG, JPG, JPEG, MP3, MPEG } from "#constant/constant";
 import { Artist } from "#models/ArtistModel/artist";
 import fs from "fs";
 import musicData from "musicmetadata";
-import Audic from "audic";
 
 //@desc  Track Create
 //@route  /track
