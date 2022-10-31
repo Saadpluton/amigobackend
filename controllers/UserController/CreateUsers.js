@@ -20,7 +20,7 @@ export const createUser = asyncHandler(async (req, res) => {
     //   return res.status(400).send({status : false , message : error?.details[0]?.message});
     // }
 
-    const emailExists = await User.findOne({ email : req.body.email});
+    const emailExists = await User.findOne({ role : req.body.role , email : req.body.email});
     
     if(emailExists)
     {
