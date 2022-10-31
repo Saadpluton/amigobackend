@@ -5,8 +5,8 @@ import validateObjectId from "#middlewares/validateObjectId";
 
 import { createPlaylistTrack } from "#controllers/PlaylistTrackController/CreatePlaylistTrack";
 import { getOnePlaylistTrack } from "#controllers/PlaylistTrackController/GetOnePlaylistTrack";
-import { getPlaylistTracks } from "#controllers/PlaylistTrackController/GetPlayListTrack";
-import { updatePlaylistTrack } from "#controllers/PlaylistTrackController/updatePlayListTrack";
+import { getPlaylistTracks } from "#controllers/PlaylistTrackController/GetPlaylistTrack";
+import { updatePlaylistTrack } from "#controllers/PlaylistTrackController/updatePlaylistTrack";
 
 
 const PlaylistTrackRoute = express.Router();
