@@ -8,6 +8,8 @@ import { getArtists } from "#controllers/ArtistController/GetArtists";
 import { getOneArtist } from "#controllers/ArtistController/GetOneArtist";
 import { updateArtistProfile } from "#controllers/ArtistController/updateArtistProfile";
 import { suspendArtist } from "#controllers/ArtistController/suspendArtist";
+import { topArtists } from "#controllers/ArtistController/TopArtist";
+import { getArtistsByName } from "#controllers/ArtistController/GetArtistByName";
 
 const artistRoute = express.Router();
 
@@ -16,6 +18,12 @@ artistRoute.post("/artist",multerUpload.single("image"),createArtist);
 
 // //GET All Artist
 artistRoute.get("/artist",getArtists );
+
+// //GET Top Artist
+artistRoute.get("/topArtist",topArtists );
+
+// //GET Top Artist
+artistRoute.get("/artistByName",getArtistsByName);
 
 // //GET One Artist
 artistRoute.get("/artist/:id",validateObjectId, getOneArtist);

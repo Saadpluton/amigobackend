@@ -13,8 +13,6 @@ export const createArtist = asyncHandler(async (req, res) => {
 
 // const {artistImage} = req.file;
 
-
-
     const {error} = validate(req.body);
 
     if (error)

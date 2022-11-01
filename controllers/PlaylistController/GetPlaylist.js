@@ -1,4 +1,4 @@
-import {Playlist , validate} from "#models/PlayListModel/playlist"
+import { Playlist, validate } from "#models/PlayListModel/playlist"
 import asyncHandler from "#middlewares/asyncHandler";
 
 //@desc  Playlist Get
@@ -7,13 +7,15 @@ import asyncHandler from "#middlewares/asyncHandler";
 //@acess  public
 
 export const getPlaylists = asyncHandler(async (req, res) => {
-  const playLists = await Playlist.find().select('-__v');
+  
+  const query = req.query.genre && req.query.subGenre ? {trackGenre: req.query.genre, trackSubGenre: req.query.subGenre} : {}
 
-  if(playLists.length > 0)
-  {
-    res.status(200).json(playLists);    
+  const playLists = await Playlist.find(query).select('-__v');
+
+  if (playLists.length > 0) {
+    return res.status(200).json(playLists);
   }
-  else{
-      res.status(404).json({status : false , message : "No record found"});
+  else {
+    return res.status(404).json({ status: false, message: "No playlist record found" });
   }
 });

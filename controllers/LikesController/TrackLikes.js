@@ -20,7 +20,7 @@ export const trackLikes = asyncHandler(async (req, res) => {
   if (!song) {
     return res
       .status(404)
-      .json({ status: false, message: "Song record not found" });
+      .json({ status: false, message: "Track record not found" });
   }
   const likesValid = await Likes.findOne({
     userId: req.params.id,

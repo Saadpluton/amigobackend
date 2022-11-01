@@ -1,12 +1,15 @@
 import mongoose from "mongoose";
 import Joi from "joi";
 
+import JoiObjectId from "joi-objectid";
+const mongoonse_id = JoiObjectId(Joi);
+
 const PlaylistSchema = new mongoose.Schema({
   title: {
     type: String,
     required: [true, "title field is required"]
   },
-  description:{
+  description: {
     type: String,
     required: [true, "description field is required"]
   },
@@ -16,10 +19,10 @@ const PlaylistSchema = new mongoose.Schema({
     required: [true, "userId field is required"]
   },
   trackId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: [mongoose.Schema.Types.ObjectId],
     ref: "Song",
-    required: [true, "userId field is required"]
-  },
+    required: true
+    },
   artistId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Artist",
@@ -37,7 +40,10 @@ const PlaylistSchema = new mongoose.Schema({
   trackDuration: {
     type: String,
   },
-  trackGenre: [{
+  trackGenre: {
+    type: String,
+  },
+  trackSubGenre: [{
     type: String
   }],
   image: {
@@ -55,14 +61,15 @@ function validatePlaylist(user) {
       .required(),
     userId: Joi.string()
       .required(),
-      description :Joi.string()
+    description: Joi.string()
       .required(),
-      trackId :Joi.string()
+    trackId: Joi.array().items(mongoonse_id().required())
       .required(),
-      artistId :Joi.string()
+
+    artistId: Joi.string()
       .required(),
- 
-    });
+
+  });
 
   return schema.validate(user);
 }

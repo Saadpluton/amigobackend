@@ -21,12 +21,10 @@ export const createPlaylist = asyncHandler(async (req, res) => {
     }
     
     const user= await User.findById(req.body.userId);
-
-    const track= await Song.findById(req.body.trackId);
+   const track= await Song.findById(req.body.trackId);
 
     const artist= await Artist.findById(req.body.artistId);
-
-   
+  
     if (!user) {
       return res.status(404).json({ status: false, message: "User record not found" })
     }
@@ -42,13 +40,14 @@ export const createPlaylist = asyncHandler(async (req, res) => {
     {
       return res.status(400).json({ status: false, message: "Please Select the Image" })    
     }
-
-    let playlists = new Playlist(_.pick(req.body, ['title','userId','description','trackId','artistId','image']))
+    let playlists = new Playlist(_.pick(req.body , ['title','trackId','userId','description','artistId','image']))
+    
     playlists.image = `uploads/${req.file?.filename}`
     playlists.trackName = track.name
     playlists.artistName = artist.name
     playlists.trackGenre = track.genre
     playlists.trackDuration = track.duration
+    playlists.trackSubGenre = track.subGenre
     
     playlists = await playlists.save();
 

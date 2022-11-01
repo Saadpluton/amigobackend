@@ -14,9 +14,9 @@ const SongSchema = new mongoose.Schema({
     duration: {
         type: String,
     },
-    genre: [{
+    genre: {
         type: String
-    }],
+    },
     image: {
         type: String,
     },

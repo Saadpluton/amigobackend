@@ -2,7 +2,7 @@ import { Artist } from "#models/ArtistModel/artist"
 import asyncHandler from "#middlewares/asyncHandler";
 
 //@desc  Suspend Artist
-//@route  /user/suspend/:id
+//@route  /artist/suspend/:id
 //@request Put Request
 //@acess  public
 

@@ -98,5 +98,5 @@ export const createTrack = asyncHandler(async (req, res) => {
 
   return res
     .status(201)
-    .json({ status: true, message: "Song created successfully" });
+    .json({ status: true, message: "Track created successfully" });
 });

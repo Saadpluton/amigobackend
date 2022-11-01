@@ -1,8 +1,8 @@
 import {Artist , validate} from "#models/ArtistModel/artist"
 import asyncHandler from "#middlewares/asyncHandler";
 
-//@desc  User Get
-//@route  /user
+//@desc  artist Get
+//@route  /artist
 //@request Get Request
 //@acess  public
 

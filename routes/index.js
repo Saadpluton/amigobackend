@@ -14,6 +14,8 @@ import LikesRoute from "#routes/LikesRoutes/likes_route";
 import SharesRoute from "#routes/SharesRoutes/shares_route";
 import GenreRoute from "#routes/GenreRoutes/genre_route";
 import ListenerRoute from "#routes/ListenerRoutes/listeners_route";
+import CommentsRoute from "#routes/CommentsRoutes/comments_route";
+
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
@@ -60,6 +62,8 @@ const routes = (app) => {
   //Listener
   app.use("/api", ListenerRoute);
 
+  //Comments
+  app.use("/api",CommentsRoute);
 
   app.use(error);
 };
