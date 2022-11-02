@@ -86,7 +86,8 @@ export const createTrack = asyncHandler(async (req, res) => {
         //console.log(fixedCurrentTime);
 
         let song = new Song(req.body);
-        song.artistName = artist.name;
+        
+        //song.artistName = artist?.name;
 
         song.duration = fixedCurrentTime;
         song.image = `${PATH}uploads/${file?.filename}`;
