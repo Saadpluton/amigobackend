@@ -1,7 +1,7 @@
 import {Artist , validate} from "#models/ArtistModel/artist"
 import _ from "lodash";
 import asyncHandler from "#middlewares/asyncHandler";
-
+import { PATH } from "#constant/constant";
 //@desc  Artist Create
 //@route  /artist
 //@request Post Request
@@ -24,7 +24,7 @@ export const createArtist = asyncHandler(async (req, res) => {
     }
 
     let artist = new Artist(_.pick(req.body, ['name','country','image','description']))
-    artist.image = `uploads/${req.file?.filename}`
+    artist.image = `${PATH}uploads/${req.file?.filename}`
     artist = await artist.save();
 
     return res.status(201).json({ status: true, message: "Artist registered successfully" })

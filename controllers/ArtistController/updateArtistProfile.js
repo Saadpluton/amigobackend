@@ -1,7 +1,7 @@
 import { Artist } from "#models/ArtistModel/artist"
 import asyncHandler from "#middlewares/asyncHandler";
 import _ from "lodash";
-
+import { PATH } from "#constant/constant";
 //@desc  update Artist Profile
 //@route  /artist/update/:id
 //@request Put Request
@@ -15,7 +15,7 @@ export const updateArtistProfile = asyncHandler(async (req, res) => {
     if (!artist) {
         return res.status(404).json({ status: false, message: "Artist record not found" })
     }
-    const image = req.file ? `uploads/${req.file?.filename}` : undefined
+    const image = req.file ? `${PATH}uploads/${req.file?.filename}` : undefined
   
     const update = await Artist.findByIdAndUpdate(req.params.id,{$set : {...req.body,image}})
 

@@ -3,6 +3,7 @@ import _ from "lodash";
 import asyncHandler from "#middlewares/asyncHandler";
 import {User} from "#models/UserModel/user"
 import { Song } from "#models/SongModel/song";
+import {Artist } from "#models/ArtistModel/artist"
 
 //@desc  Add track in Playlist
 //@route  /addtrackplaylist
@@ -11,18 +12,30 @@ import { Song } from "#models/SongModel/song";
 
 export const addTrackPlaylist = asyncHandler(async (req, res) => {
     
-    const user= await User.findById(req.body.userId);
-    const track= await Song.findById(req.body.trackId);   
-    const playList = await Playlist.findOne({_id : req.body.playlistId , userId :req.body.userId });
-    
-  const playlistsTrack = await Playlist.findOne({_id:req.body.playlistId,trackId : { $in : req.body.trackId}}).select("-__v");
+    const user= await User.findById(req.body?.userId);
+    const track= await Song.findById(req.body?.trackId);   
+    const artist = await Artist.findById("635ffe519648ce943abcca48");   
 
-console.log(playlistsTrack);
-   console.log(playList.trackId);
-    
-  //  const trackFind = playList.trackId.some((item)=>{
-  //     req.body.trackId === item.trackId
-  //   })
+    const playList = await Playlist.findOne({_id : req.body?.playlistId , userId :req.body?.userId });
+ 
+const playlistsTrack = await Playlist.findOne({_id:req.body?.playlistId,trackId : { $in : req.body?.trackId}}).select("-__v");
+
+if (playlistsTrack) {
+  return res.status(200).json({ status: true, message: "Track added already" })
+}
+
+const trackRecord = !playList.trackId.length > 0 ? 
+  {
+    image : track?.image,
+    trackName : track?.name,
+    artistName : artist?.name,
+    trackGenre : track?.genre,
+    trackDuration : track?.duration,
+    trackSubGenre : track?.subGenre, 
+  }
+:
+undefined
+
 
     if (!playList) {
       return res.status(404).json({ status: false, message: "PlayList record not found" })
@@ -35,7 +48,7 @@ console.log(playlistsTrack);
     }
   
  
-    const update = await Playlist.findOneAndUpdate({_id : req.body.playlistId , userId : req.body.userId },{$push : {trackId : req.body.trackId}})
+    const update = await Playlist.findOneAndUpdate({_id : req.body?.playlistId , userId : req.body?.userId  },{...trackRecord ,$push : {trackId : req.body.trackId}  })
 
     return res.status(200).json({ status: true, message: "Track added in playlist successfully" })
 
