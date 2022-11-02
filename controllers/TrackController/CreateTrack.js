@@ -1,7 +1,7 @@
 import { Song, validate } from "#models/SongModel/song";
 import _ from "lodash";
 import asyncHandler from "#middlewares/asyncHandler";
-import { PNG, JPG, JPEG, MP3, MPEG } from "#constant/constant";
+import { PNG, JPG, JPEG, MP3, MPEG ,PATH} from "#constant/constant";
 import { Artist } from "#models/ArtistModel/artist";
 import fs from "fs";
 import musicData from "musicmetadata";
@@ -89,7 +89,7 @@ export const createTrack = asyncHandler(async (req, res) => {
         song.artistName = artist.name;
 
         song.duration = fixedCurrentTime;
-        song.image = `uploads/${file?.filename}`;
+        song.image = `${PATH}uploads/${file?.filename}`;
         song.audio = `uploads/${audio?.filename}`;
         song = song.save();
       }
