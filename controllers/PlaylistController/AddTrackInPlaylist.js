@@ -11,17 +11,8 @@ import { Artist } from "#models/ArtistModel/artist";
 //@acess  public
 
 export const addTrackPlaylist = asyncHandler(async (req, res) => {
-
-  
-    const {error} = validate(req.body);
-
-    if (error)
-    {
-      return res.status(400).send({status : false , message : error?.details[0]?.message});
-    }
     
     const user= await User.findById(req.body.userId);
-
     const track= await Song.findById(req.body.trackId);
    
     if (!user) {
@@ -36,17 +27,11 @@ export const addTrackPlaylist = asyncHandler(async (req, res) => {
     {
       return res.status(400).json({ status: false, message: "Please Select the Image" })    
     }
-    let playlists = new Playlist(_.pick(req.body, ['title','userId','description','trackId','artistId','image']))
-    playlists.image = `uploads/${req.file?.filename}`
-    playlists.trackName = track.name
-    playlists.artistName = artist.name
-    playlists.trackGenre = track.genre
-    playlists.trackDuration = track.duration
-    playlists.trackSubGenre = track.subGenre
-    
-    playlists = await playlists.save();
+ 
+    const update = await Playlist.findByIdAndUpdate(req.body.playlistId,{$push : {trackId : req.body.trackId}})
 
     return res.status(201).json({ status: true, message: "Playlist created successfully" })
 
   })
+
   

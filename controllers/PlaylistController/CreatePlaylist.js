@@ -22,7 +22,7 @@ export const createPlaylist = asyncHandler(async (req, res) => {
     
     const user= await User.findById(req.body.userId);
    const track= await Song.findById(req.body.trackId);
-
+console.log(req.body);
     const artist= await Artist.findById(req.body.artistId);
   
     if (!user) {

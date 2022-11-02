@@ -46,7 +46,7 @@ export const loginUser = asyncHandler(async (req, res) => {
   {
 
     return res.status(200)
-    .send({ status: true, message: "User login successfully" , token})
+    .send({ status: true, message: "User login successfully" ,user : userFind ,token})
        
   }
 
