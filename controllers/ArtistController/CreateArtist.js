@@ -1,8 +1,6 @@
 import {Artist , validate} from "#models/ArtistModel/artist"
 import _ from "lodash";
 import asyncHandler from "#middlewares/asyncHandler";
-import {Account} from "#models/AccountModel/account"
-
 
 //@desc  Artist Create
 //@route  /artist

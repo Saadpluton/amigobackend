@@ -11,6 +11,7 @@ import {Artist } from "#models/ArtistModel/artist"
 
 export const artistComments = asyncHandler(async (req, res) => {
 
+  console.log(req.body);
   const user = await User.findById(req.body.userId);
   if (!user) {
     return res
@@ -27,14 +28,14 @@ export const artistComments = asyncHandler(async (req, res) => {
 
   const CommentsParentValid = await ArtistComments.findById(req.body.parentId);
 
-  if(!CommentsParentValid)
+  if(!CommentsParentValid && req.body.parentId)
   {
  return res
       .status(404)
-      .json({ status: false, message: "artist record not found" });
+      .json({ status: false, message: "Artist parent record not found" });
  
   }
-    const parentId =  req.body.parentId ? req.body.parentId : undefined
+  const parentId =  req.body.parentId ? req.body.parentId : undefined
 
   let comments = new ArtistComments({ userId: req.body.userId, artistId: req.body.artistId , comments : req.body.comments , parentId });
     await comments.save();
@@ -43,6 +44,6 @@ export const artistComments = asyncHandler(async (req, res) => {
     });
     return res
       .status(201)
-      .json({ status: true, message: "artist ArtistComments created successfully" });
+      .json({ status: true, message: "Artist comments created successfully" });
   
 });

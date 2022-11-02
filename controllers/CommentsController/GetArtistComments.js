@@ -1,25 +1,25 @@
 import {User , validate} from "#models/UserModel/user"
 import asyncHandler from "#middlewares/asyncHandler";
-import { Comments } from "#models/CommentsModel/comments";
 
+import { ArtistComments } from "#models/CommentsModel/artist_comments";
 //@desc  Comments Get
 //@route  /comments
 //@request Get Request
 //@acess  public
 
-export const getComments = asyncHandler(async (req, res) => {
+export const getArtistComments = asyncHandler(async (req, res) => {
  
-  const comments = await Comments.find();
+  const comments = await ArtistComments.find();
  
-  const result  = await Comments.aggregate([
+  const result  = await ArtistComments.aggregate([
     //{ "$match": { "userId": req.body.userId }},
     { "$lookup": {
-      "from": "comments",
+      "from": "artistcomments",
       "localField": "_id",
       "foreignField": "parentId",
       "as": "Record"
     }},
-    //{ $unwind: "$Record" },
+    // { $unwind: "$Record" },
     // {$project : {
 
     //  Record : "$Record", 

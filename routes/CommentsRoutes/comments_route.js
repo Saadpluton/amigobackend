@@ -1,22 +1,23 @@
 import express from "express";
 
 import { trackComments } from "#controllers/CommentsController/TrackComments";
-import { getComments } from "#controllers/CommentsController/GetComments";
-import { playlistComments } from "#controllers/CommentsController/PlaylistComments";
 import { artistComments } from "#controllers/CommentsController/ArtistComments";
+import { getTrackComments } from "#controllers/CommentsController/GetTrackComments";
+import { getArtistComments } from "#controllers/CommentsController/GetArtistComments";
 
 const CommentsRoute = express.Router();
 
 // //Track Comments Create
 CommentsRoute.post("/trackComments", trackComments);
 
-// //Playlist Comments Create
-CommentsRoute.post("/playllstComments", playlistComments);
-
-// //Playlist Comments Create
+// //Artist Comments Create
 CommentsRoute.post("/artistComments", artistComments);
 
-// // //GET All Comments
-CommentsRoute.get("/comments", getComments);
+// // //GET All Track Comments
+CommentsRoute.get("/trackComments", getTrackComments);
+
+// // //GET All Artist Comments
+CommentsRoute.get("/artistComments", getArtistComments);
+
 
 export default CommentsRoute;

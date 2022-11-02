@@ -8,7 +8,7 @@ const artistCommentsSchema = new mongoose.Schema({
   },
   parentId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Comments",
+    ref: "artistcomment",
     //required: [true, "userId field is required"]
   },
   artistId: {
@@ -24,4 +24,4 @@ const artistCommentsSchema = new mongoose.Schema({
   }
 });
 
-export const ArtistComments = mongoose.model("ArtistComment", artistCommentsSchema)
+export const ArtistComments = mongoose.model("artistcomment", artistCommentsSchema)

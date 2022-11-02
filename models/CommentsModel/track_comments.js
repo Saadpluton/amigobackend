@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const commentsSchema = new mongoose.Schema({
+const trackCommentsSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -8,28 +8,13 @@ const commentsSchema = new mongoose.Schema({
   },
   parentId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Comments",
+    ref: "TrackComment",
     //required: [true, "userId field is required"]
-  },
-
-  artistId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Artist",
-  },
-  albumId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Album",
-    //required : [true ,"artistId field is required"]
   },
   trackId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Song",
     //required : [true ,"artistId field is required"]
-  },
-  playlistId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Playlist",
-    //required : [true ,"playlistId field is required"]
   },
   comments: {
     type: String
@@ -40,4 +25,4 @@ const commentsSchema = new mongoose.Schema({
   }
 });
 
-export const Comments = mongoose.model("Comment", commentsSchema)
+export const TrackComments = mongoose.model("TrackComment", trackCommentsSchema)

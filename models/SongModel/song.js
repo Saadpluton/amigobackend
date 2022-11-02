@@ -70,7 +70,7 @@ function validateSong(user) {
         duration: Joi.string(),
         genre: Joi.string()
             .required(),
-        image: Joi.string(),
+        //image: Joi.string(),
         audio: Joi.string(),
         artistId: Joi.string()
             .required(),

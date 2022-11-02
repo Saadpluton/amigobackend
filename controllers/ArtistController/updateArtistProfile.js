@@ -1,7 +1,6 @@
 import { Artist } from "#models/ArtistModel/artist"
 import asyncHandler from "#middlewares/asyncHandler";
 import _ from "lodash";
-import {Account} from "#models/AccountModel/account"
 
 //@desc  update Artist Profile
 //@route  /artist/update/:id

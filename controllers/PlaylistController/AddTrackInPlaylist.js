@@ -30,10 +30,7 @@ export const addTrackPlaylist = asyncHandler(async (req, res) => {
     if (!track) {
       return res.status(404).json({ status: false, message: "Track record not found" })
     }
-    if (!artist) {
-      return res.status(404).json({ status: false, message: "Artist record not found" })
-    }
-   
+  
 
     if(!req.file?.filename)
     {
