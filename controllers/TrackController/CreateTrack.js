@@ -22,11 +22,11 @@ export const createTrack = asyncHandler(async (req, res) => {
 
   const artist = await Artist.findById(req.body.artistId);
 
-  if (!artist) {
-    return res
-      .status(404)
-      .json({ status: false, message: "artist record not found" });
-  }
+  // if (!artist) {
+  //   return res
+  //     .status(404)
+  //     .json({ status: false, message: "artist record not found" });
+  // }
 
   let file = req.files.image?.[0];
   let audio = req.files?.audio?.[0];
@@ -90,7 +90,7 @@ export const createTrack = asyncHandler(async (req, res) => {
 
         song.duration = fixedCurrentTime;
         song.image = `${PATH}uploads/${file?.filename}`;
-        song.audio = `uploads/${audio?.filename}`;
+        song.audio = `${PATH}uploads/${audio?.filename}`;
         song = song.save();
       }
     }

@@ -4,6 +4,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 import {User} from "#models/UserModel/user"
 import { Song } from "#models/SongModel/song";
 import { Artist } from "#models/ArtistModel/artist";
+import { PATH } from "#constant/constant";
 
 //@desc  Playlist Create
 //@route  /playlist
@@ -35,14 +36,13 @@ console.log(req.body);
       return res.status(404).json({ status: false, message: "Artist record not found" })
     }
    
-
     if(!req.file?.filename)
     {
       return res.status(400).json({ status: false, message: "Please Select the Image" })    
     }
     let playlists = new Playlist(_.pick(req.body , ['title','trackId','userId','description','artistId','image']))
     
-    playlists.image = `uploads/${req.file?.filename}`
+    playlists.image = `${PATH}uploads/${req.file?.filename}`
     playlists.trackName = track.name
     playlists.artistName = artist.name
     playlists.trackGenre = track.genre

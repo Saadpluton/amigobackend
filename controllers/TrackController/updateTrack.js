@@ -1,7 +1,7 @@
 import { Song } from "#models/SongModel/song";
 import asyncHandler from "#middlewares/asyncHandler";
 import _ from "lodash";
-import { PNG, JPG, JPEG, MP3, MPEG } from "#constant/constant";
+import { PNG, JPG, JPEG, MP3, MPEG , PATH } from "#constant/constant";
 import { Artist } from "#models/ArtistModel/artist";
 import fs from "fs";
 import musicData from "musicmetadata";
@@ -43,9 +43,9 @@ export const updateTrack = asyncHandler(async (req, res) => {
     });
   }
 
-  let image1 = req.files ? `uploads/${file?.filename}` : undefined
+  let image1 = req.files ? `${PATH}uploads/${file?.filename}` : undefined
 
-  let audio1 = req.files ? `uploads/${audio?.filename}` : undefined
+  let audio1 = req.files ? `${PATH}uploads/${audio?.filename}` : undefined
 
   if (audio1) {
     let parser = musicData(

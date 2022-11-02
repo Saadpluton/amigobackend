@@ -1,5 +1,6 @@
 import { User, validate } from "#models/UserModel/user"
 import asyncHandler from "#middlewares/asyncHandler";
+import { PATH } from "#constant/constant";
 
 //@desc  update Profile
 //@route  /user/update/:id
@@ -20,7 +21,7 @@ export const updateProfile = asyncHandler(async (req, res) => {
         return res.status(403).json({ status: false, message: "Email Must Be Unique" })
     }
 
-    const update = await User.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, image : `uploads/${req.file?.filename}`}});
+    const update = await User.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, image : `${PATH}uploads/${req.file?.filename}`}});
     
     return res.status(200).json({ status: true, message: "User profile updated successfully" })
 

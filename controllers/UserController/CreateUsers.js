@@ -2,7 +2,7 @@ import {User , validate} from "#models/UserModel/user"
 import bcrypt from "bcrypt";
 import _ from "lodash";
 import asyncHandler from "#middlewares/asyncHandler";
-
+import { PATH } from "#constant/constant";
 //@desc  User Create
 //@route  /user
 //@request Post Request
@@ -32,7 +32,7 @@ export const createUser = asyncHandler(async (req, res) => {
     customer.password = await bcrypt.hash(customer.password, parseInt(salt));
     if(req.file?.filename)
     {
-      customer.image = `uploads/${req.file?.filename}`
+      customer.image = `${PATH}uploads/${req.file?.filename}`
     }
     customer = await customer.save();
     res.status(201).json({ status: true, message: "User registered successfully" })
