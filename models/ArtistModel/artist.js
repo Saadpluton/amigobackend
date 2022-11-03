@@ -8,6 +8,10 @@ const ArtistSchema = new mongoose.Schema({
     maxlength: 50,
     required: [true, "name field is required"],
   },
+  gender :{
+    type : String,
+    required: [true, "gender field is required"],
+  },
   country: {
     type: String,
     required: [true, "country field is required"],
@@ -42,6 +46,7 @@ function validateArtist(user) {
     name: Joi.string().min(5).max(50).required(),
     country: Joi.string().required(),
     description: Joi.string().required(),
+    gender: Joi.string(),
     image: Joi.string(),
   });
 

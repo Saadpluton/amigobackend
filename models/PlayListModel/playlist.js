@@ -58,7 +58,7 @@ function validatePlaylist(user) {
     description: Joi.string(),
     trackId: Joi.array().items(mongoonse_id()),
     artistId: Joi.string(),
-
+    privacy: Joi.boolean(),
   });
 
   return schema.validate(user);

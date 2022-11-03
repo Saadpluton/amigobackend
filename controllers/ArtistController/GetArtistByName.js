@@ -9,7 +9,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 export const getArtistsByName = asyncHandler(async (req, res) => {
   var regex = new RegExp("^" + req.query.name,'i');
 
-  const artists = await Artist.find({name: {$regex : regex }});
+  const artists = await Artist.find({ gender : req.query.gender , name: {$regex : regex }}   );
  
   if(artists.length > 0)
   {
