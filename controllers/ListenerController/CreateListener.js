@@ -9,11 +9,13 @@ import { Song, validate } from "#models/SongModel/song"
 //@acess  public
 
 export const createListener = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
-  if (!user) {
+
+  const ip = req.socket.remoteAddress.split(':').at(-1)
+console.log(ip)
+  if (!ip) {
     return res
       .status(404)
-      .json({ status: false, message: "User record not found"});
+      .json({ status: false, message: "ip not found"});
   }
   const track = await Song.findById(req.body.trackId);
 
@@ -23,10 +25,10 @@ export const createListener = asyncHandler(async (req, res) => {
       .json({ status: false, message: "track record not found" });
   }
 
-  const listenerValid = await Listener.findOne({ userId: req.params.id, trackId: req.body.trackId });
+  const listenerValid = await Listener.findOne({ userId: ip, trackId: req.body.trackId });
 
   if (!listenerValid) {
-    let listener = new Listener({ userId: req.params.id, trackId: req.body.trackId })
+    let listener = new Listener({ userId: ip, trackId: req.body.trackId })
     await listener.save();
     await Song.findByIdAndUpdate(req.body.trackId, {
       totalListeners: track.totalListeners + 1,

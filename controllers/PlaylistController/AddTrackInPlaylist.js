@@ -24,7 +24,7 @@ if (playlistsTrack) {
   return res.status(200).json({ status: true, message: "Track added already" })
 }
 
-const trackRecord = !playList.trackId.length > 0 ? 
+const trackRecord = !playList?.trackId?.length > 0 ? 
   {
     image : track?.image,
     trackName : track?.name,

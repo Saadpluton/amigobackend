@@ -7,7 +7,7 @@ import { getListener } from "#controllers/ListenerController/GetListeners";
 const ListenerRoute = express.Router();
 
 // //Track Listener Create
-ListenerRoute.post("/trackListener/:id", validateObjectId, createListener);
+ListenerRoute.post("/trackListener", createListener);
 
 // // //GET All Listener
 ListenerRoute.get("/trackListener", getListener);

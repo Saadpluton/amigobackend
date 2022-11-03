@@ -12,13 +12,11 @@ const PlaylistSchema = new mongoose.Schema({
     type: String,
   },
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: [true, "userId field is required"]
+    type: String
   },
   trackId: {
     type: [mongoose.Schema.Types.ObjectId],
-    ref: "Song",
+    ref: "Playlist",
   },
   artistId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -54,7 +52,7 @@ const PlaylistSchema = new mongoose.Schema({
 function validatePlaylist(user) {
   const schema = Joi.object({
     title: Joi.string().required(),
-    userId: Joi.string().required(),
+    userId: Joi.string(),
     description: Joi.string(),
     trackId: Joi.array().items(mongoonse_id()),
     artistId: Joi.string(),
