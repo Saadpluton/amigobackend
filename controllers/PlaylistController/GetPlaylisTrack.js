@@ -15,6 +15,7 @@ export const getPlaylistTrack = asyncHandler(async (req, res) => {
 console.log(ids)
 ids.map((item)=>{
  
+  
  if (mongoose.Types.ObjectId.isValid(ids))
 {
  return res.status(404).send( {status : false , message : 'Invalid ID.'});
