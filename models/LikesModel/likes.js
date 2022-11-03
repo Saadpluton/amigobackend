@@ -20,6 +20,11 @@ const likesSchema = new mongoose.Schema({
     ref: "Song" ,
     //required : [true ,"artistId field is required"]
   },
+  playlistId :{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Playlist" ,
+    //required : [true ,"artistId field is required"]
+  },
 });
 
 export const Likes =  mongoose.model("Like", likesSchema)

@@ -1,35 +1,47 @@
-// import asyncHandler from "#middlewares/asyncHandler";
-// import { Comments } from "#models/CommentsModel/comments";
-// import { User } from "#models/UserModel/user";
-// import {Playlist , validate} from "#models/PlayListModel/playlist"
-// //@desc  Comments Create And Remove
-// //@route  /Comments
-// //@request Post Request
-// //@acess  public
+import asyncHandler from "#middlewares/asyncHandler";
+import { PlaylistComments } from "#models/CommentsModel/playlist_comments";
+import { User } from "#models/UserModel/user";
+import {Playlist , validate} from "#models/PlayListModel/playlist"
 
-// export const playlistComments = asyncHandler(async (req, res) => {
+//@desc  Comments Create And Remove
+//@route  /Comments
+//@request Post Request
+//@acess  public
 
-//   const user = await User.findById(req.body.userId);
-//   if (!user) {
-//     return res
-//       .status(404)
-//       .json({ status: false, message: "User record not found" });
-//   }
-//   const playlist = await Playlist.findById(req.body.playlistId);
+export const playlistComments = asyncHandler(async (req, res) => {
 
-//   if (!playlist) {
-//     return res
-//       .status(404)
-//       .json({ status: false, message: "playlist record not found" });
-//   }
+  const user = await User.findById(req.body.userId);
+  if (!user) {
+    return res
+      .status(404)
+      .json({ status: false, message: "User record not found" });
+  }
+  const playlist = await Playlist.findById(req.body.playlistId);
+
+  if (!playlist) {
+    return res
+      .status(404)
+      .json({ status: false, message: "playlist record not found" });
+  }
   
-//   let comments = new Comments({ userId: req.body.userId, playlistId: req.body.playlistId , comments : req.body.comments });
-//     await comments.save();
-//     await Playlist.findByIdAndUpdate(req.body.playlistId, {
-//       totalComments: playlist.totalComments + 1,
-//     });
-//     return res
-//       .status(201)
-//       .json({ status: true, message: "playlist Comments created successfully" });
+  const CommentsParentValid = await PlaylistComments.findById(req.body.parentId);
+
+  if(!CommentsParentValid && req.body.parentId)
+  {
+ return res
+      .status(404)
+      .json({ status: false, message: "Playlist parent record not found" });
+ 
+  }
+  const parentId =  req.body.parentId ? req.body.parentId : undefined
+
+  let comments = new PlaylistComments({ userId: req.body.userId, playlistId: req.body.playlistId , comments : req.body.comments , parentId });
+    await comments.save();
+    await Playlist.findByIdAndUpdate(req.body.playlistId, {
+      totalComments: playlist.totalComments + 1,
+    });
+    return res
+      .status(201)
+      .json({ status: true, message: "Playlist comments created successfully" });
   
-// });
+});

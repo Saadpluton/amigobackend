@@ -22,6 +22,22 @@ const PlaylistSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Artist",
   },
+  totalListeners: {
+    type: Number,
+    default: 0
+  },
+  totalLikes: {
+    type: Number,
+    default: 0
+  },
+  totalComments: {
+    type: Number,
+    default: 0
+  },
+  totalShares: {
+    type: Number,
+    default: 0
+  },
   artistName: {
     type: String,
   },
