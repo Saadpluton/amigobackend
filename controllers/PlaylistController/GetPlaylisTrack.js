@@ -9,9 +9,13 @@ import { Song } from "#models/SongModel/song";
 
 export const getPlaylistTrack = asyncHandler(async (req, res) => {
 
-  const playlistsTrack = await Song.find({_id : { $in : req.query.trackId}}).select("-__v");
+  let ids ;
+  ids = req.query.trackId.split(',')
+  console.log(ids)
 
-  if (playlistsTrack) {
+  const playlistsTrack = await Song.find({_id : { $in : ids}}).select("-__v");
+
+  if (playlistsTrack.length > 0) {
     return res.status(200).json(playlistsTrack);
   }
   else {
