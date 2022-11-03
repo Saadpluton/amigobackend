@@ -2,9 +2,7 @@ import mongoose from "mongoose";
 
 const listenerSchema = new mongoose.Schema({
   userId :{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User" ,
-    required : [true ,"userId field is required"]
+  type : String
   },
   // artistId :{
   //   type: mongoose.Schema.Types.ObjectId,
