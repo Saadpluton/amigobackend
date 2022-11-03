@@ -11,8 +11,7 @@ export const getPlaylistTrack = asyncHandler(async (req, res) => {
 
   let ids ;
   ids = req.query.trackId.split(',')
-
-
+console.log(ids)
   const playlistsTrack = await Song.find({_id : { $in : ids}}).select("-__v");
 
   if (playlistsTrack.length > 0) {
