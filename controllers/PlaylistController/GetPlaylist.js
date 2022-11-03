@@ -12,7 +12,7 @@ export const getPlaylists = asyncHandler(async (req, res) => {
 
   const userId = req.query.userId ? { userId: req.query.userId} : undefined
 
-  let { page = 1, pageSize = 10 } = req.query;
+  let { page = 1, pageSize = 20 } = req.query;
   const count = await Playlist.countDocuments();
   const skip = pageSize * (page - 1);
   let playLists ;
@@ -32,6 +32,7 @@ export const getPlaylists = asyncHandler(async (req, res) => {
       playLists,
       message: 'Playlist Fetched Successfully',
       page,
+      count,
       pageSize,
       totalPages: Math.ceil(count / pageSize)
     })
