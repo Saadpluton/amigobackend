@@ -10,12 +10,13 @@ import { Listener } from "#models/ListenerModel/listener";
 export const getTracks = asyncHandler(async (req, res) => {
 
   const ip = req.socket.remoteAddress.split(':').at(-1)
+  
   if (!ip) {
     return res
       .status(404)
       .json({ status: false, message: "ip not found"});
   }
-  
+
   const songs = await Song.find().select("-__v");
 
   const listener = await Listener.find({ userId: ip }).select('-__v');
@@ -28,6 +29,8 @@ export const getTracks = asyncHandler(async (req, res) => {
         }
       })
     })
+
+    
   if (songs?.length > 0) {
     return res.status(200).json(songs);
   } else {
