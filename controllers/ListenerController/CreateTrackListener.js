@@ -1,6 +1,5 @@
 import asyncHandler from "#middlewares/asyncHandler";
 import { Listener } from "#models/ListenerModel/listener"
-import { User } from "#models/UserModel/user";
 import { Song, validate } from "#models/SongModel/song"
 
 ///@desc  Artsit Listener Create
@@ -8,7 +7,7 @@ import { Song, validate } from "#models/SongModel/song"
 //@request Post Request
 //@acess  public
 
-export const createListener = asyncHandler(async (req, res) => {
+export const createTrackListener = asyncHandler(async (req, res) => {
 
   const ip = req.socket.remoteAddress.split(':').at(-1)
 //console.log(ip)
@@ -25,7 +24,7 @@ export const createListener = asyncHandler(async (req, res) => {
       .json({ status: false, message: "track record not found" });
   }
 
-  const listenerValid = await Listener.findOne({ userId: ip, trackId: req.body.trackId });
+  const listenerValid = await Listener.findOne({ userId: ip, trackId: req.body?.trackId });
 //console.log(listenerValid)
 
   if (!listenerValid) {
@@ -37,6 +36,6 @@ export const createListener = asyncHandler(async (req, res) => {
     return res.status(201).json({ status: true, message: "Track listener created successfully" })
   }
   else {
-    return res.status(403).json({ status: false, message: "Track listener already added" })
+    return res.status(200).json({ status: false, message: "Track listener already added" })
   }
 });

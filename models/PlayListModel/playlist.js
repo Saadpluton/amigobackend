@@ -62,7 +62,11 @@ const PlaylistSchema = new mongoose.Schema({
   privacy: {
     type: Boolean,
     default: false
-  }
+  },
+  isViewed: {
+    type: Boolean,
+    default: 0
+}
 });
 
 function validatePlaylist(user) {

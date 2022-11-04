@@ -39,6 +39,10 @@ const ArtistSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  isViewed: {
+    type: Boolean,
+    default: 0
+}
 });
 
 function validateArtist(user) {

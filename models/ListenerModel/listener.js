@@ -17,6 +17,11 @@ const listenerSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Song" ,
     //required : [true ,"artistId field is required"]
+  },
+  playlistId :{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Playlist" ,
+    //required : [true ,"artistId field is required"]
   }
 });
 

@@ -1,5 +1,6 @@
 import { Playlist, validate } from "#models/PlayListModel/playlist"
 import asyncHandler from "#middlewares/asyncHandler";
+import { Listener } from "#models/ListenerModel/listener";
 
 //@desc  Playlist Get
 //@route  /playList
@@ -25,6 +26,27 @@ export const getPlaylists = asyncHandler(async (req, res) => {
   }
 
   //const playLists = await Playlist.find(query).select('-__v').limit(50);
+
+
+  const ip = req.socket.remoteAddress.split(':').at(-1)
+  
+  if (!ip) {
+    return res
+      .status(404)
+      .json({ status: false, message: "ip not found"});
+  }
+
+
+  const listener = await Listener.find({ userId: ip }).select('-__v');
+
+  if (listener?.length > 0)
+    listener?.map((x) => {
+      playLists?.map((y) => {
+        if (y?._id.equals(x?.playlistId)) {
+          y.isViewed = true
+        }
+      })
+    })
 
   if (playLists.length > 0) {
     return res.status(200).json({

@@ -20,7 +20,7 @@ export const createTrack = asyncHandler(async (req, res) => {
       .send({ status: false, message: error?.details[0]?.message });
   }
 
-  const artist = await Artist.findById(req.body.artistId);
+  const artist = await Artist.findById(req.body?.artistId);
 
   // if (!artist) {
   //   return res
@@ -28,7 +28,7 @@ export const createTrack = asyncHandler(async (req, res) => {
   //     .json({ status: false, message: "artist record not found" });
   // }
 
-  let file = req.files.image?.[0];
+  let file = req.files?.image?.[0];
   let audio = req.files?.audio?.[0];
 
   if (!file?.filename) {
