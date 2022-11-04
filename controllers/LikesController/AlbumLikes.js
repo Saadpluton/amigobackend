@@ -2,6 +2,8 @@ import asyncHandler from "#middlewares/asyncHandler";
 import { Likes } from "#models/LikesModel/likes";
 import { User } from "#models/UserModel/user";
 import { Album } from "#models/AlbumModel/album";
+import mongoose from "mongoose";
+
 
 //@desc  Likes Create And Remove
 //@route  /albumlikes
@@ -9,7 +11,14 @@ import { Album } from "#models/AlbumModel/album";
 //@acess  public
 
 export const albumLikes = asyncHandler(async (req, res) => {
+  
+  if (!mongoose.Types.ObjectId.isValid(req.body.albumId))
+  {
+  return res.status(404).send( {status : false , message : 'Invalid album ID.'}); 
+  }
+  
   const user = await User.findById(req.params.id);
+  
   if (!user) {
     return res
       .status(404)

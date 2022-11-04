@@ -2,6 +2,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 import { Likes } from "#models/LikesModel/likes";
 import { User } from "#models/UserModel/user";
 import { Song } from "#models/SongModel/song";
+import mongoose from "mongoose";
 
 //@desc  Likes Create And Remove
 //@route  /likes
@@ -9,6 +10,11 @@ import { Song } from "#models/SongModel/song";
 //@acess  public
 
 export const trackLikes = asyncHandler(async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.body.trackId))
+  {
+  return res.status(404).send( {status : false , message : 'Invalid track ID.'}); 
+  }
+
   const user = await User.findById(req.params.id);
   if (!user) {
     return res

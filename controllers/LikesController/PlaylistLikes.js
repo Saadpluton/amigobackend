@@ -2,12 +2,21 @@ import asyncHandler from "#middlewares/asyncHandler";
 import { Likes } from "#models/LikesModel/likes";
 import { User } from "#models/UserModel/user";
 import {Playlist , validate} from "#models/PlayListModel/playlist"
+import mongoose from "mongoose";
+
+
 //@desc  Likes Create And Remove
 //@route  /Playlistlikes
 //@request Post Request
 //@acess  public
 
 export const PlaylistLikes = asyncHandler(async (req, res) => {
+  
+  if (!mongoose.Types.ObjectId.isValid(req.body.playlistId))
+  {
+  return res.status(404).send( {status : false , message : 'Invalid playlist ID.'}); 
+  }
+
   const user = await User.findById(req.params.id);
   if (!user) {
     return res
