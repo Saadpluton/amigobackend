@@ -9,29 +9,35 @@ import { PlaylistComments } from "#models/CommentsModel/playlist_comments";
 
 export const getPlaylistComments = asyncHandler(async (req, res) => {
  
-  const playlistComments = await PlaylistComments.find();
- 
-  // const result  = await PlaylistComments.aggregate([
-  //   //{ "$match": { "userId": req.body.userId }},
-  //   { "$lookup": {
-  //     "from": "Playlistcomments",
-  //     "localField": "_id",
-  //     "foreignField": "parentId",
-  //     "as": "Record"
-  //   }},
-  //   // { $unwind: "$Record" },
-  //   // {$project : {
+  const result = await PlaylistComments.aggregate([
 
-  //   //  Record : "$Record", 
-  //   //  comments : 1
-  //   // }} 
-  // ])
+    {
+      $lookup: {
+        from: 'playlistcomments',
+        localField: '_id',
+        foreignField: 'parentId',
+        as: 'child'
+      }
+    }
+  ])
+  
+  result.filter((item,index) => {
+    if(item.parentId)
+    {
+      delete result[index]
+    }
+    return item
+  })
+  
+  const playlistComment = result.filter((item) => {
+    return item !== null
+  })
 
-  if(playlistComments.length > 0)
-  {
-   return res.status(200).json(playlistComments);    
+  if (playlistComment.length > 0) {
+    return res.status(200).json(playlistComment);
   }
-  else{
-      res.status(404).json({status : false , message : "No record found"});
+  else {
+    return res.status(404).json({ status: false, message: "No record found" });
   }
+
 });
