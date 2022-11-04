@@ -26,6 +26,7 @@ console.log(ip)
   }
 
   const listenerValid = await Listener.findOne({ userId: ip, trackId: req.body.trackId });
+console.log(listenerValid)
 
   if (!listenerValid) {
     let listener = new Listener({ userId: ip, trackId: req.body.trackId })

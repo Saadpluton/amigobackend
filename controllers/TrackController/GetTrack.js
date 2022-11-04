@@ -17,8 +17,8 @@ export const getTracks = asyncHandler(async (req, res) => {
 
   if (songs.length > 0)
    {
-    res.status(200).json(songs);
+    return res.status(200).json(songs);
   } else {
-    res.status(404).json({ status: false, message: "No record found" });
+    return  res.status(404).json({ status: false, message: "No record found" });
   }
 });

@@ -56,6 +56,10 @@ const SongSchema = new mongoose.Schema({
     isSuspend: {
         type: Boolean,
         default: false
+    },
+    isViewed: {
+        type: Boolean,
+        default: 0
     }
 });
 
