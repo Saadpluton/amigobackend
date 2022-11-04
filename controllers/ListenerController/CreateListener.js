@@ -11,7 +11,7 @@ import { Song, validate } from "#models/SongModel/song"
 export const createListener = asyncHandler(async (req, res) => {
 
   const ip = req.socket.remoteAddress.split(':').at(-1)
-console.log(ip)
+//console.log(ip)
   if (!ip) {
     return res
       .status(404)
@@ -26,7 +26,7 @@ console.log(ip)
   }
 
   const listenerValid = await Listener.findOne({ userId: ip, trackId: req.body.trackId });
-console.log(listenerValid)
+//console.log(listenerValid)
 
   if (!listenerValid) {
     let listener = new Listener({ userId: ip, trackId: req.body.trackId })

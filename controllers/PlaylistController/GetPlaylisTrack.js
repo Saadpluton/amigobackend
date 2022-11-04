@@ -12,7 +12,7 @@ export const getPlaylistTrack = asyncHandler(async (req, res) => {
 
   let ids ;
   ids = req.query.trackId?.split(',')
-console.log(ids)
+//console.log(ids)
 ids.map((item)=>{
  
   
