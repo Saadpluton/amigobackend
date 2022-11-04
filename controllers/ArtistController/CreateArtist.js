@@ -2,6 +2,8 @@ import {Artist , validate} from "#models/ArtistModel/artist"
 import _ from "lodash";
 import asyncHandler from "#middlewares/asyncHandler";
 import { PATH } from "#constant/constant";
+import bcrypt from "bcrypt";
+
 //@desc  Artist Create
 //@route  /artist
 //@request Post Request
@@ -17,14 +19,26 @@ export const createArtist = asyncHandler(async (req, res) => {
     {
       return res.status(400).send({status : false , message : error?.details[0]?.message});
     }
-
-    if(!req.file?.filename)
+    const emailExists = await Artist.findOne({ email : req.body.email});
+    
+    if(emailExists)
     {
-      return res.status(400).json({ status: false, message: "Please Select the Image" })    
+        return res.status(409).json({ status: false , message: "Email already exist" })    
     }
 
-    let artist = new Artist(_.pick(req.body, ['name','country','image','description','gender']))
+    // if(!req.file?.filename)
+    // {
+    //   return res.status(400).json({ status: false, message: "Please Select the Image" })    
+    // }
+
+    let artist = new Artist(_.pick(req.body, ['name','country','image','description','gender','genre' , 'subGenre','password' ,'email']))
+    const salt = bcrypt.genSalt(10)
+    artist.password = await bcrypt.hash(artist.password, parseInt(salt))
+    
+    if(req.file?.filename)
+    {
     artist.image = `${PATH}uploads/${req.file?.filename}`
+    }
     artist = await artist.save();
 
     return res.status(201).json({ status: true, message: "Artist registered successfully" })

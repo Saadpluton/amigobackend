@@ -13,7 +13,7 @@ export const getPlaylists = asyncHandler(async (req, res) => {
 
   const userId = req.query.userId ? { userId: req.query.userId} : undefined
 
-  let { page = 1, pageSize = 20 } = req.query;
+  let { page = 1, pageSize = 100 } = req.query;
   const count = await Playlist.countDocuments();
   const skip = pageSize * (page - 1);
   let playLists ;
@@ -22,7 +22,9 @@ export const getPlaylists = asyncHandler(async (req, res) => {
     playLists = await Playlist.find(userId)
   }
   else{
-    playLists = await Playlist.find(query).limit(pageSize).skip(skip)
+    //playLists = await Playlist.find(query).limit(pageSize).skip(skip)
+    playLists = await Playlist.find(query).limit(30)
+  
   }
 
   //const playLists = await Playlist.find(query).select('-__v').limit(50);
@@ -48,17 +50,22 @@ export const getPlaylists = asyncHandler(async (req, res) => {
       })
     })
 
+  // if (playLists.length > 0) {
+  //   return res.status(200).json({
+  //     status: true,
+  //     playLists,
+  //     message: 'Playlist Fetched Successfully',
+  //     page,
+  //     count,
+  //     pageSize,
+  //     totalPages: Math.ceil(count / pageSize)
+  //   })
+  // }
   if (playLists.length > 0) {
     return res.status(200).json({
       status: true,
       playLists,
-      message: 'Playlist Fetched Successfully',
-      page,
-      count,
-      pageSize,
-      totalPages: Math.ceil(count / pageSize)
-    })
-  }
+    })}
   else {
     return res.status(404).json({ status: false, message: "No playlist record found" });
   }

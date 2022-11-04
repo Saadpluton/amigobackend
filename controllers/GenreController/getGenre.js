@@ -11,9 +11,9 @@ export const getGenres = asyncHandler(async (req, res) => {
 
   if(genre.length > 0)
   {
-    res.status(200).json(genre);    
+    return res.status(200).json(genre);    
   }
   else{
-      res.status(404).json({status : false , message : "No record found"});
+     return res.status(404).json({status : false , message : "No record found"});
   }
 });

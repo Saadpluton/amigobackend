@@ -31,7 +31,7 @@ const UserSchema = new mongoose.Schema({
   },
   role:{
     type : String,
-    enum : ["user","admin","artist"],
+    enum : ["user","admin"],
     required : true
   },
   plan:{
@@ -67,7 +67,8 @@ function validateUser(user) {
       .max(255)
       .required()
       .email(),
-    password: Joi.string()
+      role: Joi.string(),
+      password: Joi.string()
       .min(5)
       .max(255)
       .required(),

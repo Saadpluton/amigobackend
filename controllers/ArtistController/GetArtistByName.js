@@ -1,4 +1,4 @@
-import {Artist , validate} from "#models/ArtistModel/artist"
+import { Artist, validate } from "#models/ArtistModel/artist"
 import asyncHandler from "#middlewares/asyncHandler";
 
 //@desc  Artist Get By Name
@@ -7,15 +7,46 @@ import asyncHandler from "#middlewares/asyncHandler";
 //@acess  public
 
 export const getArtistsByName = asyncHandler(async (req, res) => {
-  var regex = new RegExp("^" + req.query.name,'i');
+  var regex = new RegExp("^" + req.query.name, 'i');
 
-  const artists = await Artist.find({ gender : req.query.gender , name: {$regex : regex }}   );
- 
-  if(artists.length > 0)
-  {
-    res.status(200).json(artists);    
+  // db.customers.find({
+  //   $and: [
+  //     {
+  //       $or: [
+  //         {
+  //           "Country": "Germany"
+  //         },
+  //         {
+  //           "Country": "France"
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       VIP: true
+  //     }
+  //   ]
+  // })
+
+  const name = req.query.name ? { name: { $regex: regex } } : {}
+  const gender = req.query.gender ? { gender: req.query.gender } : {}
+  const genre = req.query.genre ? { genre: { $in: [req.query.genre] } } : {}
+  const subGenre = req.query.subGenre ? { subGenre: { $in: [req.query.subGenre] } } : {}
+
+
+  const artists = await Artist.find({
+    $and: [
+      name,
+      gender,
+      genre,
+      subGenre
+    ]
+  });
+
+
+  if (artists.length > 0) {
+    res.status(200).json(artists);
   }
-  else{
-      res.status(404).json({status : false , message : "No record found"});
+  else {
+    res.status(404).json({ status: false, message: "No record found" });
   }
 });
