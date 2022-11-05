@@ -36,14 +36,9 @@ export const getArtistsByName = asyncHandler(async (req, res) => {
       ? { subGenre: { $in: [req.query.subGenre] } }
       : {};
 
-  let artists;
-  if (name && gender && genre && subGenre) {
-    artists = await Artist.find({
-      $and: [name, gender, genre, subGenre],
-    });
-  } else {
-    artists = await Artist.find().limit(100);
-  }
+  let artists = await Artist.find({
+    $and: [name, gender, genre, subGenre],
+  });
 
   if (artists.length > 0) {
     res.status(200).json(artists);
