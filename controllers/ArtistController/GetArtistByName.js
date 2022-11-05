@@ -27,6 +27,7 @@ export const getArtistsByName = asyncHandler(async (req, res) => {
   //   ]
   // })
 
+  console.log(req.query);
   const name = req.query.name != "All" ? { name: { $regex: regex } } : {};
   const gender = req.query.gender != "All" ? { gender: req.query.gender } : {};
   const genre =
