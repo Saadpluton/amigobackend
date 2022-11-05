@@ -10,7 +10,7 @@ const ArtistSchema = new mongoose.Schema({
       validator: function (v) {
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
       },
-      message: "Please enter a valid email"
+      message: "Please enter a valid email",
     },
     required: [true, "email field is required"],
   },
@@ -18,33 +18,33 @@ const ArtistSchema = new mongoose.Schema({
     type: String,
     minlength: 5,
     maxlength: 255,
-    required: [true, "password field is required"]
+    required: [true, "password field is required"],
   },
   name: {
     type: String,
     minlength: 5,
     maxlength: 50,
   },
-  gender :{
-    type : String,
+  gender: {
+    type: String,
   },
   country: {
     type: String,
   },
-  description:{
+  description: {
     type: String,
   },
   totalLikes: {
     type: Number,
-    default: 0
+    default: 0,
   },
   totalComments: {
     type: Number,
-    default: 0
+    default: 0,
   },
   totalShares: {
     type: Number,
-    default: 0
+    default: 0,
   },
   image: {
     type: String,
@@ -55,26 +55,30 @@ const ArtistSchema = new mongoose.Schema({
   },
   isViewed: {
     type: Boolean,
-    default: 0
-},
-genre : [{
-  type: String,
-  required: true,
-}],
-subGenre: [{
-  type: String,
-  required: true,
-}],
-role :{
-  type : String,
-  enum : ['artist'],
-  default : 'artist'
-}
+    default: 0,
+  },
+  genre: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  subGenre: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  role: {
+    type: String,
+    enum: ["artist"],
+    default: "artist",
+  },
 });
 ArtistSchema.methods.generateAuthToken = function () {
   const payload = { _id: this._id, name: this.name, email: this.email };
-  const secret = getEnv('JWT_SECRET');
-  const options = { expiresIn: '1d' }
+  const secret = getEnv("JWT_SECRET");
+  const options = { expiresIn: "1d" };
   return jwt.sign(payload, secret, options);
 };
 
@@ -87,16 +91,9 @@ function validateArtist(user) {
     image: Joi.string(),
     genre: Joi.array(),
     subGenre: Joi.array(),
-    role : Joi.string(),
-    email: Joi.string()
-      .min(5)
-      .max(255)
-      .required()
-      .email(),
-    password: Joi.string()
-      .min(5)
-      .max(255)
-      .required(),
+    role: Joi.string(),
+    email: Joi.string().min(5).max(255).required().email(),
+    password: Joi.string().min(5).max(255).required(),
   });
 
   return schema.validate(user);

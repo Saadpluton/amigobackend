@@ -45,9 +45,14 @@ export const getArtistsByName = asyncHandler(async (req, res) => {
     return item;
   });
   console.log(resultQuery);
-  let artists = await Artist.find({
-    $and: resultQuery,
-  });
+  let artists;
+  if (resultQuery.length > 0) {
+    artists = await Artist.find({
+      $and: resultQuery,
+    });
+  } else {
+    artists = await Artist.find().limit(100);
+  }
 
   if (artists.length > 0) {
     res.status(200).json(artists);
