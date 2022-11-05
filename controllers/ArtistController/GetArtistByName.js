@@ -27,18 +27,26 @@ export const getArtistsByName = asyncHandler(async (req, res) => {
   //   ]
   // })
 
-  console.log(req.query);
-  const name = req.query.name != "All" ? { name: { $regex: regex } } : {};
-  const gender = req.query.gender != "All" ? { gender: req.query.gender } : {};
+  const name =
+    req.query.name != "All" ? { name: { $regex: regex } } : undefined;
+  const gender =
+    req.query.gender != "All" ? { gender: req.query.gender } : undefined;
   const genre =
-    req.query.genre != "All" ? { genre: { $in: [req.query.genre] } } : {};
+    req.query.genre != "All"
+      ? { genre: { $in: [req.query.genre] } }
+      : undefined;
   const subGenre =
     req.query.subGenre != "All"
       ? { subGenre: { $in: [req.query.subGenre] } }
-      : {};
+      : undefined;
 
+  let arr = [name, gender, genre, subGenre];
+  const resultQuery = arr.filter((item) => {
+    return item;
+  });
+  console.log(resultQuery);
   let artists = await Artist.find({
-    $and: [name, gender, genre, subGenre],
+    $and: resultQuery,
   });
 
   if (artists.length > 0) {
