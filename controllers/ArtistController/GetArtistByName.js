@@ -55,8 +55,8 @@ export const getArtistsByName = asyncHandler(async (req, res) => {
   }
 
   if (artists.length > 0) {
-    res.status(200).json(artists);
+    res.status(200).json({artists : artists} );
   } else {
-    res.status(200).json({ status: true, message: "No record found",artists });
+    res.status(200).json({ status: true, message: "No record found",artists : artists });
   }
 });
