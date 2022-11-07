@@ -23,6 +23,10 @@ const AlbumSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  totalListeners: {
+    type: Number,
+    default: 0
+  },
   totalLikes: {
     type: Number,
     default: 0,

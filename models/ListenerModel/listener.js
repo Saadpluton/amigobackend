@@ -8,11 +8,11 @@ const listenerSchema = new mongoose.Schema({
   //   type: mongoose.Schema.Types.ObjectId,
   //   ref: "Artist" ,
   // },
-  // albumId :{
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Album" ,
-  //   //required : [true ,"artistId field is required"]
-  // },
+  albumId :{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Album" ,
+    //required : [true ,"artistId field is required"]
+  },
   trackId :{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Song" ,

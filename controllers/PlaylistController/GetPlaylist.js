@@ -38,18 +38,15 @@ export const getPlaylists = asyncHandler(async (req, res) => {
       .json({ status: true, message: "ip not found"});
   }
 
-
   const listener = await Listener.find({ userId: ip }).select('-__v');
-
   if (listener?.length > 0)
     listener?.map((x) => {
       playLists?.map((y) => {
-        if (y?._id.equals(x?.playlistId)) {
+         if (y?._id.equals(x?.playlistId)) {
           y.isViewed = true
         }
       })
     })
-
   // if (playLists.length > 0) {
   //   return res.status(200).json({
   //     status: true,
