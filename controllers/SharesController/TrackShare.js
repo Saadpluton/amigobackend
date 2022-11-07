@@ -12,14 +12,14 @@ export const trackShares = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (!user) {
     return res
-      .status(404)
+      .status(200)
       .json({ status: true, message: "User record not found" });
   }
   const track = await Song.findById(req.body.trackId);
 
   if (!track) {
     return res
-      .status(404)
+      .status(200)
       .json({ status: true, message: "track record not found" });
   }
 

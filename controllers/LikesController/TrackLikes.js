@@ -12,20 +12,20 @@ import mongoose from "mongoose";
 export const trackLikes = asyncHandler(async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.body.trackId))
   {
-  return res.status(404).send( {status : true , message : 'Invalid track ID.'}); 
+  return res.status(400).send( {status : false , message : 'Invalid track ID.'}); 
   }
 
   const user = await User.findById(req.params.id);
   if (!user) {
     return res
-      .status(404)
+      .status(200)
       .json({ status: true, message: "User record not found" });
   }
   const song = await Song.findById(req.body.trackId);
 
   if (!song) {
     return res
-      .status(404)
+      .status(200)
       .json({ status: true, message: "Track record not found" });
   }
   const likesValid = await Likes.findOne({

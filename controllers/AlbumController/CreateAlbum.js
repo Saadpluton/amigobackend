@@ -20,14 +20,14 @@ export const createAlbum = asyncHandler(async (req, res) => {
 
   if (!artist) {
     return res
-      .status(404)
-      .json({ status: true, message: "Artist record not found" });
+      .status(200)
+      .json({ status: false, message: "Artist record not found" });
   }
 
   if (!req.file?.filename) {
     return res
       .status(400)
-      .json({ status: true, message: "Please Select the Image" });
+      .json({ status: false, message: "Please Select the Image" });
   }
 
   let album = new Album(_.pick(req.body, ["title", "artistId","genre", "image"]));

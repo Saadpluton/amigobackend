@@ -15,13 +15,13 @@ export const createPlaylist = asyncHandler(async (req, res) => {
 
     if (error)
     {
-      return res.status(400).send({status : false , message : error?.details[0]?.message});
+      return res.status(200).send({status : false , message : error?.details[0]?.message});
     }
     
     const user= await User.findById(req.body.userId);
   
     if (!user) {
-      return res.status(404).json({ status: true, message: "User record not found" })
+      return res.status(200).json({ status: true, message: "User record not found" })
     }
    
     let playlists = new Playlist(_.pick(req.body , ['title','userId','privacy']))

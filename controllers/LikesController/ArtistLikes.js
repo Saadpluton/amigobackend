@@ -13,20 +13,20 @@ export const artistLikes = asyncHandler(async (req, res) => {
   
   if (!mongoose.Types.ObjectId.isValid(req.body.artistId))
   {
-  return res.status(404).send( {status : true , message : 'Invalid artist ID.'}); 
+  return res.status(400).send( {status : false , message : 'Invalid artist ID.'}); 
   }
 
   const user = await User.findById(req.params.id);
   if (!user) {
     return res
-      .status(404)
+      .status(200)
       .json({ status: true, message: "User record not found" });
   }
   const artist = await Artist.findById(req.body.artistId);
 
   if (!artist) {
     return res
-      .status(404)
+      .status(200)
       .json({ status: true, message: "Artist record not found" });
   }
   const likesValid = await Likes.findOne({

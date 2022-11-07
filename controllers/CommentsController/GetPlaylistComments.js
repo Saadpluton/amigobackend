@@ -37,7 +37,7 @@ export const getPlaylistComments = asyncHandler(async (req, res) => {
     return res.status(200).json(playlistComment);
   }
   else {
-    return res.status(404).json({ status: true, message: "No record found" });
+    return res.status(200).json({ status: true, message: "No record found" });
   }
 
 });

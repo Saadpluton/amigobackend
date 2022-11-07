@@ -12,14 +12,14 @@ export const albumShares = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (!user) {
     return res
-      .status(404)
+      .status(200)
       .json({ status: true, message: "User record not found" });
   }
   const album = await Album.findById(req.body.albumId);
 
   if (!album) {
     return res
-      .status(404)
+      .status(200)
       .json({ status: true, message: "Album record not found" });
   }
 

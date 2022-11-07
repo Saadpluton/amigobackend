@@ -24,7 +24,7 @@ export const suspendArtist = asyncHandler(async (req, res) => {
     }
   }
   else{
-    res.status(404).json({status : true , message : "No Artist Found."});  
+    res.status(200).json({status : true , message : "No Artist Found."});  
   }
   });
   

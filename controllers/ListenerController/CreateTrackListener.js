@@ -13,14 +13,14 @@ export const createTrackListener = asyncHandler(async (req, res) => {
 //console.log(ip)
   if (!ip) {
     return res
-      .status(404)
+      .status(200)
       .json({ status: true, message: "ip not found"});
   }
   const track = await Song.findById(req.body.trackId);
 
   if (!track) {
     return res
-      .status(404)
+      .status(200)
       .json({ status: true, message: "track record not found" });
   }
 

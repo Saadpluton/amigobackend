@@ -16,7 +16,7 @@ export const createTrack = asyncHandler(async (req, res) => {
 
   if (error) {
     return res
-      .status(400)
+      .status(200)
       .send({ status: false, message: error?.details[0]?.message });
   }
 
@@ -24,7 +24,7 @@ export const createTrack = asyncHandler(async (req, res) => {
 
   if (!artist) {
     return res
-      .status(404)
+      .status(200)
       .json({ status: true, message: "artist record not found" });
   }
 
@@ -34,13 +34,13 @@ export const createTrack = asyncHandler(async (req, res) => {
   if (!file?.filename) {
     return res
       .status(400)
-      .json({ status: true, message: "Please Select the Image" });
+      .json({ status: false, message: "Please Select the Image" });
   }
 
   if (!audio?.filename) {
     return res
       .status(400)
-      .json({ status: true, message: "Please Select the audio" });
+      .json({ status: false, message: "Please Select the audio" });
   }
 
   if (![PNG, JPEG, JPG].includes(file?.mimetype)) {
@@ -51,7 +51,7 @@ export const createTrack = asyncHandler(async (req, res) => {
   }
   if (![MP3, MPEG].includes(audio?.mimetype)) {
     return res.status(400).json({
-      status: true,
+      status: false,
       message: "Upload audio type should be mp3, mpeg",
     });
   }

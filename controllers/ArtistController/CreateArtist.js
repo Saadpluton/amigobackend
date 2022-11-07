@@ -24,7 +24,7 @@ export const createArtist = asyncHandler(async (req, res) => {
   if (emailExists) {
     return res
       .status(400)
-      .json({ status: true, message: "Email already exist" });
+      .json({ status: false, message: "Email already exist" });
   }
 
   // if(!req.file?.filename)
@@ -48,7 +48,8 @@ export const createArtist = asyncHandler(async (req, res) => {
   const salt = bcrypt.genSalt(10);
   artist.password = await bcrypt.hash(artist.password, parseInt(salt));
   if (!req.body?.name) {
-    artist.name = "Unknown";
+      const name =  req.body?.email.split('@').at(0)
+    artist.name = name;
   }
 
   if (req.file?.filename) {

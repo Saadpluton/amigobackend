@@ -14,6 +14,6 @@ export const getOnePlaylist = asyncHandler(async (req, res) => {
     return res.status(200).json(playlists);
   }
   else {
-    res.status(404).json({ status: true, message: "No record found" });
+    return res.status(200).json({ status: true, message: "No record found" });
   }
 });

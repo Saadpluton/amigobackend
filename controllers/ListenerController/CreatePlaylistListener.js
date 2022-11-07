@@ -12,7 +12,7 @@ export const createPlaylistListener = asyncHandler(async (req, res) => {
 
   if (!ip) {
     return res
-      .status(404)
+      .status(200)
       .json({ status: true, message: "ip not found"});
   }
 
@@ -20,7 +20,7 @@ export const createPlaylistListener = asyncHandler(async (req, res) => {
 
   if (!playlist) {
     return res
-      .status(404)
+      .status(200)
       .json({ status: true, message: "playlist record not found" });
   }
 

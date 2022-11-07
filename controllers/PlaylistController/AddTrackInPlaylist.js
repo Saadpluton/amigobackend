@@ -39,13 +39,13 @@ undefined
 
 
     if (!playList) {
-      return res.status(404).json({ status: true, message: "PlayList record not found" })
+      return res.status(200).json({ status: true, message: "PlayList record not found" })
     }
     if (!user) {
-      return res.status(404).json({ status: true, message: "User record not found" })
+      return res.status(200).json({ status: true, message: "User record not found" })
     }
     if (!track) {
-      return res.status(404).json({ status: true, message: "Track record not found" })
+      return res.status(200).json({ status: true, message: "Track record not found" })
     }
   
  

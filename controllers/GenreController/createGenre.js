@@ -18,7 +18,7 @@ export const createGenre = asyncHandler(async (req, res) => {
   if (!req.file?.filename) {
     return res
       .status(400)
-      .json({ status: true, message: "Please Select the Image" });
+      .json({ status: false, message: "Please Select the Image" });
   }
 
   let genre = new Genre(req.body);

@@ -34,7 +34,7 @@ export const getPlaylists = asyncHandler(async (req, res) => {
   
   if (!ip) {
     return res
-      .status(404)
+      .status(200)
       .json({ status: true, message: "ip not found"});
   }
 
@@ -67,6 +67,6 @@ export const getPlaylists = asyncHandler(async (req, res) => {
       playLists,
     })}
   else {
-    return res.status(404).json({ status: true, message: "No playlist record found" });
+    return res.status(200).json({ status: true, message: "No playlist record found" });
   }
 });
