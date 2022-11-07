@@ -20,7 +20,7 @@ export const getOneArtist = asyncHandler(async (req, res) => {
 
   const artistAlbum = await Album.find({artistId : req.params.id}).select('-__v');
 
-  const similarArtist = await Artist.find( { _id : { $ne  : req.params.id}} ).limit(20).select('-__v');
+  const similarArtist = await Artist.find( { _id : { $ne  : req.params.id}}).limit(20).select('-__v');
 
   const result  = await ArtistComments.aggregate([
     { "$lookup": {
