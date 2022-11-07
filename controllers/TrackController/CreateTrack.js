@@ -93,12 +93,13 @@ export const createTrack = asyncHandler(async (req, res) => {
         song.image = `${PATH}uploads/${file?.filename}`;
         song.audio = `${PATH}uploads/${audio?.filename}`;
         song = song.save();
-
-        const updateTrack = Artist.findByIdAndUpdate(req.body.artistId, {$push : {genre : req.body.genre , subGenre : req.body.subGenre}})
-
-      }
+      
+    }
     }
   );
+
+
+  const updateTrack = await Artist.findOneAndUpdate({_id  :  req.body.artistId },{$push : {genre : req.body.genre , subGenre : req.body.subGenre}  })
 
   return res
     .status(201)

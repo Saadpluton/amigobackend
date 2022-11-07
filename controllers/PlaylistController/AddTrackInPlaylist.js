@@ -14,7 +14,7 @@ export const addTrackPlaylist = asyncHandler(async (req, res) => {
     
     const user= await User.findById(req.body?.userId);
     const track= await Song.findById(req.body?.trackId);   
-    const artist = await Artist.findById("635ffe519648ce943abcca48");   
+    const artist = await Artist.findById(track?.artistId);   
 
     const playList = await Playlist.findOne({_id : req.body?.playlistId , userId :req.body?.userId });
  
@@ -28,8 +28,7 @@ const trackRecord = !playList?.trackId?.length > 0 ?
   {
     image : track?.image,
     trackName : track?.name,
-    //artistName : artist?.name,
-    artistName : "Saad",
+    artistName : track.artistName,
     trackGenre : track?.genre,
     trackDuration : track?.duration,
     trackSubGenre : track?.subGenre, 
@@ -41,15 +40,19 @@ undefined
     if (!playList) {
       return res.status(200).json({ status: true, message: "PlayList record not found" })
     }
-    if (!user) {
+    if (!artist && req.body.artistId) {
+      return res.status(200).json({ status: true, message: "Artist record not found" })
+    }
+
+    if (!user && req.body.userId) {
       return res.status(200).json({ status: true, message: "User record not found" })
     }
     if (!track) {
       return res.status(200).json({ status: true, message: "Track record not found" })
     }
   
- 
-    const update = await Playlist.findOneAndUpdate({_id : req.body?.playlistId , userId : req.body?.userId  },{...trackRecord ,$push : {trackId : req.body.trackId}  })
+
+    const update = await Playlist.findOneAndUpdate({_id : req.body?.playlistId , userId : req.body?.userId ,artistId :  req.body.artistId },{...trackRecord ,$push : {trackId : req.body.trackId}  })
 
     return res.status(200).json({ status: true, message: "Track added in playlist successfully" })
 
