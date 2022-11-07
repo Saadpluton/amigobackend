@@ -23,13 +23,9 @@ export const getOnePlaylist = asyncHandler(async (req, res) => {
   console.log(listener)
   if (listener?.length > 0)
     listener?.map((x) => {
-      console.log("x", x?.playlistId)
-      console.log("y", playlists?._id)
-
       if (playlists?._id.equals(x?.playlistId)) {
         playlists.isViewed = true
       }
-
     })
   if (playlists) {
     return res.status(200).json(playlists);
