@@ -18,6 +18,6 @@ export const verifyEmail = asyncHandler(async (req, res) => {
         res.redirect(`/user/reset?email=${checkedvalid.email}&resetId=${resetId}`)
     }
     else {
-        return res.status(404).json({ status: false, message: "Failed To Verified" })
+        return res.status(404).json({ status: true, message: "Failed To Verified" })
     }
 })

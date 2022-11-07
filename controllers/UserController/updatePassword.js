@@ -15,7 +15,7 @@ export const updatePassword = asyncHandler(async (req, res) => {
     const checkedvalid = await UserVerification.findOne({ email: obj.email})
     if(!checkedvalid)
     {
-        return res.status(404).json({status : false , message : "Please verify email before password updated!"})        
+        return res.status(404).json({status : true , message : "Please verify email before password updated!"})        
     }
     const salt = bcrypt.genSalt(10)
     const hashpassword = await bcrypt.hash(obj.password, parseInt(salt));

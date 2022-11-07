@@ -21,7 +21,7 @@ export const createPlaylist = asyncHandler(async (req, res) => {
     const user= await User.findById(req.body.userId);
   
     if (!user) {
-      return res.status(404).json({ status: false, message: "User record not found" })
+      return res.status(404).json({ status: true, message: "User record not found" })
     }
    
     let playlists = new Playlist(_.pick(req.body , ['title','userId','privacy']))

@@ -17,21 +17,27 @@ export const getArtistComments = asyncHandler(async (req, res) => {
       "from": "artistcomments",
       "localField": "_id",
       "foreignField": "parentId",
-      "as": "Record"
+      "as": "child"
     }},
-    // { $unwind: "$Record" },
-    // {$project : {
 
-    //  Record : "$Record", 
-    //  comments : 1
-    // }} 
   ])
+  result.filter((item,index) => {
+    if(item.parentId)
+    {
+      delete result[index]
+    }
+    return item
+  })
+  
+  const artistComment = result.filter((item) => {
+    return item !== null
+  })
 
-  if(result.length > 0)
+  if(artistComment.length > 0)
   {
-   return res.status(200).json(result);    
+   return res.status(200).json(artistComment);    
   }
   else{
-      res.status(404).json({status : false , message : "No record found"});
+      res.status(404).json({status : true , message : "No record found"});
   }
 });

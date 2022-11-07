@@ -13,14 +13,14 @@ export const artistShares = asyncHandler(async (req, res) => {
   if (!user) {
     return res
       .status(404)
-      .json({ status: false, message: "User record not found" });
+      .json({ status: true, message: "User record not found" });
   }
   const artist = await Artist.findById(req.body.artistId);
 
   if (!artist) {
     return res
       .status(404)
-      .json({ status: false, message: "Artist record not found" });
+      .json({ status: true, message: "Artist record not found" });
   }
 
   const sharesValid = await Shares.findOne({ userId: req.params.id, artistId: req.body.artistId });
@@ -34,6 +34,6 @@ export const artistShares = asyncHandler(async (req, res) => {
     return res.status(201).json({ status: true, message: "Artist Shares created successfully" })
   }
   else {
-    return res.status(403).json({ status: false, message: "Artist Shares sent Already" })
+    return res.status(200).json({ status: true, message: "Artist Shares sent Already" })
   }
 });

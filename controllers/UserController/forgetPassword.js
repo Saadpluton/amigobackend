@@ -18,13 +18,13 @@ export const forgetPassword = asyncHandler(async (req, res) => {
 
     if(checkedReset)
     {
-        return res.status(403).json({status : false , message : "Email Verification Sent Already"})
+        return res.status(403).json({status : true , message : "Email Verification Sent Already"})
     }
 
 
     if(!emailValid)
     {
-        return res.status(404).json({status : false , message : "email does not exists"})
+        return res.status(404).json({status : true , message : "email does not exists"})
     }
     let uniqueString = otpGenerator.generate(6, {
         digits: true, upperCaseAlphabets: false, lowerCaseAlphabets: true, specialChars: false

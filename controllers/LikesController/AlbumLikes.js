@@ -14,7 +14,7 @@ export const albumLikes = asyncHandler(async (req, res) => {
   
   if (!mongoose.Types.ObjectId.isValid(req.body.albumId))
   {
-  return res.status(404).send( {status : false , message : 'Invalid album ID.'}); 
+  return res.status(404).send( {status : true , message : 'Invalid album ID.'}); 
   }
   
   const user = await User.findById(req.params.id);
@@ -22,14 +22,14 @@ export const albumLikes = asyncHandler(async (req, res) => {
   if (!user) {
     return res
       .status(404)
-      .json({ status: false, message: "User record not found" });
+      .json({ status: true, message: "User record not found" });
   }
   const album = await Album.findById(req.body.albumId);
 
   if (!album) {
     return res
       .status(404)
-      .json({ status: false, message: "Album record not found" });
+      .json({ status: true, message: "Album record not found" });
   }
   const likesValid = await Likes.findOne({
     userId: req.params.id,
@@ -46,7 +46,7 @@ export const albumLikes = asyncHandler(async (req, res) => {
     });
     return res
       .status(200)
-      .json({ status: false, message: "likes remove successfully" });
+      .json({ status: true, message: "likes remove successfully" });
   } else {
     let likes = new Likes({ userId: req.params.id, albumId: req.body.albumId });
     await likes.save();

@@ -12,21 +12,21 @@ import mongoose from "mongoose";
 export const trackLikes = asyncHandler(async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.body.trackId))
   {
-  return res.status(404).send( {status : false , message : 'Invalid track ID.'}); 
+  return res.status(404).send( {status : true , message : 'Invalid track ID.'}); 
   }
 
   const user = await User.findById(req.params.id);
   if (!user) {
     return res
       .status(404)
-      .json({ status: false, message: "User record not found" });
+      .json({ status: true, message: "User record not found" });
   }
   const song = await Song.findById(req.body.trackId);
 
   if (!song) {
     return res
       .status(404)
-      .json({ status: false, message: "Track record not found" });
+      .json({ status: true, message: "Track record not found" });
   }
   const likesValid = await Likes.findOne({
     userId: req.params.id,
@@ -43,7 +43,7 @@ export const trackLikes = asyncHandler(async (req, res) => {
     });
     return res
       .status(200)
-      .json({ status: false, message: "likes remove successfully" });
+      .json({ status: true, message: "likes remove successfully" });
   } else {
     let likes = new Likes({ userId: req.params.id, trackId: req.body.trackId });
     await likes.save();

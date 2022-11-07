@@ -14,14 +14,14 @@ export const playlistComments = asyncHandler(async (req, res) => {
   if (!user) {
     return res
       .status(404)
-      .json({ status: false, message: "User record not found" });
+      .json({ status: true, message: "User record not found" });
   }
   const playlist = await Playlist.findById(req.body.playlistId);
 
   if (!playlist) {
     return res
       .status(404)
-      .json({ status: false, message: "playlist record not found" });
+      .json({ status: true, message: "playlist record not found" });
   }
   
   const CommentsParentValid = await PlaylistComments.findById(req.body.parentId);
@@ -30,7 +30,7 @@ export const playlistComments = asyncHandler(async (req, res) => {
   {
  return res
       .status(404)
-      .json({ status: false, message: "Playlist parent record not found" });
+      .json({ status: true, message: "Playlist parent record not found" });
  
   }
   const parentId =  req.body.parentId ? req.body.parentId : undefined

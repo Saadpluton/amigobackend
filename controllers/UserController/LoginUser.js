@@ -38,13 +38,13 @@ export const loginUser = asyncHandler(async (req, res) => {
   } else {
     return res
       .status(400)
-      .json({ status: false, message: "Role is not valid!" });
+      .json({ status: true, message: "Role is not valid!" });
   }
 
   if (!userFind) {
     return res
       .status(400)
-      .json({ status: false, message: "Email does not exists!" });
+      .json({ status: true, message: "Email does not exists!" });
   }
 
   let valid;
@@ -54,7 +54,7 @@ export const loginUser = asyncHandler(async (req, res) => {
   if (!valid) {
     return res
       .status(400)
-      .json({ status: false, message: "Email or password incorrect!" });
+      .json({ status: true, message: "Email or password incorrect!" });
   }
 
   if (valid) {

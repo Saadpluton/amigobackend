@@ -37,7 +37,7 @@ export const getTrackComments = asyncHandler(async (req, res) => {
     return res.status(200).json(trackComments);
   }
   else {
-    return res.status(404).json({ status: false, message: "No record found" });
+    return res.status(404).json({ status: true, message: "No record found" });
   }
 
 });

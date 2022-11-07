@@ -21,7 +21,7 @@ export const getPlaylistTrack = asyncHandler(async (req, res) => {
   }
   
   if (!ids) {
-    return res.status(400).json({ status: false, message: "TrackId required must be comma seperate format!" });
+    return res.status(400).json({ status: true, message: "TrackId required must be comma seperate format!" });
   }
 
   let validArrIds = []
@@ -38,11 +38,11 @@ if (validArrIds.length === ids.length) {
       return res.status(200).json(playlistsTrack);
     }
     else {
-      return res.status(404).json({ status: false, message: "No record found" });
+      return res.status(404).json({ status: true, message: "No record found" });
     }
   }
   else {
-    return res.status(404).json({ status: false, message: "Invalid trackId" });
+    return res.status(404).json({ status: true, message: "Invalid trackId" });
 
   }
 });

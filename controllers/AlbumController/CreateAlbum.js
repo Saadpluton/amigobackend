@@ -14,20 +14,20 @@ export const createAlbum = asyncHandler(async (req, res) => {
   if (error) {
     return res
       .status(400)
-      .send({ status: false, message: error?.details[0]?.message });
+      .send({ status: true, message: error?.details[0]?.message });
   }
   const artist = await Artist.findById(req.body.artistId);
 
   if (!artist) {
     return res
       .status(404)
-      .json({ status: false, message: "Artist record not found" });
+      .json({ status: true, message: "Artist record not found" });
   }
 
   if (!req.file?.filename) {
     return res
       .status(400)
-      .json({ status: false, message: "Please Select the Image" });
+      .json({ status: true, message: "Please Select the Image" });
   }
 
   let album = new Album(_.pick(req.body, ["title", "artistId","genre", "image"]));

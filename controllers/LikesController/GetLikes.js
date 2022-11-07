@@ -15,6 +15,6 @@ export const getLikes = asyncHandler(async (req, res) => {
     res.status(200).json(likes);    
   }
   else{
-      res.status(404).json({status : false , message : "No record found"});
+      res.status(404).json({status : true , message : "No record found"});
   }
 });

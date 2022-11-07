@@ -17,14 +17,14 @@ export const updateTrack = asyncHandler(async (req, res) => {
   if (!song) {
     return res
       .status(404)
-      .json({ status: false, message: "song record not found" });
+      .json({ status: true, message: "song record not found" });
   }
   const artist = await Artist.findById(req.body.artistId);
 
   if (!artist && req.body.artistId) {
     return res
       .status(404)
-      .json({ status: false, message: "artist record not found" });
+      .json({ status: true, message: "artist record not found" });
   }
 
   let file = req.files?.image?.[0];
@@ -32,13 +32,13 @@ export const updateTrack = asyncHandler(async (req, res) => {
 
   if (![PNG, JPEG, JPG].includes(file?.mimetype) && file) {
     return res.status(400).json({
-      status: false,
+      status: true,
       message: "Upload image type should be jpg, jpeg, png",
     });
   }
   if (![MP3, MPEG].includes(audio?.mimetype) && audio) {
     return res.status(400).json({
-      status: false,
+      status: true,
       message: "Upload audio type should be mp3, mpeg",
     });
   }

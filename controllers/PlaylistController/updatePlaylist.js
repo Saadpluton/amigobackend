@@ -18,14 +18,14 @@ export const updatePlaylist = asyncHandler(async (req, res) => {
 
    
     if (!user) {
-      return res.status(404).json({ status: false, message: "User record not found" })
+      return res.status(404).json({ status: true, message: "User record not found" })
     }
 
     if (!track) {
-      return res.status(404).json({ status: false, message: "Track record not found" })
+      return res.status(404).json({ status: true, message: "Track record not found" })
     }
     if (!artist) {
-      return res.status(404).json({ status: false, message: "Artist record not found" })
+      return res.status(404).json({ status: true, message: "Artist record not found" })
     }
     const image = req.file ? `uploads/${req.file?.filename}` : undefined
   

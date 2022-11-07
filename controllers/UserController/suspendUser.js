@@ -24,7 +24,7 @@ export const suspendUser = asyncHandler(async (req, res) => {
     }
   }
   else{
-    res.status(404).json({status : false , message : "No User Found."});  
+    res.status(404).json({status : true , message : "No User Found."});  
   }
   });
   

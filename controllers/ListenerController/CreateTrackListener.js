@@ -14,14 +14,14 @@ export const createTrackListener = asyncHandler(async (req, res) => {
   if (!ip) {
     return res
       .status(404)
-      .json({ status: false, message: "ip not found"});
+      .json({ status: true, message: "ip not found"});
   }
   const track = await Song.findById(req.body.trackId);
 
   if (!track) {
     return res
       .status(404)
-      .json({ status: false, message: "track record not found" });
+      .json({ status: true, message: "track record not found" });
   }
 
   const listenerValid = await Listener.findOne({ userId: ip, trackId: req.body?.trackId });
@@ -36,6 +36,6 @@ export const createTrackListener = asyncHandler(async (req, res) => {
     return res.status(201).json({ status: true, message: "Track listener created successfully" })
   }
   else {
-    return res.status(200).json({ status: false, message: "Track listener already added" })
+    return res.status(200).json({ status: true, message: "Track listener already added" })
   }
 });

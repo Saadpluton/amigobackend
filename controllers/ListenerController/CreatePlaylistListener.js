@@ -13,7 +13,7 @@ export const createPlaylistListener = asyncHandler(async (req, res) => {
   if (!ip) {
     return res
       .status(404)
-      .json({ status: false, message: "ip not found"});
+      .json({ status: true, message: "ip not found"});
   }
 
   const playlist = await Playlist.findById(req.body.playlistId);
@@ -21,7 +21,7 @@ export const createPlaylistListener = asyncHandler(async (req, res) => {
   if (!playlist) {
     return res
       .status(404)
-      .json({ status: false, message: "playlist record not found" });
+      .json({ status: true, message: "playlist record not found" });
   }
 
   const listenerValid = await Listener.findOne({ userId: ip, playlistId: req.body.playlistId });
@@ -36,6 +36,6 @@ export const createPlaylistListener = asyncHandler(async (req, res) => {
     return res.status(201).json({ status: true, message: "Playlist listener created successfully" })
   }
   else {
-    return res.status(200).json({ status: false, message: "Playlist listener already added" })
+    return res.status(200).json({ status: true, message: "Playlist listener already added" })
   }
 });

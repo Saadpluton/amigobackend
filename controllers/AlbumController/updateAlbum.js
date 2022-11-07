@@ -16,12 +16,12 @@ export const updateAlbum = asyncHandler(async (req, res) => {
   if (!album) {
     return res
       .status(404)
-      .json({ status: false, message: "Album record not found" });
+      .json({ status: true, message: "Album record not found" });
   }
   if (!artist && req.body.artistId) {
     return res
       .status(404)
-      .json({ status: false, message: "Artist record not found" });
+      .json({ status: true, message: "Artist record not found" });
   }
 
   const update = await Album.findByIdAndUpdate(req.params.id, {

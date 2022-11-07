@@ -14,6 +14,6 @@ export const getAlbums = asyncHandler(async (req, res) => {
     res.status(200).json(albums);    
   }
   else{
-      res.status(404).json({status : false , message : "No record found"});
+      res.status(404).json({status : true , message : "No record found"});
   }
 });

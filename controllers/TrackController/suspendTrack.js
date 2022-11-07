@@ -31,6 +31,6 @@ export const suspendTrack = asyncHandler(async (req, res) => {
         .json({ status: true, message: "Track has been restore." });
     }
   } else {
-    res.status(404).json({ status: false, message: "No track found." });
+    res.status(404).json({ status: true, message: "No track found." });
   }
 });

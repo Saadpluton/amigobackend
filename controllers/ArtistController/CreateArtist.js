@@ -23,8 +23,8 @@ export const createArtist = asyncHandler(async (req, res) => {
 
   if (emailExists) {
     return res
-      .status(409)
-      .json({ status: false, message: "Email already exist" });
+      .status(400)
+      .json({ status: true, message: "Email already exist" });
   }
 
   // if(!req.file?.filename)

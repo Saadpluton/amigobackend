@@ -14,14 +14,14 @@ export const trackComments = asyncHandler(async (req, res) => {
   if (!user) {
     return res
       .status(404)
-      .json({ status: false, message: "User record not found" });
+      .json({ status: true, message: "User record not found" });
   }
   const song = await Song.findById(req.body.trackId);
 
   if (!song) {
     return res
       .status(404)
-      .json({ status: false, message: "Track record not found" });
+      .json({ status: true, message: "Track record not found" });
   }
   const CommentsParentValid = await TrackComments.findById(req.body.parentId);
 
@@ -29,7 +29,7 @@ export const trackComments = asyncHandler(async (req, res) => {
   {
  return res
       .status(404)
-      .json({ status: false, message: "Track parent record not found" }); 
+      .json({ status: true, message: "Track parent record not found" }); 
   }
     const parentId =  req.body.parentId ? req.body.parentId : undefined
 
