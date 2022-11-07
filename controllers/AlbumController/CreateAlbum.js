@@ -30,7 +30,7 @@ export const createAlbum = asyncHandler(async (req, res) => {
       .json({ status: false, message: "Please Select the Image" });
   }
 
-  let album = new Album(_.pick(req.body, ["title", "artistId","genre", "image"]));
+  let album = new Album(_.pick(req.body, ["title", "artistId","genre","subGenre", "image"]));
   album.artistName = artist.name;
   album.image = `uploads/${req.file?.filename}`;
   album = await album.save();

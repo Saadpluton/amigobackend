@@ -6,9 +6,12 @@ const AlbumSchema = new mongoose.Schema({
     type: String,
     required: [true, "title field is required"],
   },
-  genre :[{
+  genre :{
    type : String
-  }],
+  },
+  subGenre :[{
+    type : String
+   }],
   artistName: {
     type: String,
   },
@@ -48,7 +51,9 @@ function validateAlbum(user) {
     artistId: Joi.string().required(),
     artistName: Joi.string(),
     totalLikes: Joi.number(),
-    genre : Joi.string()
+    genre : Joi.string(),
+    subGenre : Joi.string()
+    
   });
 
   return schema.validate(user);

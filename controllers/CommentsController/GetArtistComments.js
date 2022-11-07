@@ -19,8 +19,21 @@ export const getArtistComments = asyncHandler(async (req, res) => {
       "foreignField": "parentId",
       "as": "child"
     }},
-
+    
   ])
+
+  
+  const netedComments  = await ArtistComments.aggregate([
+    { "$lookup": {
+      "from": "artistcomments",
+      "localField": "parentId",
+      "foreignField": "parentId",
+      "as": "Nestedchild"
+    }},
+  ])
+
+  //console.log(netedComments)
+
   result.filter((item,index) => {
     if(item.parentId)
     {
