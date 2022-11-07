@@ -23,17 +23,21 @@ export const playlistComments = asyncHandler(async (req, res) => {
       .status(200)
       .json({ status: true, message: "playlist record not found" });
   }
-  
-  const CommentsParentValid = await PlaylistComments.findById(req.body.parentId);
 
-  if(!CommentsParentValid && req.body.parentId)
+  if (req.body.parentId !== "") 
   {
- return res
-      .status(200)
-      .json({ status: true, message: "Playlist parent record not found" });
- 
+    const CommentsParentValid = await PlaylistComments.findById(req.body.parentId);
+
+    if(!CommentsParentValid && req.body.parentId)
+    {
+   return res
+        .status(200)
+        .json({ status: true, message: "Playlist parent record not found" });
+   
+    }
   }
-  const parentId =  req.body.parentId ? req.body.parentId : undefined
+
+  const parentId = req.body.parentId && req.parentId != "" ? req.body.parentId : undefined
 
   let comments = new PlaylistComments({ userId: req.body.userId, playlistId: req.body.playlistId , comments : req.body.comments , parentId });
     await comments.save();

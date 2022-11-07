@@ -18,6 +18,10 @@ const artistCommentsSchema = new mongoose.Schema({
   comments: {
     type: String
   },
+  totalLikes : {
+    type: Number,
+    default : 0
+  },
   createAt: {
     type: Date,
     default: Date.now()

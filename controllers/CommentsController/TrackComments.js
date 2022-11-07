@@ -23,15 +23,20 @@ export const trackComments = asyncHandler(async (req, res) => {
       .status(200)
       .json({ status: true, message: "Track record not found" });
   }
-  const CommentsParentValid = await TrackComments.findById(req.body.parentId);
-
-  if(!CommentsParentValid && req.body.parentId)
+  if (req.body.parentId !== "") 
   {
- return res
-      .status(200)
-      .json({ status: true, message: "Track parent record not found" }); 
+    const CommentsParentValid = await PlaylistComments.findById(req.body.parentId);
+
+    if(!CommentsParentValid && req.body.parentId)
+    {
+   return res
+        .status(200)
+        .json({ status: true, message: "Track parent record not found" });
+   
+    }
   }
-    const parentId =  req.body.parentId ? req.body.parentId : undefined
+
+  const parentId = req.body.parentId && req.parentId != "" ? req.body.parentId : undefined
 
   let comments = new TrackComments({ userId: req.body.userId, trackId: req.body.trackId , comments : req.body.comments , parentId });
     await comments.save();

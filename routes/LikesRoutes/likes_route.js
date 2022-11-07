@@ -7,6 +7,7 @@ import { getLikes } from "#controllers/LikesController/GetLikes";
 import { albumLikes } from "#controllers/LikesController/AlbumLikes";
 import { artistLikes } from "#controllers/LikesController/ArtistLikes";
 import { PlaylistLikes } from "#controllers/LikesController/PlaylistLikes";
+import { artistCommentsLikes } from "#controllers/LikesController/ArtistCommentsLikes";
 
 const LikesRoute = express.Router();
 
@@ -21,6 +22,9 @@ LikesRoute.post("/artistlikes/:id", validateObjectId, artistLikes);
 
 // //Playlist Likes Create
 LikesRoute.post("/playlistlikes/:id", validateObjectId, PlaylistLikes);
+
+// //Artsit Comment Likes Create
+LikesRoute.post("/artistCommentlikes/:id", validateObjectId, artistCommentsLikes);
 
 // // //GET All likes
 LikesRoute.get("/likes", getLikes);
