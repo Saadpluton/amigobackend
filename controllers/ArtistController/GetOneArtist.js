@@ -7,6 +7,7 @@ import { Album } from "#models/AlbumModel/album";
 import { Likes } from "#models/LikesModel/likes";
 import { Listener } from "#models/ListenerModel/listener";
 import mongoose from "mongoose";
+import { getArtistComments } from "#controllers/CommentsController/GetArtistComments";
 
 //@desc  Get One Artist 
 //@route  /artist/id
@@ -79,34 +80,10 @@ export const getOneArtist = asyncHandler(async (req, res) => {
 
   }
   
- 
-
-  const result = await ArtistComments.aggregate([
-    {
-      "$lookup": {
-        "from": "artistcomments",
-        "localField": "_id",
-        "foreignField": "parentId",
-        "as": "child"
-      }
-    },
-
-  ])
+  const artistComment = await getArtistComments(req,res)
 
 
-  result.filter((item, index) => {
-    if (item.parentId) {
-      delete result[index]
-    }
-    return item
-  })
-
-  const artistComment = result.filter((item) => {
-    return item !== null
-  })
-
-
-  if (artist) {
+if (artist) {
     return res.status(200).json({ artist: artist, artistTrack: artistTrack, artistAlbum: artistAlbum, artistPlaylist: artistPlaylist, similarArtist: similarArtist, artistComment: artistComment });
   }
   else {

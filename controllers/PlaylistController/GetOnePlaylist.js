@@ -61,15 +61,7 @@ export const getOnePlaylist = asyncHandler(async (req, res) => {
           }
         })
       })
-    // const playlistComments  = await PlaylistComments.aggregate([
-    //   { "$lookup": {
-    //     "from": "playlistcomments",
-    //     "localField": "_id",
-    //     "foreignField": "parentId",
-    //     "as": "child"
-    //   }},
-    // ])
-  
+   
     const playlistComments = await getPlaylistComments(req,res)
 
     if (playlists) {

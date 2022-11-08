@@ -44,12 +44,6 @@ let trackCommentsGet;
   })
 
 }
-  
-  if (trackCommentsGet?.length > 0) {
-    return res.status(200).json(trackCommentsGet);
-  }
-  else {
-    return res.status(200).json({ status: true, message: "No record found" });
-  }
+return trackCommentsGet
 
 });
