@@ -22,7 +22,7 @@ export const getTracks = asyncHandler(async (req, res) => {
 
   const listener = await Listener.find({ userId: ip }).select('-__v');
 
-  const userId = req?.query?.userId !== undefined ? {userId :  req.query.userId} : {}
+  const userId = req?.query?.userId !== "undefined" ? {userId :  req.query.userId} : {}
 
     const likes = await Likes.find(userId).select('-__v');
 
