@@ -17,7 +17,7 @@ export const getGenresFiltration = asyncHandler(async (req, res) => {
   {
   return res.status(400).send( {status : false , message : 'Invalid genre ID.'}); 
   }
-const ip = req.socket.remoteAddress.split(':').at(-1)
+ const ip = req.socket.remoteAddress.split(':').at(-1)
 
   if (!ip) {
     return res
