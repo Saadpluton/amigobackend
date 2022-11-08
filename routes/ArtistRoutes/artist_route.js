@@ -4,7 +4,7 @@ import {multerUpload} from "#utils/multer";
 import validateObjectId from "#middlewares/validateObjectId";
 
 import { createArtist } from "#controllers/ArtistController/CreateArtist";
-import { getArtists } from "#controllers/ArtistController/GetArtists";
+import { weeklyGetArtists } from "#controllers/ArtistController/WeeklyGetArtists";
 import { getOneArtist } from "#controllers/ArtistController/GetOneArtist";
 import { updateArtistProfile } from "#controllers/ArtistController/updateArtistProfile";
 import { suspendArtist } from "#controllers/ArtistController/suspendArtist";
@@ -17,7 +17,7 @@ const artistRoute = express.Router();
 artistRoute.post("/artist",multerUpload.single("image"),createArtist);
 
 // //GET All Artist
-artistRoute.get("/artist",getArtists );
+artistRoute.get("/weeklyArtist",weeklyGetArtists );
 
 // //GET Top Artist
 artistRoute.get("/topArtist",topArtists );

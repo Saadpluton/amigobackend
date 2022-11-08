@@ -36,8 +36,6 @@ export const getOneArtist = asyncHandler(async (req, res) => {
 
   const listener = await Listener.find({ userId: ip }).select('-__v');
  
-
-
   if (listener?.length > 0)
   listener?.map((x) => {
     artistTrack?.map((y) => {
