@@ -41,7 +41,6 @@ export const getPlaylists = asyncHandler(async (req, res) => {
 
   const listener = await Listener.find({ userId: ip }).select('-__v');
 
-  const likes = await Likes.find({userId: req.query.userIds}).select('-__v');
 
   if (listener?.length > 0)
     listener?.map((x) => {
@@ -53,14 +52,6 @@ export const getPlaylists = asyncHandler(async (req, res) => {
     })
 
 
-    if (likes?.length > 0)
-    likes?.map((x) => {
-      playLists?.map((y) => {
-           if (y?._id.equals(x?.playlistId)) {
-            y.isLiked = true
-          }
-        })
-      })
   // if (playLists.length > 0) {
   //   return res.status(200).json({
   //     status: true,

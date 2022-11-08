@@ -70,6 +70,10 @@ const ArtistSchema = new mongoose.Schema({
     enum: ["artist"],
     default: "artist",
   },
+  isLiked :{
+    type : Boolean,
+    default : false
+  }
 });
 ArtistSchema.methods.generateAuthToken = function () {
   const payload = { _id: this._id, name: this.name, email: this.email };

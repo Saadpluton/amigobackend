@@ -1,7 +1,5 @@
 import { Artist, validate } from "#models/ArtistModel/artist";
 import asyncHandler from "#middlewares/asyncHandler";
-import { Listener } from "#models/ListenerModel/listener";
-import { Likes } from "#models/LikesModel/likes";
 
 //@desc  Artist Get By Name
 //@route  /artist
@@ -56,16 +54,6 @@ export const getArtistsByName = asyncHandler(async (req, res) => {
     artists = await Artist.find().limit(100);
   }
 
-  const likes = await Likes.find({userId: req.query.userIds}).select('-__v');
-
-    if (likes?.length > 0)
-    likes?.map((x) => {
-      artists?.map((y) => {
-           if (y?._id.equals(x?.artistId)) {
-            y.isLiked = true
-          }
-        })
-      })
   
   if (artists.length > 0) {
     res.status(200).json({artists : artists} );
