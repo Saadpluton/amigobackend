@@ -8,6 +8,7 @@ import { getTracks } from "#controllers/TrackController/GetTrack";
 import { getOneTrack } from "#controllers/TrackController/GetOneTrack";
 import { updateTrack } from "#controllers/TrackController/updateTrack";
 import { suspendTrack } from "#controllers/TrackController/suspendTrack";
+import { getNewTracks } from "#controllers/TrackController/GetNewTrack";
 
 const TrackRoute = express.Router();
 
@@ -32,6 +33,9 @@ TrackRoute.get("/track", getTracks);
 
 // // //GET One Track
 TrackRoute.get("/track/:id", validateObjectId, getOneTrack);
+
+// // //GET Newly Track
+TrackRoute.get("/newTrack", getNewTracks);
 
 // // //Track Updated
 TrackRoute.put(

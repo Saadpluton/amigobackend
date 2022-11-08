@@ -8,7 +8,7 @@ import { Likes } from "#models/LikesModel/likes";
 //@request Get Request
 //@acess  public
 
-export const getTracks = asyncHandler(async (req, res) => {
+export const getNewTracks = asyncHandler(async (req, res) => {
 
   const ip = req.socket.remoteAddress.split(':').at(-1)
   
@@ -18,7 +18,7 @@ export const getTracks = asyncHandler(async (req, res) => {
       .json({ status: true, message: "ip not found"});
   }
 
-  const songs = await Song.find().select("-__v");
+  const songs = await Song.find().limit(20).select("-__v");
 
   const listener = await Listener.find({ userId: ip }).select('-__v');
 

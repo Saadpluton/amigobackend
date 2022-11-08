@@ -4,6 +4,8 @@ import { Song } from "#models/SongModel/song";
 import mongoose from "mongoose";
 import Joi from "joi";
 import JoiObjectId from "joi-objectid";
+import { Listener } from "#models/ListenerModel/listener";
+import { Likes } from "#models/LikesModel/likes";
 const mongoonse_id = JoiObjectId(Joi);
 
 //@desc  Get Playlist Track
@@ -32,9 +34,38 @@ export const getPlaylistTrack = asyncHandler(async (req, res) => {
   })
 
 if (validArrIds.length === ids.length) {
-    const playlistsTrack = await Song.find({ _id: { $in: ids } }).select("-__v");
+  const ip = req.socket.remoteAddress.split(':').at(-1)
+  
+  if (!ip) {
+    return res
+      .status(200)
+      .json({ status: true, message: "ip not found"});
+  }
 
-    if (playlistsTrack.length > 0) {
+  const playlistsTrack = await Song.find({ _id: { $in: ids } }).select("-__v");
+  const listener = await Listener.find({ userId: ip }).select('-__v');
+  const likes = await Likes.find({userId: req.query.userId}).select('-__v');
+
+  if (listener?.length > 0)
+    listener?.map((x) => {
+      playlistsTrack?.map((y) => {
+         if (y?._id.equals(x?.trackId)) {
+          y.isViewed = true
+        }
+      })
+    })
+
+
+    if (likes?.length > 0)
+    likes?.map((x) => {
+      playlistsTrack?.map((y) => {
+           if (y?._id.equals(x?.trackId)) {
+            y.isLiked = true
+          }
+        })
+      })
+   
+      if (playlistsTrack.length > 0) {
       return res.status(200).json(playlistsTrack);
     }
     else {
@@ -43,6 +74,5 @@ if (validArrIds.length === ids.length) {
   }
   else {
     return res.status(400).json({ status: false, message: "Invalid trackId" });
-
   }
 });
