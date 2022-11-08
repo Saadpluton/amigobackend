@@ -33,8 +33,20 @@ export const getTrackComments = asyncHandler(async (req, res) => {
     return item !== null
   })
 
-  if (trackComments.length > 0) {
-    return res.status(200).json(trackComments);
+let trackCommentsGet;
+  if(trackComments.length > 0)
+{
+   trackCommentsGet = trackComments.filter((item) => {   
+    if(item?.trackId.toString() === req.params.id)
+    {
+      return item
+    }
+  })
+
+}
+  
+  if (trackCommentsGet?.length > 0) {
+    return res.status(200).json(trackCommentsGet);
   }
   else {
     return res.status(200).json({ status: true, message: "No record found" });

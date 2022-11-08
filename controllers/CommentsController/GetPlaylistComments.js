@@ -33,21 +33,19 @@ export const getPlaylistComments = asyncHandler(async (req, res) => {
     return item !== null
   })
   
-
-  
   const playlistCommentsGet = playlistComment.filter((item) => {   
-   
-    if(item?.artistId.equals(req.query.playlistId))
+    if(item.playlistId.toString() === req.params.id)
     {
       return item
     }
+
   })
-  
-  if (playlistCommentsGet.length > 0) {
-    return res.status(200).json(playlistCommentsGet);
-  }
-  else {
-    return res.status(200).json({ status: true, message: "No record found" });
-  }
+  return playlistCommentsGet
+  // if (playlistCommentsGet.length > 0) {
+  //   return res.status(200).json(playlistCommentsGet);
+  // }
+  // else {
+  //   return res.status(200).json({ status: true, message: "No record found" });
+  // }
 
 });

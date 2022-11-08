@@ -5,6 +5,8 @@ import { PlaylistComments } from "#models/CommentsModel/playlist_comments";
 import { Artist } from "#models/ArtistModel/artist";
 import { Song } from "#models/SongModel/song";
 import { Likes } from "#models/LikesModel/likes";
+import { getPlaylistComments } from "#controllers/CommentsController/GetPlaylistComments";
+
 
 //@desc  Get One Playlist 
 //@route  /playlist/id
@@ -59,15 +61,16 @@ export const getOnePlaylist = asyncHandler(async (req, res) => {
           }
         })
       })
-    const playlistComments  = await PlaylistComments.aggregate([
-      { "$lookup": {
-        "from": "playlistcomments",
-        "localField": "_id",
-        "foreignField": "parentId",
-        "as": "child"
-      }},
-    ])
+    // const playlistComments  = await PlaylistComments.aggregate([
+    //   { "$lookup": {
+    //     "from": "playlistcomments",
+    //     "localField": "_id",
+    //     "foreignField": "parentId",
+    //     "as": "child"
+    //   }},
+    // ])
   
+    const playlistComments = await getPlaylistComments(req,res)
 
     if (playlists) {
     return res.status(200).json({playlists : playlists ,playlistsTrack : playlistsTrack , similarPlaylist : similarPlaylist , similarArtist : similarArtist , playlistComments : playlistComments});
