@@ -2,6 +2,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 import { PlaylistComments } from "#models/CommentsModel/playlist_comments";
 import { User } from "#models/UserModel/user";
 import {Playlist , validate} from "#models/PlayListModel/playlist"
+import mongoose from "mongoose";
 
 //@desc  Comments Create And Remove
 //@route  /Comments
@@ -10,6 +11,21 @@ import {Playlist , validate} from "#models/PlayListModel/playlist"
 
 export const playlistComments = asyncHandler(async (req, res) => {
 
+  if (!mongoose.Types.ObjectId.isValid(req.body.userId))
+  {
+  return res.status(400).send( {status : false , message : 'Invalid user ID.'}); 
+  }
+  if (!mongoose.Types.ObjectId.isValid(req.body.playlistId))
+  {
+  return res.status(400).send( {status : false , message : 'Invalid playlist ID.'}); 
+  } 
+  if(req.body.parentId)
+  {
+    if (!mongoose.Types.ObjectId.isValid(req.body.parentId))
+    {
+    return res.status(400).send( {status : false , message : 'Invalid parent ID.'}); 
+    }
+  }
   const user = await User.findById(req.body.userId);
   if (!user) {
     return res

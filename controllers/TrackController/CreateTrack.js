@@ -1,10 +1,11 @@
 import { Song, validate } from "#models/SongModel/song";
 import _ from "lodash";
 import asyncHandler from "#middlewares/asyncHandler";
-import { PNG, JPG, JPEG, MP3, MPEG ,PATH} from "#constant/constant";
+import { PNG, JPG, JPEG, MP3, MPEG, PATH } from "#constant/constant";
 import { Artist } from "#models/ArtistModel/artist";
 import fs from "fs";
 import musicData from "musicmetadata";
+import mongoose from "mongoose";
 
 //@desc  Track Create
 //@route  /track
@@ -13,13 +14,14 @@ import musicData from "musicmetadata";
 
 export const createTrack = asyncHandler(async (req, res) => {
   const { error } = validate(req.body);
-
   if (error) {
     return res
-      .status(200)
+      .status(400)
       .send({ status: false, message: error?.details[0]?.message });
   }
-
+  if (!mongoose.Types.ObjectId.isValid(req.body.artistId)) {
+    return res.status(400).send({ status: false, message: 'Invalid artist ID.' });
+  }
   const artist = await Artist.findById(req.body?.artistId);
 
   if (!artist) {
@@ -86,20 +88,20 @@ export const createTrack = asyncHandler(async (req, res) => {
         //console.log(fixedCurrentTime);
 
         let song = new Song(req.body);
-        
-      const name = artist?.name ? artist?.name : "Unknown"
+
+        const name = artist?.name ? artist?.name : "Unknown"
         song.artistName = name;
         song.duration = fixedCurrentTime;
         song.image = `${PATH}uploads/${file?.filename}`;
         song.audio = `${PATH}uploads/${audio?.filename}`;
         song = song.save();
-      
-    }
+
+      }
     }
   );
 
 
-  const updateTrack = await Artist.findOneAndUpdate({_id  :  req.body.artistId },{$push : {genre : req.body.genre , subGenre : req.body.subGenre}  })
+  const updateTrack = await Artist.findOneAndUpdate({ _id: req.body.artistId }, { $push: { genre: req.body.genre, subGenre: req.body.subGenre } })
 
   return res
     .status(201)

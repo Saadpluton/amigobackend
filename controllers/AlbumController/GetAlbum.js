@@ -30,11 +30,11 @@ export const getAlbums = asyncHandler(async (req, res) => {
     })
 
 
-  if(albums.length > 0)
+  if(albums?.length > 0)
   {
-    res.status(200).json(albums);    
+   return res.status(200).json(albums);    
   }
   else{
-      res.status(200).json({status : true , message : "No record found"});
+    return res.status(200).json({status : true , message : "No record found"});
   }
 });

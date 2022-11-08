@@ -1,10 +1,12 @@
 import { Song } from "#models/SongModel/song";
 import asyncHandler from "#middlewares/asyncHandler";
 import _ from "lodash";
-import { PNG, JPG, JPEG, MP3, MPEG , PATH } from "#constant/constant";
+import { PNG, JPG, JPEG, MP3, MPEG, PATH } from "#constant/constant";
 import { Artist } from "#models/ArtistModel/artist";
 import fs from "fs";
 import musicData from "musicmetadata";
+import mongoose from "mongoose";
+
 
 //@desc  update track
 //@route  /track/update/:id
@@ -13,11 +15,15 @@ import musicData from "musicmetadata";
 
 export const updateTrack = asyncHandler(async (req, res) => {
   const song = await Song.findById(req.params.id);
-
+  if (req.body.artistId) {
+    if (!mongoose.Types.ObjectId.isValid(req.body.artistId)) {
+      return res.status(400).send({ status: false, message: 'Invalid artist ID.' });
+    }
+  }
   if (!song) {
     return res
       .status(200)
-      .json({ status: true, message: "song record not found" });
+      .json({ status: true, message: "track record not found" });
   }
   const artist = await Artist.findById(req.body.artistId);
 

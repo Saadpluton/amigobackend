@@ -22,8 +22,7 @@ export const createUser = asyncHandler(async (req, res) => {
     }
 
     const emailExistsArtist = await Artist.findOne({role : req.body.role, email: req.body.email }); 
-    const emailExistsUser = await User.findOne({ role : req.body.role , email : req.body.email});
-    
+    const emailExistsUser = await User.findOne({ role : req.body.role , email : req.body.email}); 
    
 let customer ;
     if(req.body.role === "user")
@@ -42,14 +41,14 @@ let customer ;
       customer = await customer.save();
       return res.status(201).json({ status: true, message: "User registered successfully" })    
     }
-   if(req.body.role === "artist")
+  else if(req.body.role === "artist")
    {
     if (emailExistsArtist) {
       return res
         .status(400)
         .json({ status: true, message: "Artist Email already exist" });
     }
-  
+
     customer = new Artist(obj)
     const salt = bcrypt.genSalt(10)
     customer.password = await bcrypt.hash(customer.password, parseInt(salt));
@@ -61,7 +60,12 @@ let customer ;
     customer = await customer.save();
     return res.status(201).json({ status: true, message: "Artist registered successfully" })
 
-   }
+   }else {
+    return res
+      .status(400)
+      .json({ status: true, message: "Role is not valid!" });
+  }
+
 
   })
   

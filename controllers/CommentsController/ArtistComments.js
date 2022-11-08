@@ -3,6 +3,7 @@ import { User } from "#models/UserModel/user";
 import { Song } from "#models/SongModel/song";
 import { ArtistComments } from "#models/CommentsModel/artist_comments";
 import { Artist } from "#models/ArtistModel/artist"
+import mongoose from "mongoose";
 
 //@desc  ArtistComments Create And Remove
 //@route  /ArtistComments
@@ -11,7 +12,22 @@ import { Artist } from "#models/ArtistModel/artist"
 
 export const artistComments = asyncHandler(async (req, res) => {
 
-  console.log(req.body);
+  if (!mongoose.Types.ObjectId.isValid(req.body.userId))
+  {
+  return res.status(400).send( {status : false , message : 'Invalid user ID.'}); 
+  }
+  if (!mongoose.Types.ObjectId.isValid(req.body.artistId))
+  {
+  return res.status(400).send( {status : false , message : 'Invalid artist ID.'}); 
+  } 
+  if(req.body.parentId)
+  {
+    if (!mongoose.Types.ObjectId.isValid(req.body.parentId))
+    {
+    return res.status(400).send( {status : false , message : 'Invalid parent ID.'}); 
+    }
+  }
+  
   const user = await User.findById(req.body.userId);
   if (!user) {
     return res

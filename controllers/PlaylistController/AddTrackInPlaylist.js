@@ -4,6 +4,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 import {User} from "#models/UserModel/user"
 import { Song } from "#models/SongModel/song";
 import {Artist } from "#models/ArtistModel/artist"
+import mongoose from "mongoose";
 
 //@desc  Add track in Playlist
 //@route  /addtrackplaylist
@@ -11,7 +12,30 @@ import {Artist } from "#models/ArtistModel/artist"
 //@acess  public
 
 export const addTrackPlaylist = asyncHandler(async (req, res) => {
-    
+  if (!mongoose.Types.ObjectId.isValid(req.body.playlistId))
+  {
+  return res.status(400).send( {status : false , message : 'Invalid playlist ID.'}); 
+  }
+  if(req.body.artistId)
+  {
+    if (!mongoose.Types.ObjectId.isValid(req.body.artistId))
+    {
+    return res.status(400).send( {status : false , message : 'Invalid artist ID.'}); 
+    } 
+  }
+  if(req.body.userId)
+  {
+  if (!mongoose.Types.ObjectId.isValid(req.body.userId))
+  {
+  return res.status(400).send( {status : false , message : 'Invalid user ID.'}); 
+  }
+}
+  if (!mongoose.Types.ObjectId.isValid(req.body.trackId))
+  {
+  return res.status(400).send( {status : false , message : 'Invalid trackId ID.'}); 
+  } 
+
+
     const user= await User.findById(req.body?.userId);
     const track= await Song.findById(req.body?.trackId);   
     const artist = await Artist.findById(track?.artistId);   
@@ -28,7 +52,7 @@ const trackRecord = !playList?.trackId?.length > 0 ?
   {
     image : track?.image,
     trackName : track?.name,
-    artistName : track.artistName,
+    artistName : track?.artistName,
     trackGenre : track?.genre,
     trackDuration : track?.duration,
     trackSubGenre : track?.subGenre, 
@@ -52,7 +76,7 @@ undefined
     }
   
 
-    const update = await Playlist.findOneAndUpdate({_id : req.body?.playlistId , userId : req.body?.userId ,artistId :  req.body.artistId },{...trackRecord ,$push : {trackId : req.body.trackId}  })
+    const update = await Playlist.findOneAndUpdate({_id : req.body?.playlistId , userId : req.body?.userId ,artistId :  req.body?.artistId },{...trackRecord ,$push : {trackId : req.body?.trackId}  })
 
     return res.status(200).json({ status: true, message: "Track added in playlist successfully" })
 

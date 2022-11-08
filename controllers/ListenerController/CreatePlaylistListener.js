@@ -1,6 +1,8 @@
 import asyncHandler from "#middlewares/asyncHandler";
 import { Listener } from "#models/ListenerModel/listener"
 import {Playlist , validate} from "#models/PlayListModel/playlist"
+import mongoose from "mongoose";
+
 ///@desc  Artsit Listener Create
 //@route  /trackListener
 //@request Post Request
@@ -8,6 +10,10 @@ import {Playlist , validate} from "#models/PlayListModel/playlist"
 
 export const createPlaylistListener = asyncHandler(async (req, res) => {
 
+  if (!mongoose.Types.ObjectId.isValid(req.body.playlistId))
+  {
+  return res.status(400).send( {status : false , message : 'Invalid playlist ID.'}); 
+  }
   const ip = req.socket.remoteAddress.split(':').at(-1)
 
   if (!ip) {

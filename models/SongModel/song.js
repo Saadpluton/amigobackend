@@ -89,7 +89,7 @@ function validateSong(user) {
     year: Joi.string()
       .regex(/^\d{4}\-\d{2}\-\d{2}$/)
       .required(),
-    subGenre: Joi.string(),
+    subGenre: Joi.string().required(),
   });
   return schema.validate(user);
 }

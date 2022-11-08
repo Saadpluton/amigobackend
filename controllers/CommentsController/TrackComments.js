@@ -2,6 +2,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 import { TrackComments } from "#models/CommentsModel/track_comments";
 import { User } from "#models/UserModel/user";
 import { Song } from "#models/SongModel/song";
+import mongoose from "mongoose";
 
 //@desc  Comments Create And Remove
 //@route  /Comments
@@ -9,7 +10,21 @@ import { Song } from "#models/SongModel/song";
 //@acess  public
 
 export const trackComments = asyncHandler(async (req, res) => {
-
+  if (!mongoose.Types.ObjectId.isValid(req.body.userId))
+  {
+  return res.status(400).send( {status : false , message : 'Invalid user ID.'}); 
+  }
+  if (!mongoose.Types.ObjectId.isValid(req.body.trackId))
+  {
+  return res.status(400).send( {status : false , message : 'Invalid track ID.'}); 
+  } 
+  if(req.body.parentId)
+  {
+    if (!mongoose.Types.ObjectId.isValid(req.body.parentId))
+    {
+    return res.status(400).send( {status : false , message : 'Invalid parent ID.'}); 
+    }
+  }
   const user = await User.findById(req.body.userId);
   if (!user) {
     return res

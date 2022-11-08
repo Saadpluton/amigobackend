@@ -16,10 +16,6 @@ import { getArtistComments } from "#controllers/CommentsController/GetArtistComm
 
 export const getOneArtist = asyncHandler(async (req, res) => {
 
-  if (!mongoose.Types.ObjectId.isValid(req.params.id))
-  {
-  return res.status(400).send( {status : false , message : 'Invalid artist ID.'}); 
-  }
   if(req.query.userId)
   {
     if (!mongoose.Types.ObjectId.isValid(req.query.userId))

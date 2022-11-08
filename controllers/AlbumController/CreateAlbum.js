@@ -2,6 +2,7 @@ import { Album, validate } from "#models/AlbumModel/album";
 import _ from "lodash";
 import asyncHandler from "#middlewares/asyncHandler";
 import { Artist } from "#models/ArtistModel/artist";
+import mongoose from "mongoose";
 
 //@desc  Album Create
 //@route  /album
@@ -9,6 +10,8 @@ import { Artist } from "#models/ArtistModel/artist";
 //@acess  public
 
 export const createAlbum = asyncHandler(async (req, res) => {
+
+  
   const { error } = validate(req.body);
 
   if (error) {
@@ -16,6 +19,12 @@ export const createAlbum = asyncHandler(async (req, res) => {
       .status(400)
       .send({ status: true, message: error?.details[0]?.message });
   }
+
+  if (!mongoose.Types.ObjectId.isValid(req.body.artistId))
+  {
+  return res.status(400).send( {status : false , message : 'Invalid artist ID.'}); 
+  }
+  
   const artist = await Artist.findById(req.body.artistId);
 
   if (!artist) {

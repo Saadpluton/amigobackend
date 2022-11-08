@@ -2,6 +2,7 @@ import { Song, validate } from "#models/SongModel/song";
 import asyncHandler from "#middlewares/asyncHandler";
 import { Likes } from "#models/LikesModel/likes";
 import { Listener } from "#models/ListenerModel/listener";
+import mongoose from "mongoose";
 
 //@desc  Get One Track
 //@route  /track/id
@@ -9,7 +10,14 @@ import { Listener } from "#models/ListenerModel/listener";
 //@acess  public
 
 export const getOneTrack = asyncHandler(async (req, res) => {
-
+  
+  if(req.query.userId && req.query.userId !== "undefined")
+  {
+    if (!mongoose.Types.ObjectId.isValid(req.query.userId)) {
+      return res.status(400).send({ status: false, message: 'Invalid user ID.' });
+    }
+    
+  }
   const ip = req.socket.remoteAddress.split(':').at(-1)
   
   if (!ip) {

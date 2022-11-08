@@ -1,6 +1,7 @@
 import asyncHandler from "#middlewares/asyncHandler";
 import { Listener } from "#models/ListenerModel/listener"
 import { Song, validate } from "#models/SongModel/song"
+import mongoose from "mongoose";
 
 ///@desc  Artsit Listener Create
 //@route  /trackListener
@@ -8,6 +9,11 @@ import { Song, validate } from "#models/SongModel/song"
 //@acess  public
 
 export const createTrackListener = asyncHandler(async (req, res) => {
+ 
+  if (!mongoose.Types.ObjectId.isValid(req.body.trackId))
+  {
+  return res.status(400).send( {status : false , message : 'Invalid track ID.'}); 
+  }
 
   const ip = req.socket.remoteAddress.split(':').at(-1)
 //console.log(ip)

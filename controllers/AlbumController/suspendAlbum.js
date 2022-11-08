@@ -1,5 +1,7 @@
 import {Album} from "#models/AlbumModel/album"
 import asyncHandler from "#middlewares/asyncHandler";
+import mongoose from "mongoose";
+
 
 //@desc  Suspend Album
 //@route  /album/suspend/:id
@@ -9,7 +11,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 export const suspendAlbum = asyncHandler(async (req, res) => {
     
     const { id } = req.params;
-      const album = await Album.findById(id);
+    const album = await Album.findById(id);
 
       if(album)
      {
