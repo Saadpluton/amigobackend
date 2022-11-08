@@ -17,11 +17,7 @@ export const getGenresFiltration = asyncHandler(async (req, res) => {
   {
   return res.status(400).send( {status : false , message : 'Invalid genre ID.'}); 
   }
-
-  // const playlist = await Playlist.find({trackGenre: req.query.genre ,  trackSubGenre: { $in: [req.query.subGenre] } }).select('-__v');
-  // const artist = await Artist.find({ genre: { $in: [req.query.genre] } , subGenre: { $in: [req.query.subGenre] }} ).select('-__v');
-  // //const album = await Album.find({ genre: { $in: [req.query.genre] } , subGenre: { $in: [req.query.subGenre] }).select('-__v');
-  const ip = req.socket.remoteAddress.split(':').at(-1)
+const ip = req.socket.remoteAddress.split(':').at(-1)
 
   if (!ip) {
     return res

@@ -46,9 +46,16 @@ export const getArtistComments = asyncHandler(async (req, res) => {
     return item !== null
   })
 
-  if(artistComment.length > 0)
+  const artistCommentsGet = artistComment.filter((item) => {   
+    if(item.artistId.equals(req.query.artistId))
+    {
+      return item
+    }
+  })
+  
+  if(artistCommentsGet.length > 0)
   {
-   return res.status(200).json(artistComment);    
+   return res.status(200).json(artistCommentsGet);    
   }
   else{
       res.status(200).json({status : true , message : "No record found"});

@@ -6,6 +6,7 @@ import { ArtistComments } from "#models/CommentsModel/artist_comments";
 import { Album } from "#models/AlbumModel/album";
 import { Likes } from "#models/LikesModel/likes";
 import { Listener } from "#models/ListenerModel/listener";
+import mongoose from "mongoose";
 
 //@desc  Get One Artist 
 //@route  /artist/id
@@ -14,6 +15,18 @@ import { Listener } from "#models/ListenerModel/listener";
 
 export const getOneArtist = asyncHandler(async (req, res) => {
 
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+  {
+  return res.status(400).send( {status : false , message : 'Invalid artist ID.'}); 
+  }
+  if(req.query.userId)
+  {
+    if (!mongoose.Types.ObjectId.isValid(req.query.userId))
+    {
+    return res.status(400).send( {status : false , message : 'Invalid user ID.'}); 
+    }
+  }
+ 
   const artist = await Artist.findById(req.params.id).select("-__v");
 
   const artistTrack = await Song.find({ artistId: req.params.id }).select("-__v");

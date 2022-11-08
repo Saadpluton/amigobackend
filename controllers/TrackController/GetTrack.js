@@ -22,9 +22,11 @@ export const getTracks = asyncHandler(async (req, res) => {
 
   const listener = await Listener.find({ userId: ip }).select('-__v');
 
-  const likes = await Likes.find({userId: req.query.userId}).select('-__v');
+  const userId = req?.query?.userId ? {userId :  req.query.userId} : {}
 
-  if (likes?.length > 0)
+    const likes = await Likes.find(userId).select('-__v');
+
+    if (likes?.length > 0)
   likes?.map((x) => {
       songs?.map((y) => {
          if (y?._id.equals(x?.trackId)) {

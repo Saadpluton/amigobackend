@@ -19,8 +19,9 @@ export const getOneTrack = asyncHandler(async (req, res) => {
   }
 
   const songs = await Song.findById(req.params.id).select("-__v");
+  const userId = req?.query?.userId ? {userId :  req.query.userId} : {}
 
-  const likes = await Likes.find({ userId: req.query.userId }).select('-__v');
+  const likes = await Likes.find(userId).select('-__v');
 
   const listener = await Listener.find({ userId: ip }).select('-__v');
 

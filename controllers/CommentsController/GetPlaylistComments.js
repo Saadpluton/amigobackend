@@ -32,9 +32,19 @@ export const getPlaylistComments = asyncHandler(async (req, res) => {
   const playlistComment = result.filter((item) => {
     return item !== null
   })
+  
 
-  if (playlistComment.length > 0) {
-    return res.status(200).json(playlistComment);
+  
+  const playlistCommentsGet = playlistComment.filter((item) => {   
+   
+    if(item?.artistId.equals(req.query.playlistId))
+    {
+      return item
+    }
+  })
+  
+  if (playlistCommentsGet.length > 0) {
+    return res.status(200).json(playlistCommentsGet);
   }
   else {
     return res.status(200).json({ status: true, message: "No record found" });
