@@ -44,8 +44,13 @@ if (validArrIds.length === ids.length) {
 
   const playlistsTrack = await Song.find({ _id: { $in: ids } }).select("-__v");
   const listener = await Listener.find({ userId: ip }).select('-__v');
-  const likes = await Likes.find({userId: req.query.userId}).select('-__v');
 
+  let likes ;
+  if(req?.query?.userId !== "undefined")
+  {
+   likes = await Likes.find( {userId :  req.query.userId}).select('-__v');
+  }
+  
   if (listener?.length > 0)
     listener?.map((x) => {
       playlistsTrack?.map((y) => {

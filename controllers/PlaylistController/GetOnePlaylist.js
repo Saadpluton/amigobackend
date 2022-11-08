@@ -16,8 +16,12 @@ export const getOnePlaylist = asyncHandler(async (req, res) => {
   const ip = req.socket.remoteAddress.split(':').at(-1)
   const playlists = await Playlist.findById(req.params.id);
 
-  const likes = await Likes.find({userId: req.query.userId}).select('-__v');
-
+  let likes ;
+  if(req?.query?.userId !== "undefined")
+  {
+   likes = await Likes.find( {userId :  req.query.userId}).select('-__v');
+  }
+  
   if (!ip) {
     return res
       .status(200)
