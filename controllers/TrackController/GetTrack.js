@@ -1,6 +1,7 @@
 import { Song, validate } from "#models/SongModel/song";
 import asyncHandler from "#middlewares/asyncHandler";
 import { Listener } from "#models/ListenerModel/listener";
+import { Likes } from "#models/LikesModel/likes";
 
 //@desc  track Get
 //@route  /track
@@ -20,6 +21,20 @@ export const getTracks = asyncHandler(async (req, res) => {
   const songs = await Song.find().select("-__v");
 
   const listener = await Listener.find({ userId: ip }).select('-__v');
+
+  const likes = await Likes.find({userId: req.query.userId}).select('-__v');
+
+
+  if (likes?.length > 0)
+  likes?.map((x) => {
+      songs?.map((y) => {
+         if (y?._id.equals(x?.trackId)) {
+          y.isLiked = true
+        }
+      })
+    })
+
+
 
   if (listener?.length > 0)
     listener?.map((x) => {

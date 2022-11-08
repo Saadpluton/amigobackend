@@ -39,9 +39,11 @@ export const playlistCommentsLikes = asyncHandler(async (req, res) => {
       userId: req.params.id,
       playlistCommentId: req.body.playlistCommentId,
     });
+    if(playlist.totalLikes !== 0){
     await PlaylistComments.findByIdAndUpdate(req.body.playlistCommentId, {
       totalLikes: playlist.totalLikes - 1,
     });
+  }
     return res
       .status(200)
       .json({ status: true, message: " Playlist Comments likes remove successfully" });

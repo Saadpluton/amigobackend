@@ -39,9 +39,11 @@ export const artistCommentsLikes = asyncHandler(async (req, res) => {
       userId: req.params.id,
       artistCommentId: req.body.artistCommentId,
     });
+    if(artist.totalLikes !== 0){
     await ArtistComments.findByIdAndUpdate(req.body.artistCommentId, {
       totalLikes: artist.totalLikes - 1,
     });
+  }
     return res
       .status(200)
       .json({ status: true, message: " Artist Comments likes remove successfully" });

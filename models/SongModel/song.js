@@ -63,7 +63,11 @@ const SongSchema = new mongoose.Schema({
   },
   isViewed: {
     type: Boolean,
-    default: 0,
+    default: false,
+  },
+  isLiked: {
+    type: Boolean,
+    default: false,
   },
 });
 

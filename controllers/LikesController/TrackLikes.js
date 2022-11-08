@@ -38,9 +38,12 @@ export const trackLikes = asyncHandler(async (req, res) => {
       userId: req.params.id,
       trackId: req.body.trackId,
     });
+    if(song.totalLikes !== 0)
+    {
     await Song.findByIdAndUpdate(req.body.trackId, {
       totalLikes: song.totalLikes - 1,
     });
+  }
     return res
       .status(200)
       .json({ status: true, message: "likes remove successfully" });

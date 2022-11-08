@@ -41,9 +41,12 @@ export const albumLikes = asyncHandler(async (req, res) => {
       userId: req.params.id,
       AlbumId: req.body.AlbumId,
     });
+    if(album.totalLikes !== 0){
+
     await Album.findByIdAndUpdate(req.body.albumId, {
       totalLikes: album.totalLikes - 1,
     });
+  }
     return res
       .status(200)
       .json({ status: true, message: "likes remove successfully" });

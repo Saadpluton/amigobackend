@@ -40,9 +40,12 @@ export const PlaylistLikes = asyncHandler(async (req, res) => {
       userId: req.params.id,
       playlistId: req.body.playlistId,
     });
-    await Playlist.findByIdAndUpdate(req.body.playlistId, {
-      totalLikes: playlist.totalLikes - 1,
-    });
+    if(playlist.totalLikes !== 0)
+    {
+      await Playlist.findByIdAndUpdate(req.body.playlistId, {
+        totalLikes: playlist.totalLikes - 1,
+      });
+    }
     return res
       .status(200)
       .json({ status: true, message: "likes remove successfully" });
