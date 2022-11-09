@@ -12,6 +12,7 @@ import SharesRoute from "#routes/SharesRoutes/shares_route";
 import GenreRoute from "#routes/GenreRoutes/genre_route";
 import ListenerRoute from "#routes/ListenerRoutes/listeners_route";
 import CommentsRoute from "#routes/CommentsRoutes/comments_route";
+import AdminRoute from "#routes/AdminRoutes/admin_route";
 
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -52,6 +53,9 @@ const routes = (app) => {
 
   //Comments
   app.use("/api",CommentsRoute);
+ 
+  //Admin
+ app.use("/api",AdminRoute);
 
   app.use(error);
 };
