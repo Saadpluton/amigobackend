@@ -18,7 +18,11 @@ const genreSchema = new mongoose.Schema({
   createdAt :{
     type : Date,
     default : Date.now()
-  }
+  },
+  isSuspend: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Genre = mongoose.model("Genre", genreSchema);
