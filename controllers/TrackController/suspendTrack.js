@@ -19,16 +19,16 @@ export const suspendTrack = asyncHandler(async (req, res) => {
       );
       res
         .status(200)
-        .json({ status: true, message: "Track has been suspend." });
+        .json({ status: true, message: "Track has been enabled." });
     } else {
       const UnSuspend = await Song.findOneAndUpdate(
         { _id: id },
         { isSuspend: (song.isSuspend = false) },
         { new: true }
       );
-      res
+     return res
         .status(200)
-        .json({ status: true, message: "Track has been restore." });
+        .json({ status: true, message: "Track has been disabled." });
     }
   } else {
     res.status(200).json({ status: true, message: "No track found." });

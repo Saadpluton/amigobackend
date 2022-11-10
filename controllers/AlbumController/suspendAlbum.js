@@ -18,11 +18,11 @@ export const suspendAlbum = asyncHandler(async (req, res) => {
       if (album.isSuspend === false){
 
         const Suspend = await Album.findOneAndUpdate({_id :id}, { isSuspend: album.isSuspend = true }, { new: true });
-        res.status(200).json({status : true , message : "Album has been suspend."});
+        res.status(200).json({status : true , message : "Album has been enabled."});
       }
       else{
       const UnSuspend = await Album.findOneAndUpdate({_id :id}, { isSuspend: album.isSuspend = false }, { new: true });
-      res.status(200).json({status : true , message : "Album has been restore."});  
+      res.status(200).json({status : true , message : "Album has been disabled."});  
     }
   }
   else{

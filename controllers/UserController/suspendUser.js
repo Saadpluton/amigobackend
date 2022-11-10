@@ -16,11 +16,11 @@ export const suspendUser = asyncHandler(async (req, res) => {
       if (customer.isSuspend === false){
 
         const Suspend = await User.findOneAndUpdate({_id :id}, { isSuspend: customer.isSuspend = true }, { new: true });
-        res.status(200).json({status : true , message : "User has been suspend."});
+        res.status(200).json({status : true , message : "User has been enabled."});
       }
       else{
       const UnSuspend = await User.findOneAndUpdate({_id :id}, { isSuspend: customer.isSuspend = false }, { new: true });
-      res.status(200).json({status : true , message : "User has been restore."});  
+      res.status(200).json({status : true , message : "User has been disabled."});  
     }
   }
   else{
