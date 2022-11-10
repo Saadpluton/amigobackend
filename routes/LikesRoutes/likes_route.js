@@ -8,6 +8,7 @@ import { albumLikes } from "#controllers/LikesController/AlbumLikes";
 import { artistLikes } from "#controllers/LikesController/ArtistLikes";
 import { PlaylistLikes } from "#controllers/LikesController/PlaylistLikes";
 import { artistCommentsLikes } from "#controllers/LikesController/ArtistCommentsLikes";
+import { getTotalLikes } from "#controllers/LikesController/TotalLikes";
 
 const LikesRoute = express.Router();
 
@@ -28,5 +29,8 @@ LikesRoute.post("/artistCommentlikes/:id", validateObjectId, artistCommentsLikes
 
 // // //GET All likes
 LikesRoute.get("/likes", getLikes);
+
+// // //GET All likes
+LikesRoute.get("/total", getTotalLikes);
 
 export default LikesRoute;
