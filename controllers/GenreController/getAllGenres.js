@@ -1,13 +1,13 @@
 import {Genre , validate} from "#models/GenreModel/genre"
 import asyncHandler from "#middlewares/asyncHandler";
 
-//@desc  Genre Get
+//@desc  Genre Get All Admin
 //@route  /genre
 //@request Get Request
 //@acess  public
 
-export const getGenres = asyncHandler(async (req, res) => {
-  const genre = await Genre.find({isSuspend: false}).select('-__v');
+export const getAllGenres = asyncHandler(async (req, res) => {
+  const genre = await Genre.find().select('-__v');
 
   if(genre.length > 0)
   {
