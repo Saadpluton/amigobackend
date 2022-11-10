@@ -62,6 +62,7 @@ UserSchema.methods.generateAuthToken = function () {
 
 function validateUser(user) {
   const schema = Joi.object({
+    name : Joi.string(),
     email: Joi.string()
       .min(5)
       .max(255)

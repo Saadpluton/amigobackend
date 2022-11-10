@@ -32,12 +32,19 @@ let customer ;
           return res.status(400).json({ status: true , message: "User Email already exist" })    
       }
       customer = new User(obj)
+      if (!req.body?.name) {
+        const name =  req.body?.email.split('@').at(0)
+        customer.name = name;
+    }
+  
       const salt = bcrypt.genSalt(10)
       customer.password = await bcrypt.hash(customer.password, parseInt(salt));
       if(req.file?.filename)
       {
         customer.image = `${PATH}uploads/${req.file?.filename}`
       }
+    
+  
       customer = await customer.save();
       return res.status(201).json({ status: true, message: "User registered successfully" })    
     }
@@ -50,6 +57,10 @@ let customer ;
     }
 
     customer = new Artist(obj)
+    if (!req.body?.name) {
+      const name =  req.body?.email.split('@').at(0)
+      customer.name = name;
+  }
     const salt = bcrypt.genSalt(10)
     customer.password = await bcrypt.hash(customer.password, parseInt(salt));
     
