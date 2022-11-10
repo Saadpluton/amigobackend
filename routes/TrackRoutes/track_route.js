@@ -9,6 +9,7 @@ import { getOneTrack } from "#controllers/TrackController/GetOneTrack";
 import { updateTrack } from "#controllers/TrackController/updateTrack";
 import { suspendTrack } from "#controllers/TrackController/suspendTrack";
 import { getNewTracks } from "#controllers/TrackController/GetNewTrack";
+import { getAllTracks } from "#controllers/TrackController/GetAllTrack";
 
 const TrackRoute = express.Router();
 
@@ -56,5 +57,8 @@ TrackRoute.put(
 
 // // //Suspend Track
 TrackRoute.put("/track/suspend/:id", validateObjectId, suspendTrack);
+
+// // //Get All Track Admin
+TrackRoute.get("/allTrack", getAllTracks);
 
 export default TrackRoute;
