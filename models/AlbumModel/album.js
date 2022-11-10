@@ -46,6 +46,10 @@ const AlbumSchema = new mongoose.Schema({
   isViewed: {
     type: Boolean,
     default: 0
+},
+createdAt :{
+  type : Date,
+  default : Date.now()
 }
 });
 

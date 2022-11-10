@@ -35,7 +35,10 @@ const likesSchema = new mongoose.Schema({
     ref: "playlistcomment" ,
     //required : [true ,"artistId field is required"]
   },
-  
+  createdAt :{
+    type : Date,
+    default : Date.now()
+  }
 });
 
 export const Likes =  mongoose.model("Like", likesSchema)

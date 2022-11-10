@@ -22,6 +22,10 @@ const listenerSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Playlist" ,
     //required : [true ,"artistId field is required"]
+  },
+  createdAt :{
+    type : Date,
+    default : Date.now()
   }
 });
 

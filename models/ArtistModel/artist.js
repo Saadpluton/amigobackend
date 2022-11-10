@@ -73,6 +73,10 @@ const ArtistSchema = new mongoose.Schema({
   isLiked :{
     type : Boolean,
     default : false
+  },
+  createdAt :{
+    type : Date,
+    default : Date.now()
   }
 });
 ArtistSchema.methods.generateAuthToken = function () {
