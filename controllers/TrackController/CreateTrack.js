@@ -6,7 +6,7 @@ import { Artist } from "#models/ArtistModel/artist";
 import fs from "fs";
 import musicData from "musicmetadata";
 import mongoose from "mongoose";
-import {User , validate} from "#models/UserModel/user"
+import {User } from "#models/UserModel/user"
 
 //@desc  Track Create
 //@route  /track
