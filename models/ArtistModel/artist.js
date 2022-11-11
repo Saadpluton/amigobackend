@@ -22,8 +22,6 @@ const ArtistSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    minlength: 5,
-    maxlength: 50,
   },
   gender: {
     type: String,
@@ -92,7 +90,7 @@ ArtistSchema.methods.generateAuthToken = function () {
 
 function validateArtist(user) {
   const schema = Joi.object({
-    name: Joi.string().min(5).max(50),
+    name: Joi.string(),
     country: Joi.string(),
     description: Joi.string().min(5).max(100),
     gender: Joi.string(),
@@ -100,8 +98,8 @@ function validateArtist(user) {
     genre: Joi.array(),
     subGenre: Joi.array(),
     role: Joi.string(),
-    email: Joi.string().min(5).max(255).required().email(),
-    password: Joi.string().min(5).max(255).required(),
+    email: Joi.string().required().email(),
+    password: Joi.string().min(8).max(255).required(),
   });
 
   return schema.validate(user);
