@@ -17,7 +17,7 @@ export const artistLikes = asyncHandler(async (req, res) => {
   }
 
   const user = await User.findById(req.params.id);
-  if (!user) {
+  if (!user && req.body.userId) {
     return res
       .status(200)
       .json({ status: true, message: "User record not found" });

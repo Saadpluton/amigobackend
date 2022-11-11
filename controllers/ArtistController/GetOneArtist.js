@@ -76,7 +76,7 @@ export const getOneArtist = asyncHandler(async (req, res) => {
 
   }
   
-  const artistComment = await getArtistComments(req,res)
+  const artistComment = await getArtistComments(req,res);
 
 
 if (artist) {
