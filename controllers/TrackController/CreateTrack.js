@@ -25,13 +25,11 @@ export const createTrack = asyncHandler(async (req, res) => {
   }
   const artist = await Artist.findById(req.body?.artistId);
 
-  const admin = await User.findById(req.body?.userId);
-
-  if (!artist || admin.role !== "admin") {
-    return res
-      .status(200)
-      .json({ status: true, message: "artist record not found" });
-  }
+  // if (!artist || !artist?.role !== "admin") {
+  //   return res
+  //     .status(200)
+  //     .json({ status: true, message: "artist record not found" });
+  // }
 
   let file = req.files?.image?.[0];
   let audio = req.files?.audio?.[0];
