@@ -30,10 +30,10 @@ export const loginUser = asyncHandler(async (req, res) => {
 
   let userFind, token;
 
-  if (req.body.role === "user" ) {
+  if (req.body.role === "user" || req.body.role === "admin" ) {
     userFind = await User.findOne({ role : req.body?.role, email: req.body?.email });
     token = userFind?.generateAuthToken();
-  } else if (req.body.role === "artist" || req.body.role === "admin") {
+  } else if (req.body.role === "artist") {
     userFind = await Artist.findOne({ email: req.body?.email });
     token = userFind?.generateAuthToken();
   } else {
