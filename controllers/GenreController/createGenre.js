@@ -10,6 +10,8 @@ import { PATH } from "#constant/constant";
 export const createGenre = asyncHandler(async (req, res) => {
   const { error } = validate(req.body);
 
+  console.log("genre" , req.body)
+ 
   if (error) {
     return res
       .status(400)

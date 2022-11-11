@@ -20,11 +20,11 @@ export const getPlaylists = asyncHandler(async (req, res) => {
   let playLists ;
   if(userId)
   {
-    playLists = await Playlist.find(userId).populate("userId")
+    playLists = await Playlist.find(userId)
   }
   else{
     //playLists = await Playlist.find(query).limit(pageSize).skip(skip)
-    playLists = await Playlist.find(query).populate("userId").limit(30)
+    playLists = await Playlist.find(query).limit(30)
   
   }
 
