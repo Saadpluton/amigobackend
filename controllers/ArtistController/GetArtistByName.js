@@ -28,9 +28,9 @@ export const getArtistsByName = asyncHandler(async (req, res) => {
   // })
 
   const name =
-    req.query.name != "All" ? { name: { $regex: regex } } : undefined;
+    req.query.name != "All" ? { name: { $regex: regex } , isSuspend: false } : undefined;
   const gender =
-    req.query.gender != "All" ? { gender: req.query.gender } : undefined;
+    req.query.gender != "All" ? { gender: req.query.gender ,isSuspend: false} : undefined;
   const genre =
     req.query.genre != "All"
       ? { genre: { $in: [req.query.genre] } }
@@ -51,7 +51,7 @@ export const getArtistsByName = asyncHandler(async (req, res) => {
       $and: resultQuery,
     });
   } else {
-    artists = await Artist.find().limit(100);
+    artists = await Artist.find({isSuspend: false}).limit(100);
   }
 
   

@@ -7,7 +7,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 //@acess  public
 
 export const weeklyGetArtists = asyncHandler(async (req, res) => {
-  const artists = await Artist.find().select('-__v');
+  const artists = await Artist.find({isSuspend: false}).select('-__v');
 
   if(artists.length > 0)
   {

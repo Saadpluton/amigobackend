@@ -25,7 +25,7 @@ export const getNewTracks = asyncHandler(async (req, res) => {
       .json({ status: true, message: "ip not found"});
   }
 
-  const songs = await Song.find().sort({createdAt:-1}).limit(20).select("-__v");
+  const songs = await Song.find({isSuspend:false}).sort({createdAt:-1}).limit(20).select("-__v");
 
   const listener = await Listener.find({ userId: ip }).select('-__v');
 

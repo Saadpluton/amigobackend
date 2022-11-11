@@ -9,7 +9,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 export const getAllTracks = asyncHandler(async (req, res) => {
 
 
-  let songs = await Song.find({});
+  let songs = await Song.find({isSuspend : false});
 
   if (songs?.length > 0) {
     return res.status(200).json(songs);

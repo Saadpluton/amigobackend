@@ -7,7 +7,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 //@acess  public
 
 export const topArtists = asyncHandler(async (req, res) => {
-  const artists = await Artist.find().select("name").limit(5); 
+  const artists = await Artist.find({isSuspend: false}).select("name").limit(5); 
   if(artists.length > 0)
   {
     res.status(200).json(artists);    

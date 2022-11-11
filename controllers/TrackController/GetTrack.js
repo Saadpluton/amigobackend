@@ -26,7 +26,7 @@ export const getTracks = asyncHandler(async (req, res) => {
   }
 
 
-  let songs = await Song.find({ isTrending: false, totalListeners: { $gte: TOTALLISTENERS }, totalLikes: { $gte: TOTALLIKES } })
+  let songs = await Song.find({ isTrending: false , isSuspend: false, totalListeners: { $gte: TOTALLISTENERS }, totalLikes: { $gte: TOTALLIKES } })
     .sort({ totalListeners: -1, totalLikes: -1 })
     .limit(5)
     .select("-__v");
@@ -39,7 +39,7 @@ export const getTracks = asyncHandler(async (req, res) => {
     likes = await Likes.find({ userId: req.query.userId }).select('-__v');
   }
 
-  const trendingSongsByAdmin = await Song.find({ isTrending: true }).select("-__v");
+  const trendingSongsByAdmin = await Song.find({ isTrending: true , isSuspend: false }).select("-__v");
 
    if(trendingSongsByAdmin.length > 0)
    {

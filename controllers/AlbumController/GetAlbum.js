@@ -16,7 +16,7 @@ export const getAlbums = asyncHandler(async (req, res) => {
       .json({ status: true, message: "ip not found"});
   }
 
-  const albums = await Album.find().select('-__v');
+  const albums = await Album.find({isSuspend: false}).select('-__v');
  
   const listener = await Listener.find({ userId: ip }).select('-__v');
 
