@@ -16,7 +16,7 @@ export const getTotalLikes = asyncHandler(async (req, res) => {
    
     const totalAlbum = await Album.find().countDocuments();
    
-    const totalUser = await User.find().countDocuments();
+    const totalUser = await User.find({role : "user"}).countDocuments();
    
     const totalTrack = await Song.find().countDocuments();
    
