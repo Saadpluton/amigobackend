@@ -17,14 +17,12 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    minlength: 5,
+    minlength: 8,
     maxlength: 255,
     required: [true, "password field is required"]
   },
   name: {
     type: String,
-    minlength: 5,
-    maxlength: 50,
   },
   country: {
     type: String,
@@ -64,14 +62,10 @@ function validateUser(user) {
   const schema = Joi.object({
     name : Joi.string(),
     email: Joi.string()
-      .min(5)
-      .max(255)
       .required()
       .email(),
       role: Joi.string().required(),
       password: Joi.string()
-      .min(5)
-      .max(255)
       .required(),
   });
 
