@@ -3,6 +3,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 import { Song } from "#models/SongModel/song";
 import { Album } from "#models/AlbumModel/album";
 import {Playlist} from "#models/PlayListModel/playlist"
+import { Artist } from "#models/ArtistModel/artist";
 
 //@desc Total Likes Get
 //@route  /totalLikes
