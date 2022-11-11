@@ -6,6 +6,8 @@ import { getPlaylists } from "#controllers/AdminController/getAllPlaylist";
 import { getTracks } from "#controllers/AdminController/getAllTrack";
 import { getAlbums } from "#controllers/AdminController/getAllAlbum";
 import { getArtist } from "#controllers/AdminController/getAllArtist";
+import { getFeatureArtist } from "#controllers/AdminController/getAllFeatureArtist";
+import { createFeatureArtist } from "#controllers/AdminController/CreateFeatureArtist";
 
 
 const AdminRoute = express.Router();
@@ -24,5 +26,12 @@ AdminRoute.get("/albumAdmin", getAlbums);
 
 // Admin All Artist
 AdminRoute.get("/artistAdmin", getArtist);
+
+// Admin Create Feature Artist
+AdminRoute.get("/adminFeatureArtist/:id", validateObjectId,createFeatureArtist);
+
+// Admin All Feature Artist
+AdminRoute.get("/featureArtist", getFeatureArtist);
+
 
 export default AdminRoute;
