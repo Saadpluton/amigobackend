@@ -3,6 +3,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 import bcrypt from "bcrypt";
 import Joi from "joi";
 import { Artist } from "#models/ArtistModel/artist";
+import e from "express";
 //@desc Login User
 //@route  /user/login
 //@request post Request
@@ -56,7 +57,12 @@ export const loginUser = asyncHandler(async (req, res) => {
       .status(400)
       .json({ status: true, message: "Email or password incorrect!" });
   }
-
+  if(userFind.isSuspend === true){
+    return res
+      .status(400)
+      .json({ status: true, message: "You status is suspend!" });
+  
+  }
   if (valid) {
     return res
       .status(200)
