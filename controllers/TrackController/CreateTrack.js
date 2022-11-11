@@ -6,6 +6,7 @@ import { Artist } from "#models/ArtistModel/artist";
 import fs from "fs";
 import musicData from "musicmetadata";
 import mongoose from "mongoose";
+import {User , validate} from "#models/UserModel/user"
 
 //@desc  Track Create
 //@route  /track
@@ -24,7 +25,9 @@ export const createTrack = asyncHandler(async (req, res) => {
   }
   const artist = await Artist.findById(req.body?.artistId);
 
-  if (!artist) {
+  const admin = await User.findById(req.body?.userId);
+
+  if (!artist || admin.role !== "admin") {
     return res
       .status(200)
       .json({ status: true, message: "artist record not found" });
