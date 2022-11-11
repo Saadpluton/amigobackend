@@ -12,7 +12,7 @@ export const getPlaylists = asyncHandler(async (req, res) => {
 
   const query = req.query.genre && req.query.subGenre ? { trackGenre: req.query.genre, trackSubGenre: req.query.subGenre ,isSuspend: false , privacy : false} : {isSuspend: false,privacy : false}
 
-  const userId = req.query.userId ? { userId: req.query.userId , isSuspend: false , privacy : false}  : {isSuspend: false , privacy : false}
+  const userId = req.query.userId ? { userId: req.query.userId , isSuspend: false }  : {isSuspend: false }
 
   let { page = 1, pageSize = 100 } = req.query;
   const count = await Playlist.countDocuments();
