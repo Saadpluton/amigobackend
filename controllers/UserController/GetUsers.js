@@ -7,7 +7,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 //@acess  public
 
 export const getUsers = asyncHandler(async (req, res) => {
-  const customers = await User.find().select('-__v');
+  const customers = await User.find({role : "user"}).select('-__v');
 
   if(customers.length > 0)
   {
