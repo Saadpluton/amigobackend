@@ -1,7 +1,5 @@
 import { Song, validate } from "#models/SongModel/song"
 import asyncHandler from "#middlewares/asyncHandler";
-import { Listener } from "#models/ListenerModel/listener";
-import { Likes } from "#models/LikesModel/likes";
 
 //@desc  Track Get
 //@route  /Track

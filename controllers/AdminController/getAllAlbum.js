@@ -1,7 +1,5 @@
 import { Album, validate } from "#models/AlbumModel/album"
 import asyncHandler from "#middlewares/asyncHandler";
-import { Listener } from "#models/ListenerModel/listener";
-import { Likes } from "#models/LikesModel/likes";
 
 //@desc  album Get
 //@route  /album
