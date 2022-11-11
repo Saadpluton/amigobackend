@@ -8,7 +8,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 
 export const getArtist = asyncHandler(async (req, res) => {
 
-  const artist = await Artist.find();
+  const artist = await Artist.find({role : "artist"});
   
   if (artist.length > 0) {
     return res.status(200).json({

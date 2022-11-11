@@ -18,6 +18,8 @@ export const getTotalLikes = asyncHandler(async (req, res) => {
    
     const totalUser = await User.find({role : "user"}).countDocuments();
    
+    const totalArtist = await Artist.find({role : "artist"}).countDocuments();
+   
     const totalTrack = await Song.find().countDocuments();
    
     const likes = await Song.find().select('-__v');
@@ -36,5 +38,5 @@ export const getTotalLikes = asyncHandler(async (req, res) => {
         }, 0)
     }
 
-    return res.status(200).json({ status: true, totalLikes, totalComments ,totalListeners,totalTrack,totalUser,totalAlbum,totalPlaylist});
+    return res.status(200).json({ status: true, totalLikes, totalComments ,totalListeners,totalTrack,totalUser,totalAlbum,totalPlaylist,totalArtist});
 });
