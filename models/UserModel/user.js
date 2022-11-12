@@ -39,6 +39,9 @@ const UserSchema = new mongoose.Schema({
   dob:{
     type : Date,
   },
+  description:{
+   type : String,
+  },
   // plan:{
   //   type : String,
   //   enum : ["premium","gold","silver"],
@@ -65,6 +68,8 @@ UserSchema.methods.generateAuthToken = function () {
 function validateUser(user) {
   const schema = Joi.object({
     name : Joi.string(),
+    description: Joi.string().min(5).max(100),
+    gender: Joi.string(),
     email: Joi.string()
       .required()
       .email(),
