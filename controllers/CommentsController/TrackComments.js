@@ -40,7 +40,7 @@ export const trackComments = asyncHandler(async (req, res) => {
   }
   if (req.body.parentId !== "") 
   {
-    const CommentsParentValid = await PlaylistComments.findById(req.body.parentId);
+    const CommentsParentValid = await TrackComments.findById(req.body.parentId);
 
     if(!CommentsParentValid && req.body.parentId)
     {
