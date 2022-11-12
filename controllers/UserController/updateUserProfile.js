@@ -21,8 +21,8 @@ export const updateProfile = asyncHandler(async (req, res) => {
         return res.status(403).json({ status: true, message: "Email Must Be Unique" })
     }
 
-    const update = await User.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, image : `${PATH}uploads/${req.file?.filename}`}});
+    const updateUser = await User.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, image : `${PATH}uploads/${req.file?.filename}`}},{new : true});
     
-    return res.status(200).json({ status: true, message: "User profile updated successfully" ,user})
+    return res.status(200).json({ status: true, message: "User profile updated successfully" ,user: updateUser})
 
 })
