@@ -76,6 +76,10 @@ const ArtistSchema = new mongoose.Schema({
     type : String,
     enum :["male","female"]
   },
+  profileComplete :{
+    type: Number,
+    default : 0
+  },
   dob:{
     type : Date,
   },
