@@ -104,7 +104,7 @@ function validateArtist(user) {
     name: Joi.string(),
     country: Joi.string(),
     description: Joi.string().min(5).max(100),
-    gender: Joi.string().valid(['male','female']),
+    gender: Joi.string(),
     image: Joi.string(),
     genre: Joi.array(),
     subGenre: Joi.array(),
