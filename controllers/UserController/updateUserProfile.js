@@ -23,6 +23,6 @@ export const updateProfile = asyncHandler(async (req, res) => {
 
     const update = await User.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, image : `${PATH}uploads/${req.file?.filename}`}});
     
-    return res.status(200).json({ status: true, message: "User profile updated successfully" })
+    return res.status(200).json({ status: true, message: "User profile updated successfully" ,user})
 
 })

@@ -19,9 +19,9 @@ export const updateArtistProfile = asyncHandler(async (req, res) => {
   
     const profileComplete = 70
     
-    
+
     const update = await Artist.findByIdAndUpdate(req.params.id,{$set : {...req.body,image ,profileComplete }})
 
-    return res.status(200).json({ status: true, message: "Artist profile updated successfully" })
+    return res.status(200).json({ status: true, message: "Artist profile updated successfully" ,artist})
 
 })
