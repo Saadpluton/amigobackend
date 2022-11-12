@@ -20,16 +20,33 @@ export const createTrack = asyncHandler(async (req, res) => {
       .status(400)
       .send({ status: false, message: error?.details[0]?.message });
   }
-  if (!mongoose.Types.ObjectId.isValid(req.body.artistId)) {
-    return res.status(400).send({ status: false, message: 'Invalid artist ID.' });
+  if(req.body.artistId)
+  {
+    if (!mongoose.Types.ObjectId.isValid(req.body.artistId)) {
+      return res.status(400).send({ status: false, message: 'Invalid artist ID.' });
+    }
   }
+  if(req.body.userId)
+  {
+    if (!mongoose.Types.ObjectId.isValid(req.body.userId)) {
+      return res.status(400).send({ status: false, message: 'Invalid ID.' });
+    }
+  }
+  
   const artist = await Artist.findById(req.body?.artistId);
+  const user = await User.findById(req.body?.userId);
 
-  // if (!artist || !artist?.role !== "admin") {
-  //   return res
-  //     .status(200)
-  //     .json({ status: true, message: "artist record not found" });
-  // }
+  if (!artist && req.body.artistId ) {
+    return res
+      .status(200)
+      .json({ status: true, message: "artist record not found" });
+  }
+  
+  if (req.body.userId && user?.role == "user") {
+    return res
+      .status(200)
+      .json({ status: true, message: "admin record not found" });
+  }
 
   let file = req.files?.image?.[0];
   let audio = req.files?.audio?.[0];
@@ -90,7 +107,7 @@ export const createTrack = asyncHandler(async (req, res) => {
 
         let song = new Song(req.body);
 
-        const name = artist?.name ? artist?.name : "Unknown"
+        const name = artist?.name ? artist?.name : user?.name       
         song.artistName = name;
         song.duration = fixedCurrentTime;
         song.image = `${PATH}uploads/${file?.filename}`;

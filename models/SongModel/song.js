@@ -25,7 +25,10 @@ const SongSchema = new mongoose.Schema({
   artistId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Artist",
-    required: [true, "artistId field is required"],
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
   artistName: {
     type: String,
@@ -88,7 +91,8 @@ function validateSong(user) {
     genre: Joi.string().required(),
     image: Joi.string(),
     audio: Joi.string(),
-    artistId: Joi.string().required(),
+    artistId: Joi.string(),
+    userId: Joi.string(),
     artistName: Joi.string(),
     year: Joi.string()
       .regex(/^\d{4}\-\d{2}\-\d{2}$/)

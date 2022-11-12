@@ -8,18 +8,24 @@ import { Likes } from "#models/LikesModel/likes";
 //@request Get Request
 //@acess  public
 
-export const getPlaylists = asyncHandler(async (req, res) => {
-
-  const query = req.query.genre && req.query.subGenre ? { trackGenre: req.query.genre, trackSubGenre: req.query.subGenre ,isSuspend: false , privacy : false} : {isSuspend: false,privacy : false}
+export const getPlaylistsByUserId = asyncHandler(async (req, res) => {
 
   let { page = 1, pageSize = 100 } = req.query;
   const count = await Playlist.countDocuments();
   const skip = pageSize * (page - 1);
   let playLists ;
+  
+  if(req.query.userId)
+  {
+    playLists = await Playlist.find({userId: req.query.userId , isSuspend: false})
+  }
+  else{
+    return res
+      .status(200)
+      .json({ status: true, message: "User record not found"});
+  }
+  //const playLists = await Playlist.find(query).select('-__v').limit(50);
 
-  
-    playLists = await Playlist.find(query)
-  
 
   const ip = req.socket.remoteAddress.split(':').at(-1)
   
