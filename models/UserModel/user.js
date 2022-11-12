@@ -32,13 +32,17 @@ const UserSchema = new mongoose.Schema({
     enum : ["user","admin"],
     required : true
   },
-  plan:{
+  gender:{
     type : String,
-    enum : ["premium","gold","silver"],
+    enum :["male","female"]
   },
-  phone:{
-    type : Number,
+  dob:{
+    type : Date,
   },
+  // plan:{
+  //   type : String,
+  //   enum : ["premium","gold","silver"],
+  // },
   image : {
     type: String,
   },
