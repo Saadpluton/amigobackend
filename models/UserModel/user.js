@@ -81,7 +81,8 @@ function validateUser(user) {
       password: Joi.string().min(8).max(255)
       .required(),
       image: Joi.string(),
-      country: Joi.string()
+      country: Joi.string(),
+      dob: Joi.date()
   });
 
   return schema.validate(user);
