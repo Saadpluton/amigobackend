@@ -80,6 +80,8 @@ function validateUser(user) {
       role: Joi.string().required(),
       password: Joi.string().min(8).max(255)
       .required(),
+      image: Joi.string(),
+      country: Joi.string()
   });
 
   return schema.validate(user);
