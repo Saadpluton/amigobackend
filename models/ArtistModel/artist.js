@@ -72,6 +72,13 @@ const ArtistSchema = new mongoose.Schema({
     enum: ["artist"],
     default: "artist",
   },
+  gender:{
+    type : String,
+    enum :["male","female"]
+  },
+  dob:{
+    type : Date,
+  },
   isLiked :{
     type : Boolean,
     default : false
