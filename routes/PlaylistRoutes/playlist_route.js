@@ -35,4 +35,5 @@ PlaylistRoute.get("/playlistUser", getPlaylistsByUserId);
 // // // //Playlist Updated
 PlaylistRoute.put("/playlist/update/:id",multerUpload.single("image") ,validateObjectId,updatePlaylist);
 
+
 export default PlaylistRoute;

@@ -3,6 +3,8 @@ import asyncHandler from "#middlewares/asyncHandler";
 import { Likes } from "#models/LikesModel/likes";
 import { Listener } from "#models/ListenerModel/listener";
 import mongoose from "mongoose";
+import { getTrackComments } from "#controllers/CommentsController/GetTrackComments";
+getTrackComments
 
 //@desc  Get One Track
 //@route  /track/id
@@ -52,8 +54,11 @@ export const getOneTrack = asyncHandler(async (req, res) => {
     }
   })
 
+    
+  const trackComments = await getTrackComments(req,res);
+
   if (songs) {
-    return res.status(200).json(songs);
+    return res.status(200).json(songs,trackComments);
   } else {
     res.status(200).json({ status: true, message: "No record found" });
   }
