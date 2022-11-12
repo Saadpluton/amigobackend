@@ -22,7 +22,7 @@ export const createGenre = asyncHandler(async (req, res) => {
       .status(400)
       .json({ status: false, message: "Please Select the Image" });
   }
-
+  console.log(req.body);
   let genre = new Genre(req.body);
   genre.subGenre.push("All");
   genre.image = `${PATH}uploads/${req.file?.filename}`;
