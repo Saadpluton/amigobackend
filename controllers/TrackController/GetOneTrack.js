@@ -58,8 +58,8 @@ export const getOneTrack = asyncHandler(async (req, res) => {
   const trackComments = await getTrackComments(req,res);
 
   if (songs) {
-    return res.status(200).json(songs,trackComments);
+    return res.status(200).json({songs,trackComments});
   } else {
-    res.status(200).json({ status: true, message: "No record found" });
+   return res.status(200).json({ status: true, message: "No record found" });
   }
 });
