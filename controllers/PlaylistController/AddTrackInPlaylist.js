@@ -38,7 +38,7 @@ export const addTrackPlaylist = asyncHandler(async (req, res) => {
 
     const user= await User.findById(req.body?.userId);
     const track= await Song.findById(req.body?.trackId);   
-    const artist = await Artist.findById(track?.artistId);   
+    const artist = await Artist.findById(req.body?.artistId);   
 
  let playList ;
     if(req.body.userId)
