@@ -40,8 +40,15 @@ export const addTrackPlaylist = asyncHandler(async (req, res) => {
     const track= await Song.findById(req.body?.trackId);   
     const artist = await Artist.findById(track?.artistId);   
 
-    const playList = await Playlist.findOne({_id : req.body?.playlistId , userId :req.body?.userId });
- 
+ let playList ;
+    if(req.body.userId)
+    {
+      playList = await Playlist.findOne({_id : req.body?.playlistId , userId :req.body?.userId });
+    }
+    else{
+      playList = await Playlist.findOne({_id : req.body?.playlistId , artistId :req.body?.artistId });
+    }
+    
 const playlistsTrack = await Playlist.findOne({_id:req.body?.playlistId,trackId : { $in : req.body?.trackId}}).select("-__v");
 
 if (playlistsTrack) {
