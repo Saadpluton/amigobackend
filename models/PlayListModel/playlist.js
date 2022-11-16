@@ -55,6 +55,9 @@ const PlaylistSchema = new mongoose.Schema({
   trackGenre: {
     type: String,
   },
+  genre: [{
+    type: String
+  }],
   trackSubGenre: [{
     type: String
   }],
@@ -86,6 +89,7 @@ function validatePlaylist(user) {
     description: Joi.string(),
     trackId: Joi.array().items(mongoonse_id()),
     artistId: Joi.string(),
+    genre: Joi.array().required(),
     privacy: Joi.boolean(),
   });
 
