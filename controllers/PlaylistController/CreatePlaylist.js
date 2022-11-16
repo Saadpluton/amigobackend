@@ -48,7 +48,7 @@ export const createPlaylist = asyncHandler(async (req, res) => {
     }
    if(user || artist)
    {
-    let playlists = new Playlist(_.pick(req.body , ['title','userId','artistId','privacy']))
+    let playlists = new Playlist(_.pick(req.body , ['title','userId','genre','description','artistId','privacy']))
 
     playlists = await playlists.save();
 
