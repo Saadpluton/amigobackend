@@ -15,14 +15,18 @@ export const getPlaylistsByUserId = asyncHandler(async (req, res) => {
   const skip = pageSize * (page - 1);
   let playLists ;
   
-  if(req.query.userId)
+  if(req.query?.userId )
   {
     playLists = await Playlist.find({userId: req.query.userId , isSuspend: false})
+  }
+  else if(req.query?.artistId )
+  {
+    playLists = await Playlist.find({artistId: req.query.artistId , isSuspend: false})
   }
   else{
     return res
       .status(200)
-      .json({ status: true, message: "User record not found"});
+      .json({ status: true, message: "Record not found"});
   }
   //const playLists = await Playlist.find(query).select('-__v').limit(50);
 

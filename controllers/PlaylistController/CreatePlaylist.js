@@ -42,7 +42,7 @@ export const createPlaylist = asyncHandler(async (req, res) => {
     if (!artist && req.body.artistId) {
       return res.status(200).json({ status: true, message: "Artist record not found" })
     }
-
+    
     if (!user && req.body.userId) {
       return res.status(200).json({ status: true, message: "User record not found" })
     }
