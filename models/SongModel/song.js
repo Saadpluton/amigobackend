@@ -55,11 +55,6 @@ const SongSchema = new mongoose.Schema({
   audio: {
     type: String,
   },
-  subGenre: [
-    {
-      type: String,
-    },
-  ],
   isSuspend: {
     type: Boolean,
     default: false,
@@ -94,10 +89,6 @@ function validateSong(user) {
     artistId: Joi.string(),
     userId: Joi.string(),
     artistName: Joi.string(),
-    year: Joi.string()
-      .regex(/^\d{4}\-\d{2}\-\d{2}$/)
-      .required(),
-    subGenre: Joi.string().required(),
   });
   return schema.validate(user);
 }

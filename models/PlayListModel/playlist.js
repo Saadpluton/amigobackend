@@ -86,7 +86,7 @@ function validatePlaylist(user) {
   const schema = Joi.object({
     title: Joi.string().required(),
     userId: Joi.string(),
-    description: Joi.string(),
+    description: Joi.string().max(244),
     trackId: Joi.array().items(mongoonse_id()),
     artistId: Joi.string(),
     genre: Joi.string().required(),
