@@ -10,6 +10,7 @@ import { updatePlaylist } from "#controllers/PlaylistController/updatePlaylist";
 import { addTrackPlaylist } from "#controllers/PlaylistController/AddTrackInPlaylist";
 import { getPlaylistTrack } from "#controllers/PlaylistController/GetPlaylisTrack";
 import { getPlaylistsByUserId } from "#controllers/PlaylistController/getPlaylistBuUserId";
+import { suspendPlaylist } from "#controllers/PlaylistController/suspendPlaylist";
 
 
 const PlaylistRoute = express.Router();
@@ -34,6 +35,8 @@ PlaylistRoute.get("/playlistUser", getPlaylistsByUserId);
 
 // // // //Playlist Updated
 PlaylistRoute.put("/playlist/update/:id",multerUpload.single("image") ,validateObjectId,updatePlaylist);
+// // //Suspend Playlist
+PlaylistRoute.put("/playlist/suspend/:id", validateObjectId, suspendPlaylist);
 
 
 export default PlaylistRoute;

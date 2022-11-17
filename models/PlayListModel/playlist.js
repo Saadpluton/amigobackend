@@ -79,7 +79,11 @@ isLiked: {
 createdAt :{
   type : Date,
   default : Date.now()
-}
+},
+isSuspend: {
+  type: Boolean,
+  default: false,
+},
 });
 
 function validatePlaylist(user) {
