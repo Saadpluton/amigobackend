@@ -15,11 +15,11 @@ export const getPlaylistsByUserId = asyncHandler(async (req, res) => {
   const skip = pageSize * (page - 1);
   let playLists ;
   
-  if(req.query?.userId )
+  if(req.query?.userId && req.query.userId !== "undefined")
   {
     playLists = await Playlist.find({userId: req.query.userId , isSuspend: false})
   }
-  else if(req.query?.artistId )
+  else if(req.query?.artistId && req.query.artistId !== "undefined" )
   {
     playLists = await Playlist.find({artistId: req.query.artistId , isSuspend: false})
   }

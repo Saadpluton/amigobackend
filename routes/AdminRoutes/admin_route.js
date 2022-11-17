@@ -1,5 +1,6 @@
 import express from "express";
 import validateObjectId from "#middlewares/validateObjectId";
+import {multerUpload} from "#utils/multer";
 
 import { createTrendingTrack } from "#controllers/AdminController/CreateTrending Track";
 import { getPlaylists } from "#controllers/AdminController/getAllPlaylist";
@@ -8,7 +9,7 @@ import { getAlbums } from "#controllers/AdminController/getAllAlbum";
 import { getArtist } from "#controllers/AdminController/getAllArtist";
 import { getFeatureArtist } from "#controllers/AdminController/getAllFeatureArtist";
 import { createFeatureArtist } from "#controllers/AdminController/CreateFeatureArtist";
-
+import { createUserAdminRegistration } from "#controllers/AdminController/createUserRegistration";
 
 const AdminRoute = express.Router();
 
@@ -33,5 +34,7 @@ AdminRoute.get("/adminFeatureArtist/:id", validateObjectId,createFeatureArtist);
 // Admin All Feature Artist
 AdminRoute.get("/featureArtist", getFeatureArtist);
 
+// Admin Create USer And Artist
+AdminRoute.post("/adminCreate",multerUpload.single("image"), createUserAdminRegistration);
 
 export default AdminRoute;

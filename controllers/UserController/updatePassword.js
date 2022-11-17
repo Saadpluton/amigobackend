@@ -11,7 +11,6 @@ import bcrypt from "bcrypt";
 export const updatePassword = asyncHandler(async (req, res) => {
 
     const obj = JSON.parse(JSON.stringify(req.body));
-    //console.log(obj)
     const checkedvalid = await UserVerification.findOne({ email: obj.email})
     if(!checkedvalid)
     {
@@ -22,6 +21,6 @@ export const updatePassword = asyncHandler(async (req, res) => {
 
     const update = await User.findOneAndUpdate({email :obj.email}, { password: hashpassword }, { new: true });
     await UserVerification.findOneAndDelete({email : obj.email});
-    return res.status(200).json({status : true , message : "Password updated successfully"})
+    return res.status(200).json({status : true , message : "Password updated successfully" ,user : update})
  
 })

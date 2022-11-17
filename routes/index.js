@@ -21,7 +21,7 @@ const routes = (app) => {
   app.use("/user/reset", (req, res) => {
     res.sendFile(
       path.join(__dirname, "../controllers/UserController/resetPassword.html")
-    );
+    );    
   });
 
   //User

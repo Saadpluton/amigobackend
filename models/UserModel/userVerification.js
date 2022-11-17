@@ -7,8 +7,11 @@ const UserVerificationSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-    }
-    ,
+    },
+    role : {
+        type: String,
+        enum : ["user","artist"],
+    },
     resetId: {
         type: String,
     },
@@ -20,8 +23,20 @@ const UserVerificationSchema = new mongoose.Schema({
 
 });
 
-const UserVerification = mongoose.model("UserVerification", UserVerificationSchema)
+function validateUserVerification(user) {
+    const schema = Joi.object({
+        email: Joi.string()
+        .required()
+        .email(),
+         role: Joi.string().required(),
+    });
+  
+    return schema.validate(user);
+  }
+  
+  const UserVerification = mongoose.model("UserVerification", UserVerificationSchema)
 
-export { UserVerification }
+  export { UserVerification, validateUserVerification as validate }
+  
 
 

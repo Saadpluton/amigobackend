@@ -12,9 +12,21 @@ import { forgetPassword } from "#controllers/UserController/forgetPassword";
 import { verifyEmail } from "#controllers/UserController/VerificationEmail";
 import { updatePassword } from "#controllers/UserController/updatePassword";
 import { updateProfile } from "#controllers/UserController/updateUserProfile";
-
+import { createSignUp } from "#controllers/UserController/createSignUp";
+import { verifyEmailSignUp } from "#controllers/UserController/VerificationEmailSignUp";
 
 const userRoute = express.Router();
+
+//Create User By Verification Email
+
+//Create Users By Email
+userRoute.post("/user/create",createSignUp);
+
+//Verify Email
+userRoute.get("/user/create/verify/:id/:resetId",verifyEmailSignUp);
+
+
+/////////////////////
 
 //Create Users
 userRoute.post("/user",multerUpload.single("image"),createUser);
