@@ -20,8 +20,14 @@ export const updateProfile = asyncHandler(async (req, res) => {
     if ((user.email !== userEmailValid?.email) && req.body.email ) {
         return res.status(403).json({ status: true, message: "Email Must Be Unique" })
     }
+    let image ;
+    if(req.file?.filename)
+    {
+      image = `${PATH}uploads/${req.file?.filename}`
+    }
+    image = user.image
     const profileComplete = 70
-    const updateUser = await User.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, image : `${PATH}uploads/${req.file?.filename}` ,profileComplete}},{new : true});
+    const updateUser = await User.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, image ,profileComplete}},{new : true});
     
     return res.status(200).json({ status: true, message: "User profile updated successfully" ,user: updateUser})
 

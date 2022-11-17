@@ -35,9 +35,9 @@ export const createPlaylist = asyncHandler(async (req, res) => {
   
     }
    
-    const user= await User.findById(req.body.userId);
+    const user= await User.findById(req.body?.userId);
   
-    const artist= await Artist.findById(req.body.artistId);
+    const artist= await Artist.findById(req.body?.artistId);
   
     if (!artist && req.body.artistId) {
       return res.status(200).json({ status: true, message: "Artist record not found" })

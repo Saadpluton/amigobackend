@@ -82,7 +82,7 @@ function validateUser(user) {
       .required(),
       image: Joi.string(),
       country: Joi.string(),
-      dob: Joi.date()
+
   });
 
   return schema.validate(user);
