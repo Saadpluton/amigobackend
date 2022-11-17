@@ -14,7 +14,7 @@ export const verifyEmail = asyncHandler(async (req, res) => {
     const checkedvalid = await UserVerification.findOne({ _id: id, resetId: resetId })
 
     if (checkedvalid) {
-        res.redirect(`http://localhost:5000/updatePassword?email=${checkedvalid.email}&resetId=${resetId}`)
+        res.redirect(`http://localhost:3000/updatePassword?email=${checkedvalid.email}&resetId=${resetId}`)
     }
     else {
         return res.status(404).json({ status: true, message: "Failed To Verified" })
