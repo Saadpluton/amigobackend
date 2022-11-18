@@ -52,6 +52,9 @@ const UserSchema = new mongoose.Schema({
   image : {
     type: String,
   },
+  url:{
+    type: String,
+  },
   isSuspend: {
     type: Boolean,
     default: false,
@@ -85,7 +88,8 @@ function validateUser(user) {
       .required(),
       image: Joi.string(),
       country: Joi.string(),
-      dob: Joi.date()
+      url : Joi.string(),
+   
   });
 
   return schema.validate(user);

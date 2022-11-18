@@ -49,15 +49,12 @@ export const createPlaylist = asyncHandler(async (req, res) => {
    if(user || artist)
    {
     let playlists = new Playlist(_.pick(req.body , ['title','userId','genre','description','artistId','privacy']))
-
     playlists = await playlists.save();
 
     return res.status(201).json({ status: true, message: "Playlist created successfully" })
    }
    else{
     return res.status(200).json({ status: true, message: "Required user or artist field" })
- 
    }
-    
   })
   
