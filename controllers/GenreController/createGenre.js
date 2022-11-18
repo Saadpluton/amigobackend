@@ -10,10 +10,9 @@ import { PATH } from "#constant/constant";
 export const createGenre = asyncHandler(async (req, res) => {
   const { error } = validate(req.body);
 
-  let ids ;
-  ids = req.body.subGenre?.split(",")
+  // let ids ;
+  // ids = req.body.subGenre?.split(",")
 
-  console.log("idss",ids);
   if (error) {
     return res
       .status(400)
@@ -25,8 +24,7 @@ export const createGenre = asyncHandler(async (req, res) => {
       .json({ status: false, message: "Please Select the Image" });
   }
   console.log(req.body);
-  let genre = new Genre({...req.body,subGenre : ids});
-  genre.subGenre.push("All");
+  let genre = new Genre(req.body);
   genre.image = `${PATH}uploads/${req.file?.filename}`;
   genre = await genre.save();
   return res
