@@ -16,7 +16,7 @@ import { getArtistComments } from "#controllers/CommentsController/GetArtistComm
 
 export const getOneArtist = asyncHandler(async (req, res) => {
 
-  if(req?.query?.userId !== "undefined")
+  if(req?.query?.userId != "undefined")
   {
     if (!mongoose.Types.ObjectId.isValid(req.query.userId))
     {
@@ -35,7 +35,7 @@ export const getOneArtist = asyncHandler(async (req, res) => {
   const similarArtist = await Artist.find({ _id: { $ne: req.params.id } }).limit(20).select('-__v');
 
   let likes ;
-  if(req?.query?.userId !== "undefined")
+  if(req?.query?.userId != "undefined")
   {
    likes = await Likes.find( {userId :  req.query.userId}).select('-__v');
   }
