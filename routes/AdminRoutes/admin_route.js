@@ -10,6 +10,7 @@ import { getArtist } from "#controllers/AdminController/getAllArtist";
 import { getFeatureArtist } from "#controllers/AdminController/getAllFeatureArtist";
 import { createFeatureArtist } from "#controllers/AdminController/CreateFeatureArtist";
 import { createUserAdminRegistration } from "#controllers/AdminController/createUserRegistration";
+import { getPlaylistsAdmin } from "#controllers/AdminController/GetPlayListAdmin";
 
 const AdminRoute = express.Router();
 
@@ -18,6 +19,10 @@ AdminRoute.get("/trackTrending/:id",validateObjectId, createTrendingTrack);
 
 // Admin All Playlist
 AdminRoute.get("/playlistAdmin", getPlaylists);
+
+// Admin Personal Playlist
+AdminRoute.get("/playlistAdminPersonal/:id",validateObjectId, getPlaylistsAdmin);
+
 
 // Admin All Track
 AdminRoute.get("/trackAdmin", getTracks);
