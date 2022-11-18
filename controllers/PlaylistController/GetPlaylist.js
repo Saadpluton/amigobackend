@@ -10,7 +10,7 @@ import { Likes } from "#models/LikesModel/likes";
 
 export const getPlaylists = asyncHandler(async (req, res) => {
 
-  const query = req.query.genre && req.query.subGenre ? { trackGenre: req.query.genre, trackSubGenre: req.query.subGenre ,isSuspend: false , privacy : false} : {isSuspend: false,privacy : false}
+  const query = req.query.genre  ? { genre: req.query.genre, isSuspend: false , privacy : false} : {isSuspend: false,privacy : false}
 
   let { page = 1, pageSize = 100 } = req.query;
   const count = await Playlist.countDocuments();

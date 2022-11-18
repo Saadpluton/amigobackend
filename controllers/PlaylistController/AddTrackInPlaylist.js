@@ -60,9 +60,7 @@ const trackRecord = !playList?.trackId?.length > 0 ?
     image : track?.image,
     trackName : track?.name,
     artistName : track?.artistName,
-    trackGenre : track?.genre,
-    trackDuration : track?.duration,
-    trackSubGenre : track?.subGenre, 
+    trackDuration : track?.duration, 
   }
 :
 undefined

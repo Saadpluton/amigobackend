@@ -52,15 +52,9 @@ const PlaylistSchema = new mongoose.Schema({
   trackDuration: {
     type: String,
   },
-  trackGenre: {
-    type: String,
-  },
   genre:{
     type: String
   },
-  trackSubGenre: [{
-    type: String
-  }],
   image: {
     type: String,
   },
