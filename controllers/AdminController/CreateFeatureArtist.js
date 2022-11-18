@@ -8,13 +8,10 @@ import { Artist } from "#models/ArtistModel/artist";
 
 export const createFeatureArtist
   = asyncHandler(async (req, res) => {
-
     const { id } = req.params;
     const featureArtist = await Artist.findById(id);
-
     if (featureArtist) {
       if (featureArtist.isFeatured === false) {
-
         const added = await Artist.findOneAndUpdate({ _id: id }, { isFeatured: featureArtist.isFeatured = true }, { new: true });
         return res.status(200).json({ status: true, message: "Feature Artist has been added." });
       }
