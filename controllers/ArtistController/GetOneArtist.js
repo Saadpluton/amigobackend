@@ -16,7 +16,7 @@ import { getArtistComments } from "#controllers/CommentsController/GetArtistComm
 
 export const getOneArtist = asyncHandler(async (req, res) => {
 
-  if(req.query.userId)
+  if(req?.query?.userId !== "undefined")
   {
     if (!mongoose.Types.ObjectId.isValid(req.query.userId))
     {
