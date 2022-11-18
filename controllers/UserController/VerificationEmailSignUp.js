@@ -15,7 +15,7 @@ export const verifyEmailSignUp = asyncHandler(async (req, res) => {
     const checkedvalid = await UserVerification.findOne({ _id: id, resetId: resetId })
 
     if (checkedvalid) {
-        res.redirect(`http://localhost:3000/create-password?email=${checkedvalid?.email}&role=${checkedvalid?.role}&resetId=${resetId}`)
+        res.redirect(`http://amigo-cms.pluton.ltd/create-password?email=${checkedvalid?.email}&role=${checkedvalid?.role}&resetId=${resetId}`)
     }
     else {
         return res.status(404).json({ status: false, message: "Link Expired" })

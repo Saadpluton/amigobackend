@@ -29,7 +29,7 @@ export const forgetPassword = asyncHandler(async (req, res) => {
         digits: true, upperCaseAlphabets: false, lowerCaseAlphabets: true, specialChars: false
     })
 
-    let currentUrl = "http://localhost:5000/";
+    let currentUrl = "https://amigobackend.herokuapp.com/";
     
     let verification = new UserVerification({
         //userId: emailValid._id,
