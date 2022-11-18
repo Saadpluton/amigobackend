@@ -41,7 +41,6 @@ export const createArtist = asyncHandler(async (req, res) => {
       "gender",
       "dob",
       "genre",
-      "subGenre",
       "password",
       "email",
     ])

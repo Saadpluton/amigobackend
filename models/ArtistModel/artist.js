@@ -61,12 +61,6 @@ const ArtistSchema = new mongoose.Schema({
       required: true,
     },
   ],
-  subGenre: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
   role: {
     type: String,
     enum: ["artist"],
@@ -74,7 +68,7 @@ const ArtistSchema = new mongoose.Schema({
   },
   gender:{
     type : String,
-    enum :["male","female"]
+    enum :["male","female","All"]
   },
   profileComplete :{
     type: Number,
@@ -107,7 +101,6 @@ function validateArtist(user) {
     gender: Joi.string(),
     image: Joi.string(),
     genre: Joi.array(),
-    subGenre: Joi.array(),
     role: Joi.string(),
     email: Joi.string().required().email(),
     password: Joi.string().min(8).max(255).required(),
