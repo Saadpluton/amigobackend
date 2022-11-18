@@ -68,7 +68,6 @@ const ArtistSchema = new mongoose.Schema({
   },
   gender:{
     type : String,
-    enum :["male","female","All"]
   },
   profileComplete :{
     type: Number,
