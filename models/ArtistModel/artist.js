@@ -73,6 +73,9 @@ const ArtistSchema = new mongoose.Schema({
     type: Number,
     default : 0
   },
+  url:{
+    type: String,
+  },
   dob:{
     type : Date,
   },
@@ -95,6 +98,7 @@ ArtistSchema.methods.generateAuthToken = function () {
 function validateArtist(user) {
   const schema = Joi.object({
     name: Joi.string(),
+    url: Joi.string(),
     country: Joi.string(),
     description: Joi.string().min(5).max(100),
     gender: Joi.string(),
