@@ -10,6 +10,7 @@ import { updateTrack } from "#controllers/TrackController/updateTrack";
 import { suspendTrack } from "#controllers/TrackController/suspendTrack";
 import { getNewTracks } from "#controllers/TrackController/GetNewTrack";
 import { getAllTracks } from "#controllers/TrackController/GetAllTrack";
+import { getAllArtistTracks } from "#controllers/TrackController/GetArtistTrack";
 
 const TrackRoute = express.Router();
 
@@ -60,5 +61,8 @@ TrackRoute.put("/track/suspend/:id", validateObjectId, suspendTrack);
 
 // // //Get All Track Admin
 TrackRoute.get("/allTrack", getAllTracks);
+
+// // //Get All Artist Track
+TrackRoute.get("/allTrackArtist/:id",validateObjectId, getAllArtistTracks);
 
 export default TrackRoute;
