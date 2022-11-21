@@ -53,11 +53,13 @@ export const updateTrack = asyncHandler(async (req, res) => {
 
   let audio1 = req.files ? `${PATH}uploads/${audio?.filename}` : undefined
 
-  if (audio1) {
+  if (audio) {
     let parser = musicData(
-      fs.createReadStream(`uploads/${audio?.filename}`),
+          fs.createReadStream(`uploads/${audio?.filename}`),
       { duration: true },
       function (err, metadata) {
+        console.log("Hello");
+
         let fixedCurrentTime;
         let duration = 0;
         if (err) {
@@ -101,16 +103,11 @@ export const updateTrack = asyncHandler(async (req, res) => {
 
   }
   else {
-    const update = Song.findByIdAndUpdate(req.params.id, {
-      $set: {
-        ...req.body,
-        //duration: fixedCurrentTime,
-        image: image1,
-      },
-    })
-
+    const update = await Song.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, image : image1 ,}},{new : true});
+   
   }
+ 
   return res
     .status(200)
-    .json({ status: true, message: "Song updated successfully" });
+    .json({ status: true, message: "Track updated successfully" });
 });
