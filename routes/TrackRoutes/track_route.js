@@ -11,6 +11,7 @@ import { suspendTrack } from "#controllers/TrackController/suspendTrack";
 import { getNewTracks } from "#controllers/TrackController/GetNewTrack";
 import { getAllTracks } from "#controllers/TrackController/GetAllTrack";
 import { getAllArtistTracks } from "#controllers/TrackController/GetArtistTrack";
+import { deleteTrack } from "#controllers/TrackController/DeleteTrack";
 
 const TrackRoute = express.Router();
 
@@ -32,6 +33,9 @@ TrackRoute.post(
 
 // //GET All Track
 TrackRoute.get("/track", getTracks);
+
+// //delete Track
+TrackRoute.delete("/track/:id",validateObjectId, deleteTrack);
 
 // // //GET One Track
 TrackRoute.get("/track/:id", validateObjectId, getOneTrack);
