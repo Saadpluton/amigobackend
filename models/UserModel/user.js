@@ -52,6 +52,9 @@ const UserSchema = new mongoose.Schema({
   image : {
     type: String,
   },
+  cover : {
+    type: String,
+  },
   url:{
     type: String,
   },
@@ -87,6 +90,7 @@ function validateUser(user) {
       password: Joi.string().min(8).max(255)
       .required(),
       image: Joi.string(),
+      cover: Joi.string(),
       country: Joi.string(),
       url : Joi.string(),
    

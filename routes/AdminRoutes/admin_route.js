@@ -40,6 +40,15 @@ AdminRoute.get("/adminFeatureArtist/:id", validateObjectId,createFeatureArtist);
 AdminRoute.get("/featureArtist", getFeatureArtist);
 
 // Admin Create USer And Artist
-AdminRoute.post("/adminCreate",multerUpload.single("image"), createUserAdminRegistration);
+AdminRoute.post("/adminCreate",multerUpload.fields([
+    {
+      name: "image",
+      maxCount: 1,
+    },
+    {
+      name: "cover",
+      maxCount: 1,
+    },
+  ]), createUserAdminRegistration);
 
 export default AdminRoute;

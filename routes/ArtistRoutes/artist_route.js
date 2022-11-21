@@ -29,7 +29,16 @@ artistRoute.get("/artistByName",getArtistsByName);
 artistRoute.get("/artist/:id",validateObjectId, getOneArtist);
 
 // //Artist Profile Updated
-artistRoute.put("/artist/update/:id",multerUpload.single("image") ,validateObjectId,updateArtistProfile);
+artistRoute.put("/artist/update/:id",multerUpload.fields([
+    {
+      name: "image",
+      maxCount: 1,
+    },
+    {
+      name: "cover",
+      maxCount: 1,
+    },
+  ]),validateObjectId,updateArtistProfile);
 
 // //Suspend Artist
 artistRoute.put("/artist/suspend/:id",validateObjectId, suspendArtist);

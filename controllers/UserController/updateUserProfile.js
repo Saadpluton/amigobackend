@@ -1,7 +1,7 @@
 import { User, validate } from "#models/UserModel/user"
 import asyncHandler from "#middlewares/asyncHandler";
-import { PATH } from "#constant/constant";
 
+import { PNG, JPG, JPEG, MP3, MPEG, PATH } from "#constant/constant";
 //@desc  update Profile
 //@route  /user/update/:id
 //@request Put Request
@@ -21,7 +21,23 @@ export const updateProfile = asyncHandler(async (req, res) => {
         return res.status(403).json({ status: true, message: "Email Must Be Unique" })
     }
     const profileComplete = 70
-    const updateUser = await User.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, image : `${PATH}uploads/${req.file?.filename}` ,profileComplete}},{new : true});
+    let imageFile = req.files?.image?.[0];
+    let coverFile = req.files?.cover?.[0];
+  
+    if (![PNG, JPEG, JPG].includes(imageFile?.mimetype || ![PNG, JPEG, JPG].includes(coverFile?.mimetype))) {
+      return res.status(400).json({
+        status: false,
+        message: "Upload image type should be jpg, jpeg, png",
+      });
+    }
+
+    
+    let image = imageFile ? {image : `${PATH}uploads/${imageFile?.filename}` } : undefined
+   
+    let cover = coverFile ? {cover : `${PATH}uploads/${coverFile?.filename}` } : undefined
+   
+
+    const updateUser = await User.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, ...image , ...cover ,profileComplete}},{new : true});
     
     return res.status(200).json({ status: true, message: "User profile updated successfully" ,user: updateUser})
 

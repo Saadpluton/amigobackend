@@ -47,6 +47,9 @@ const ArtistSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  cover: {
+    type: String,
+  },
   isSuspend: {
     type: Boolean,
     default: false,
@@ -100,6 +103,7 @@ function validateArtist(user) {
     description: Joi.string().min(5).max(100),
     gender: Joi.string(),
     image: Joi.string(),
+    cover: Joi.string(),
     genre: Joi.array(),
     role: Joi.string(),
     email: Joi.string().required().email(),

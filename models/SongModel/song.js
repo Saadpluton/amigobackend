@@ -5,11 +5,11 @@ const SongSchema = new mongoose.Schema({
   name: {
     type: String,
   },
-  tag: [
-    {
-      type: String,
-    },
-  ],
+  // tag: [
+  //   {
+  //     type: String,
+  //   },
+  // ],
   description: {
     type: String,
   },
@@ -80,7 +80,7 @@ const SongSchema = new mongoose.Schema({
 function validateSong(user) {
   const schema = Joi.object({
     name: Joi.string().required(),
-    tag: Joi.string().required(),
+    //tag: Joi.string().required(),
     description: Joi.string().required(),
     duration: Joi.string(),
     genre: Joi.string().required(),

@@ -29,7 +29,16 @@ userRoute.get("/user/create/verify/:id/:resetId",verifyEmailSignUp);
 /////////////////////
 
 //Create Users
-userRoute.post("/user",multerUpload.single("image"),createUser);
+userRoute.post("/user",multerUpload.fields([
+    {
+      name: "image",
+      maxCount: 1,
+    },
+    {
+      name: "cover",
+      maxCount: 1,
+    },
+  ]),createUser);
 
 //GET All Users
 userRoute.get("/user",getUsers );
@@ -56,6 +65,15 @@ userRoute.get("/user/verifed/",verifyEmail);
 userRoute.post("/user/update",updatePassword);
 
 //Profile Updated
-userRoute.put("/user/update/:id",validateObjectId ,multerUpload.single("image"),updateProfile);
+userRoute.put("/user/update/:id",validateObjectId ,multerUpload.fields([
+    {
+      name: "image",
+      maxCount: 1,
+    },
+    {
+      name: "cover",
+      maxCount: 1,
+    },
+  ]),updateProfile);
 
 export default userRoute;

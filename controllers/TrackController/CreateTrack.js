@@ -119,7 +119,7 @@ export const createTrack = asyncHandler(async (req, res) => {
   );
 
 
-  const updateTrack = await Artist.findOneAndUpdate({ _id: req.body.artistId }, { $push: { genre: req.body.genre, subGenre: req.body.subGenre } })
+  const updateTrack = await Artist.findOneAndUpdate({ _id: req.body.artistId }, { $push: { genre: req.body.genre} })
 
   return res
     .status(201)
