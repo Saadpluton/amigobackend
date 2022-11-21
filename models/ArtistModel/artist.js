@@ -76,9 +76,6 @@ const ArtistSchema = new mongoose.Schema({
   url:{
     type: String,
   },
-  dob:{
-    type : Date,
-  },
   isLiked :{
     type : Boolean,
     default : false

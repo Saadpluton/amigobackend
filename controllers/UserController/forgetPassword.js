@@ -3,6 +3,7 @@ import {UserVerification} from "#models/UserModel/userVerification"
 import asyncHandler from "#middlewares/asyncHandler";
 import otpGenerator from 'otp-generator';
 import nodemailer from "nodemailer";
+import { Artist } from "#models/ArtistModel/artist";
 
 //@desc  forget User Password
 //@route  /user/forget
@@ -11,9 +12,27 @@ import nodemailer from "nodemailer";
 
 export const forgetPassword = asyncHandler(async (req, res) => {
 
-    
-    const emailValid = await User.findOne({email:req.body.email})
+    let userFind ;
+   
+    if (req.body.role === "user" ) {
+        userFind = await User.findOne({ role : req.body?.role, email: req.body?.email });
 
+      }
+       else if (req.body.role === "artist") {
+        userFind = await Artist.findOne({role : req.body?.role, email: req.body?.email });
+      } 
+      else {
+        return res
+          .status(400)
+          .json({ status: true, message: "Role is not valid!" });
+      }
+    
+      if (!userFind) {
+        return res
+          .status(400)
+          .json({ status: true, message: "Email does not exists!" });
+      }
+   
     const checkedReset = await UserVerification.findOne({email:req.body.email});
 
     if(checkedReset)
@@ -21,18 +40,19 @@ export const forgetPassword = asyncHandler(async (req, res) => {
         return res.status(403).json({status : true , message : "Email Verification Sent Already"})
     }
 
-    // if(!emailValid)
-    // {
-    //     return res.status(404).json({status : true , message : "email does not exists"})
-    // }
+   
+
     let uniqueString = otpGenerator.generate(6, {
         digits: true, upperCaseAlphabets: false, lowerCaseAlphabets: true, specialChars: false
     })
 
-    let currentUrl = "https://amigobackend.herokuapp.com/";
+    //let currentUrl = "https://amigobackend.herokuapp.com/";
+    
+    let currentUrl = "http://localhost:5000/";
     
     let verification = new UserVerification({
         //userId: emailValid._id,
+        role : req.body.role,
         email : req.body.email,
         resetId: uniqueString,
         
