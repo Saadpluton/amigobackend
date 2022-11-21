@@ -86,9 +86,9 @@ export const updateTrack = asyncHandler(async (req, res) => {
           const update = Song.findByIdAndUpdate(req.params.id, {
             $set: {
               ...req.body,
-              duration: fixedCurrentTime,
+              //duration: fixedCurrentTime,
               image: image1,
-              audio: audio1,
+              //audio: audio1,
             },
           }).then((res) => {
             if (res) {
@@ -104,7 +104,7 @@ export const updateTrack = asyncHandler(async (req, res) => {
     const update = Song.findByIdAndUpdate(req.params.id, {
       $set: {
         ...req.body,
-        duration: fixedCurrentTime,
+        //duration: fixedCurrentTime,
         image: image1,
       },
     })
