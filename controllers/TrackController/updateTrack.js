@@ -14,6 +14,7 @@ import mongoose from "mongoose";
 //@acess  public
 
 export const updateTrack = asyncHandler(async (req, res) => {
+  console.log(req.body);
   const song = await Song.findById(req.params.id);
   if (req.body.artistId) {
     if (!mongoose.Types.ObjectId.isValid(req.body.artistId)) {
