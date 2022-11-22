@@ -25,7 +25,7 @@ export const deletePlaylistTrack = async (req, res, next) => {
 
       if(playlistTrackFind)
       {
-       await Playlist.findByIdAndUpdate(id , {$set : {trackId : trackId}});
+       await Playlist.findByIdAndUpdate(id , {$set : {trackId : trackId }});
        return res.status(200).json({status : true , message : "Playlist Track has been deleted."});  
       }
       else{

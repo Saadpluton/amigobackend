@@ -12,7 +12,7 @@ import mongoose from "mongoose";
 //@acess  public
 
 export const updatePlaylist = asyncHandler(async (req, res) => {
-
+console.log(req.body);
     if(req.body.userId)
     {
     if (!mongoose.Types.ObjectId.isValid(req.body.userId))
