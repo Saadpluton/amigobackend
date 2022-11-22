@@ -18,7 +18,7 @@ export const updateArtistProfile = asyncHandler(async (req, res) => {
     if (!artist) {
         return res.status(200).json({ status: true, message: "Artist record not found" })
     }
-    if ((![PNG, JPEG, JPG].includes(imageFile?.mimetype || ![PNG, JPEG, JPG].includes(coverFile?.mimetype))) && (imageFile || coverFile) ) {
+    if ((![PNG, JPEG, JPG].includes(imageFile?.mimetype) || ![PNG, JPEG, JPG].includes(coverFile?.mimetype)) && (imageFile || coverFile) ) {
         return res.status(400).json({
           status: false,
           message: "Upload image type should be jpg, jpeg, png",
