@@ -20,6 +20,11 @@ const shareSchema = new mongoose.Schema({
     ref: "Song" ,
     //required : [true ,"artistId field is required"]
   },
+  playlistId :{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Playlist" ,
+    //required : [true ,"artistId field is required"]
+  },
 });
 
 export const Shares =  mongoose.model("Share", shareSchema)

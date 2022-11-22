@@ -6,6 +6,7 @@ import { getShare } from "#controllers/SharesController/GetShares";
 import { artistShares } from "#controllers/SharesController/ArtistShare";
 import { albumShares } from "#controllers/SharesController/AlbumShare";
 import { trackShares } from "#controllers/SharesController/TrackShare";
+import { playlistShares } from "#controllers/SharesController/PlaylistShare";
 
 
 const SharesRoute = express.Router();
@@ -18,6 +19,9 @@ SharesRoute.post("/albumShares/:id",validateObjectId,albumShares);
 
 // //Album Shares Create
 SharesRoute.post("/trackShares/:id",validateObjectId,trackShares);
+
+// //PlayList Shares Create
+SharesRoute.post("/playlistShares/:id",validateObjectId,playlistShares);
 
 // // //GET All Shares
 SharesRoute.get("/shares",getShare );
