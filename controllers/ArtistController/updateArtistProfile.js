@@ -18,18 +18,22 @@ export const updateArtistProfile = asyncHandler(async (req, res) => {
     if (!artist) {
         return res.status(200).json({ status: true, message: "Artist record not found" })
     }
-    if (![PNG, JPEG, JPG].includes(imageFile?.mimetype) && imageFile) {
+    if(req.files)
+    {
+      if (![PNG, JPEG, JPG].includes(imageFile?.mimetype) && req.files?.image) {
         return res.status(400).json({
           status: false,
           message: "Upload image type should be jpg, jpeg, png",
         });
       }
-      if ((![PNG, JPEG, JPG].includes(coverFile?.mimetype)) && coverFile) {
+      if ((![PNG, JPEG, JPG].includes(coverFile?.mimetype)) && req.files?.cover) {
         return res.status(400).json({
           status: false,
           message: "Upload image type should be jpg, jpeg, png",
         });
       }
+
+    }
     const profileComplete = 70
     
     let image = imageFile ? {image : `${PATH}uploads/${imageFile?.filename}` } : undefined
