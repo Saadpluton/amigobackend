@@ -41,12 +41,12 @@ export const updatePlaylist = asyncHandler(async (req, res) => {
       return res.status(200).json({ status: true, message: "User record not found" })
     }
 
-    const image = req.file ? `uploads/${req.file?.filename}` : undefined
+    //const image = req.file ? `uploads/${req.file?.filename}` : undefined
   
     const trackId = req.body.trackId ? {trackName : track.name ,trackDuration : track.duration, trackGenre : track.genre}  : undefined
     const artistId = req.body.artistId ? {artistName : artist.name}  : undefined
  
-    const update = await Playlist.findByIdAndUpdate(req.params.id,{$set : {...req.body, image,...trackId,...artistId}})
+    const update = await Playlist.findByIdAndUpdate(req.params.id,{$set : {...req.body,...trackId,...artistId}})
 
     return res.status(200).json({ status: true, message: "Playlist updated successfully" })
 
