@@ -10,6 +10,7 @@ import {Song , validate} from "#models/SongModel/song"
 
 export const trackShares = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
+ console.log(req.body);
   if (!user) {
     return res
       .status(200)
