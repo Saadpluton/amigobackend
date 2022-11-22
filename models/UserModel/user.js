@@ -66,6 +66,10 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default : 0
   },
+  trackId: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Song",
+  },
   createdAt :{
     type : Date,
     default : Date.now()

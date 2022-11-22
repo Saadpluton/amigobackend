@@ -12,6 +12,7 @@ import { getNewTracks } from "#controllers/TrackController/GetNewTrack";
 import { getAllTracks } from "#controllers/TrackController/GetAllTrack";
 import { getAllArtistTracks } from "#controllers/TrackController/GetArtistTrack";
 import { deleteTrack } from "#controllers/TrackController/DeleteTrack";
+import { addTrackFavourite } from "#controllers/TrackController/AddedToFavourite";
 
 const TrackRoute = express.Router();
 
@@ -68,5 +69,8 @@ TrackRoute.get("/allTrack", getAllTracks);
 
 // // //Get All Artist Track
 TrackRoute.get("/allTrackArtist/:id",validateObjectId, getAllArtistTracks);
+
+// // //Add Track To Favourite
+TrackRoute.post("/favouriteTrack", addTrackFavourite);
 
 export default TrackRoute;

@@ -83,6 +83,10 @@ const ArtistSchema = new mongoose.Schema({
     type : Boolean,
     default : false
   },
+  trackId: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Song",
+  },
   createdAt :{
     type : Date,
     default : Date.now()
