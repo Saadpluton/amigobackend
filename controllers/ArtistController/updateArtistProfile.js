@@ -9,7 +9,7 @@ import { PNG, JPG, JPEG, MP3, MPEG, PATH } from "#constant/constant";
 //@acess  public
 
 export const updateArtistProfile = asyncHandler(async (req, res) => {
-
+console.log(req.files);
 
     const artist = await Artist.findById(req.params.id);
      
@@ -18,22 +18,25 @@ export const updateArtistProfile = asyncHandler(async (req, res) => {
     if (!artist) {
         return res.status(200).json({ status: true, message: "Artist record not found" })
     }
-    if(req.files)
+    if(req.files?.image)
     {
-      if (![PNG, JPEG, JPG].includes(imageFile?.mimetype) && req.files?.image) {
+      if (![PNG, JPEG, JPG].includes(imageFile?.mimetype)) {
         return res.status(400).json({
           status: false,
-          message: "Upload image type should be jpg, jpeg, png",
+          message: "Upload image type should be jpg, jpeg, png a",
         });
       }
-      if ((![PNG, JPEG, JPG].includes(coverFile?.mimetype)) && req.files?.cover) {
+    } 
+    if(req.files?.cover)
+    {
+      if ((![PNG, JPEG, JPG].includes(coverFile?.mimetype))) {
         return res.status(400).json({
           status: false,
-          message: "Upload image type should be jpg, jpeg, png",
+          message: "Upload image type should be jpg, jpeg, png b",
         });
       }
-
     }
+      
     const profileComplete = 70
     
     let image = imageFile ? {image : `${PATH}uploads/${imageFile?.filename}` } : undefined
