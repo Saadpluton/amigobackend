@@ -11,7 +11,6 @@ import mongoose from "mongoose";
 
 export const getFavouriteTracks = asyncHandler(async (req, res) => {
   
-  
   if(req.query.artistId && req.query.artistId != "undefined")
   {
     if (!mongoose.Types.ObjectId.isValid(req.query.artistId))
@@ -26,19 +25,30 @@ export const getFavouriteTracks = asyncHandler(async (req, res) => {
   return res.status(400).send( {status : false , message : 'Invalid user ID.'}); 
   }
 }
-console.log(req.query);
 
-  let user = await User.findOne({_id : req.query?.userId });
-  let artist = await Artist.findOne({_id : req.query?.artistId });
-  if(!user && req.query.userId != "undefined") 
+  let user,artist;
+
+  if(req.query.userId != "undefined" && req.query.userId) 
+  {
+   user = await User.findOne({_id : req.query?.userId });
+  }
+  else if(req.query.artistId != "undefined"  && req.query.artistId) 
+  {
+   artist = await Artist.findOne({_id : req.query?.artistId });
+  }
+
+  
+  if(!user && req.query.userId && req.query.userId != "undefined") 
   {
     return res.status(200).json({ status: true, message: "User record not found" });
   }
-  if(!artist && req.query.artistId != "undefined") 
+  if( !artist && req.query.artistId && req.query.artistId != "undefined") 
   {
     return res.status(200).json({ status: true, message: "Artist record not found" });
   }
+
   let songs ;
+
   if(user)
   {
    songs = await Song.find({_id : {$in : user?.trackId} , isSuspend : false});
