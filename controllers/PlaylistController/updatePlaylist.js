@@ -43,8 +43,8 @@ console.log(req.body);
 
     //const image = req.file ? `uploads/${req.file?.filename}` : undefined
   
-    const trackId = req.body.trackId ? {trackName : track.name ,trackDuration : track.duration, trackGenre : track.genre}  : undefined
-    const artistId = req.body.artistId ? {artistName : artist.name}  : undefined
+    const trackId = req.body.trackId ? {trackName : track?.name ,trackDuration : track?.duration, trackGenre : track?.genre}  : undefined
+    const artistId = req.body.artistId ? {artistName : artist?.name}  : undefined
  
     const update = await Playlist.findByIdAndUpdate(req.params.id,{$set : {...req.body,...trackId,...artistId}})
 
