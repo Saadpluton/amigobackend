@@ -8,6 +8,7 @@ import { getAlbums } from "#controllers/AlbumController/GetAlbum";
 import { getOneAlbum } from "#controllers/AlbumController/GetOneAlbum";
 import { updateAlbum } from "#controllers/AlbumController/updateAlbum";
 import { suspendAlbum } from "#controllers/AlbumController/suspendAlbum";
+import { getArtistAlbum } from "#controllers/AlbumController/getArtistAlbum";
 
 
 const albumRoute = express.Router();
@@ -26,5 +27,8 @@ albumRoute.put("/album/update/:id",multerUpload.single("image") ,validateObjectI
 
 // // //Suspend album
 albumRoute.put("/album/suspend/:id",validateObjectId, suspendAlbum);
+
+// // //GET Artist album
+albumRoute.get("/artistAlbum", getArtistAlbum);
 
 export default albumRoute;
