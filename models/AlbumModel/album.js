@@ -12,6 +12,10 @@ const AlbumSchema = new mongoose.Schema({
   description: {
     type: String,
   },
+  trackId: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Song",
+  },
   artistName: {
     type: String,
   },

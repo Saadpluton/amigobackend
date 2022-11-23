@@ -6,6 +6,8 @@ import { getTrackComments } from "#controllers/CommentsController/GetTrackCommen
 import { getArtistComments } from "#controllers/CommentsController/GetArtistComments";
 import { playlistComments } from "#controllers/CommentsController/PlaylistComments";
 import { getPlaylistComments } from "#controllers/CommentsController/GetPlaylistComments";
+import { albumComments } from "#controllers/CommentsController/AlbumComments";
+import { getAlbumComments } from "#controllers/CommentsController/GetAlbumComments";
 
 const CommentsRoute = express.Router();
 
@@ -15,8 +17,11 @@ CommentsRoute.post("/trackComments", trackComments);
 // //Artist Comments Create
 CommentsRoute.post("/artistComments", artistComments);
 
-// //Artist Comments Create
+// //Playlist Comments Create
 CommentsRoute.post("/playllstComments", playlistComments);
+
+// //Album Comments Create
+CommentsRoute.post("/albumComments", albumComments);
 
 // // //GET All Track Comments
 CommentsRoute.get("/trackComments", getTrackComments);
@@ -26,5 +31,8 @@ CommentsRoute.get("/artistComments", getArtistComments);
 
 // // //GET All Playlist Comments
 CommentsRoute.get("/playlistComments", getPlaylistComments);
+
+// // //GET All Album Comments
+CommentsRoute.get("/albumComments", getAlbumComments);
 
 export default CommentsRoute;
