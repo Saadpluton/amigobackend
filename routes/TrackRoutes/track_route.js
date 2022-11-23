@@ -14,6 +14,7 @@ import { getAllArtistTracks } from "#controllers/TrackController/GetArtistTrack"
 import { deleteTrack } from "#controllers/TrackController/DeleteTrack";
 import { addTrackFavourite } from "#controllers/TrackController/AddedToFavourite";
 import { getFavouriteTracks } from "#controllers/TrackController/GetFavouriteTrack";
+import { getUniqueTrack } from "#controllers/TrackController/UniqueTrack";
 
 const TrackRoute = express.Router();
 
@@ -76,5 +77,8 @@ TrackRoute.post("/favouriteTrack", addTrackFavourite);
 
 // // //Get All Favourite Track
 TrackRoute.get("/favouriteTrack", getFavouriteTracks);
+
+// // //Get Unique Track
+TrackRoute.get("/uniqueTrack", getUniqueTrack);
 
 export default TrackRoute;

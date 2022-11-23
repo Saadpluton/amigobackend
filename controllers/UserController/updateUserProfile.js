@@ -23,19 +23,13 @@ export const updateProfile = asyncHandler(async (req, res) => {
     const profileComplete = 70
     let imageFile = req.files?.image?.[0];
     let coverFile = req.files?.cover?.[0];
-  
-    // if (![PNG, JPEG, JPG].includes(imageFile?.mimetype  || ![PNG, JPEG, JPG].includes(coverFile?.mimetype))) {
-    //   return res.status(400).json({
-    //     status: false,
-    //     message: "Upload image type should be jpg, jpeg, png",
-    //   });
-    // }
+
     if(imageFile)
     {
       if (![PNG, JPEG, JPG].includes(imageFile?.mimetype)) {
         return res.status(400).json({
           status: false,
-          message: "Upload image type should be jpg, jpeg, png a",
+          message: "Upload image type should be jpg, jpeg, png",
         });
       }
     } 
@@ -44,7 +38,7 @@ export const updateProfile = asyncHandler(async (req, res) => {
       if ((![PNG, JPEG, JPG].includes(coverFile?.mimetype))) {
         return res.status(400).json({
           status: false,
-          message: "Upload image type should be jpg, jpeg, png b",
+          message: "Upload image type should be jpg, jpeg, png",
         });
       }
     }
