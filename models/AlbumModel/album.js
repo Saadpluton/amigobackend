@@ -6,12 +6,12 @@ const AlbumSchema = new mongoose.Schema({
     type: String,
     required: [true, "title field is required"],
   },
-  genre :{
-   type : String
+  genre: {
+    type: String
   },
-  subGenre :[{
-    type : String
-   }],
+  description: {
+    type: String,
+  },
   artistName: {
     type: String,
   },
@@ -46,11 +46,15 @@ const AlbumSchema = new mongoose.Schema({
   isViewed: {
     type: Boolean,
     default: 0
-},
-createdAt :{
-  type : Date,
-  default : Date.now()
-}
+  },
+  privacy: {
+    type: Boolean,
+    default: false
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  }
 });
 
 function validateAlbum(user) {
@@ -59,9 +63,9 @@ function validateAlbum(user) {
     artistId: Joi.string().required(),
     artistName: Joi.string(),
     totalLikes: Joi.number(),
-    genre : Joi.string(),
-    subGenre : Joi.string()
-    
+    genre: Joi.string(),
+    description: Joi.string().max(244),
+    privacy: Joi.boolean(),
   });
 
   return schema.validate(user);

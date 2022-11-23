@@ -33,15 +33,8 @@ export const createAlbum = asyncHandler(async (req, res) => {
       .json({ status: false, message: "Artist record not found" });
   }
 
-  if (!req.file?.filename) {
-    return res
-      .status(400)
-      .json({ status: false, message: "Please Select the Image" });
-  }
-
-  let album = new Album(_.pick(req.body, ["title", "artistId","genre","subGenre", "image"]));
+  let album = new Album(_.pick(req.body, ["title", "artistId","genre","description","privacy"]));
   album.artistName = artist.name;
-  album.image = `uploads/${req.file?.filename}`;
   album = await album.save();
 
   return res
