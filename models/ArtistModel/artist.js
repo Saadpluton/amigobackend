@@ -4,6 +4,10 @@ import { getEnv } from "../../utils/env.js";
 import jwt from "jsonwebtoken";
 
 const ArtistSchema = new mongoose.Schema({
+  type : {
+    type: String,
+    default:"Artist"
+   },
   email: {
     type: String,
     validate: {

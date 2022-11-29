@@ -5,6 +5,10 @@ import JoiObjectId from "joi-objectid";
 const mongoonse_id = JoiObjectId(Joi);
 
 const AlbumSchema = new mongoose.Schema({
+ type : {
+  type: String,
+  default:"Album"
+ },
   title: {
     type: String,
     required: [true, "title field is required"],

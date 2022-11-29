@@ -2,14 +2,13 @@ import mongoose from "mongoose";
 import Joi from "joi";
 
 const SongSchema = new mongoose.Schema({
+  type : {
+    type: String,
+    default:"Track"
+   },
   name: {
     type: String,
   },
-  // tag: [
-  //   {
-  //     type: String,
-  //   },
-  // ],
   description: {
     type: String,
   },

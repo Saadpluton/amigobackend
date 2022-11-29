@@ -5,6 +5,10 @@ import JoiObjectId from "joi-objectid";
 const mongoonse_id = JoiObjectId(Joi);
 
 const PlaylistSchema = new mongoose.Schema({
+  type : {
+    type: String,
+    default:"Playlist"
+   },
   title: {
     type: String,
   },

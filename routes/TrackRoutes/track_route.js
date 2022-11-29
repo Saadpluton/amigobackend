@@ -15,6 +15,7 @@ import { deleteTrack } from "#controllers/TrackController/DeleteTrack";
 import { addTrackFavourite } from "#controllers/TrackController/AddedToFavourite";
 import { getFavouriteTracks } from "#controllers/TrackController/GetFavouriteTrack";
 import { getUniqueTrack } from "#controllers/TrackController/UniqueTrack";
+import { getSearch } from "#controllers/TrackController/Search";
 
 const TrackRoute = express.Router();
 
@@ -80,5 +81,8 @@ TrackRoute.get("/favouriteTrack", getFavouriteTracks);
 
 // // //Get Unique Track
 TrackRoute.get("/uniqueTrack", getUniqueTrack);
+
+// // //Search Filter
+TrackRoute.get("/search", getSearch);
 
 export default TrackRoute;
