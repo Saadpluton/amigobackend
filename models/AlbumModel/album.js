@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 import Joi from "joi";
 
+import JoiObjectId from "joi-objectid";
+const mongoonse_id = JoiObjectId(Joi);
+
 const AlbumSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -67,6 +70,7 @@ function validateAlbum(user) {
     artistId: Joi.string().required(),
     artistName: Joi.string(),
     totalLikes: Joi.number(),
+    trackId: Joi.array().items(mongoonse_id()),
     genre: Joi.string(),
     description: Joi.string().max(244),
     privacy: Joi.boolean(),

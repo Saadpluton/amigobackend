@@ -15,6 +15,7 @@ export const updatePassword = asyncHandler(async (req, res) => {
     const checkedvalid = await UserVerification.findOne({ email: obj.email , role : obj.role})
     if(!checkedvalid)
     {
+        
         return res.status(404).json({status : true , message : "Please verify email before password updated!"})        
     }
     let salt , hashpassword , update ;
