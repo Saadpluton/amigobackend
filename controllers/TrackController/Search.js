@@ -11,6 +11,11 @@ import { Album } from "#models/AlbumModel/album";
 
 export const getSearch = asyncHandler(async (req, res) => {
 
+if(req.query.search === "")
+{
+  return res.status(200).json({ status: true, message: "No record found" });
+}
+
   var regex = new RegExp("^" + req.query.search, "i");
   
     const name =
@@ -23,7 +28,7 @@ export const getSearch = asyncHandler(async (req, res) => {
     req.query.search ? { gender: { $regex: regex }} : undefined;
   
     const genre =
-    req.query.search ? { genre: { $regex: regex }} : undefined;
+    req.query.search ?  { genre: { $regex: regex }} : undefined;
 
   let arrTrack = [name , genre];
   let arrArtist = [name, gender, genre];
@@ -42,8 +47,9 @@ export const getSearch = asyncHandler(async (req, res) => {
     return item;
   });
  
+
   
- 
+       
     const similarTrack = await Song.find({ $and : [ {$or : resultQueryTrack }]}).limit(10).sort({ name : -1}).select("-__v");  
  
     const similarArtist = await Artist.find({ $and : [ {$or : resultQueryArtist }]}).limit(10).sort({ name : -1}).select('-__v');
