@@ -58,7 +58,7 @@ if(req.query.search === "")
   
     const similarAlbum = await Album.find({ $and : [ {$or : resultQueryPlaylistAndAlbum }]}).limit(10).sort({ title : -1}).select('-__v');
   
-    const data = [...similarTrack , ...similarArtist , ...similarAlbum , ...similarPlaylist]
+    const data = [...similarTrack , ...similarArtist , ...similarPlaylist , ...similarAlbum]
 
     if (data.length > 0) 
     {
