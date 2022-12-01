@@ -51,7 +51,7 @@ if(req.query.search === "")
 
     const similarTrack = await Song.find({ $and : [ {$or : resultQueryTrack }]}).limit(10).sort({ name : -1}).select("-__v");  
  
-    const similarArtist = await Artist.find({ $and :  resultQueryArtist }).limit(10).sort({ name : -1}).select('-__v');
+    const similarArtist = await Artist.find({ $and : [ {$or : resultQueryArtist }]}).limit(10).sort({ name : -1}).select('-__v');
  
     const similarPlaylist = await Playlist.find({ $and : [ {$or : resultQueryPlaylistAndAlbum }]}).limit(10).sort({ title : -1}).select('-__v');
   
