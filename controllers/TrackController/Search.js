@@ -30,11 +30,13 @@ if(req.query.search === "")
     const genre =
     req.query.search ?  { genre: { $regex: regex }} : undefined;
 
-  let arrTrack = [name , genre];
-  let arrArtist = [name, gender, genre];
-  let arrPlaylistAndALlbum = [title, genre]
- 
+    const type =
+    req.query.search ?  { type : { $regex: regex }} : undefined;
 
+  let arrTrack = [name , genre , type];
+  let arrArtist = [name, gender, genre , type];
+  let arrPlaylistAndALlbum = [title, genre , type]
+ 
   const resultQueryTrack = arrTrack.filter((item) => {
     return item;
   });
@@ -47,8 +49,6 @@ if(req.query.search === "")
     return item;
   });
  
-
-  
        
     const similarTrack = await Song.find({ $and : [ {$or : resultQueryTrack }]}).limit(10).sort({ name : -1}).select("-__v");  
  
@@ -62,7 +62,7 @@ if(req.query.search === "")
 
     if (data.length > 0) 
     {
-    return res.status(200).json(data);
+    return res.status(200).json({similarTrack,similarArtist,similarPlaylist,similarAlbum});
   }
   else {
     return res.status(200).json({ status: true, message: "No record found" });
