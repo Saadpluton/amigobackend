@@ -44,15 +44,15 @@ export const getSearch = asyncHandler(async (req, res) => {
  
   
  
-    const similarTrack = await Song.find({ $and : [ {$or : resultQueryTrack }]}).limit(10).select("-__v");  
+    const similarTrack = await Song.find({ $and : [ {$or : resultQueryTrack }]}).limit(10).sort({ name : -1}).select("-__v");  
  
-    const similarArtist = await Artist.find({ $and : [ {$or : resultQueryArtist }]}).limit(10).select('-__v');
+    const similarArtist = await Artist.find({ $and : [ {$or : resultQueryArtist }]}).limit(10).sort({ name : -1}).select('-__v');
  
-    const similarPlaylist = await Playlist.find({ $and : [ {$or : resultQueryPlaylistAndAlbum }]}).limit(10).select('-__v');
+    const similarPlaylist = await Playlist.find({ $and : [ {$or : resultQueryPlaylistAndAlbum }]}).limit(10).sort({ title : -1}).select('-__v');
   
-    const similarAlbum = await Album.find({ $and : [ {$or : resultQueryPlaylistAndAlbum }]}).limit(10).select('-__v');
+    const similarAlbum = await Album.find({ $and : [ {$or : resultQueryPlaylistAndAlbum }]}).limit(10).sort({ title : -1}).select('-__v');
   
-    const data = [...similarPlaylist , ...similarTrack , ...similarArtist , ...similarAlbum]
+    const data = [...similarTrack , ...similarArtist , ...similarAlbum , ...similarPlaylist]
 
     if (data.length > 0) 
     {
