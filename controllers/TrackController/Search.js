@@ -57,12 +57,14 @@ if(req.query.search === "")
     const similarPlaylist = await Playlist.find({ $and : [ {$or : resultQueryPlaylistAndAlbum }]}).limit(10).sort({ title : -1}).select('-__v');
   
     const similarAlbum = await Album.find({ $and : [ {$or : resultQueryPlaylistAndAlbum }]}).limit(10).sort({ title : -1}).select('-__v');
-  
+
+    const result =  [...similarTrack , ...similarArtist ,  ...similarPlaylist , ...similarAlbum]
+
     const data = {similarTrack ,similarArtist , similarPlaylist , similarAlbum}
 
     if (data) 
     {
-     return res.status(200).json(data)
+     return res.status(200).json({data,result : result?.length})
     }
   else {
     return res.status(200).json({ status: true, message: "No record found" });
