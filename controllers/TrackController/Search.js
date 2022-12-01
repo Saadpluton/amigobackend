@@ -62,7 +62,7 @@ if(req.query.search === "")
 
     if (data.length > 0) 
     {
-    return res.status(200).json({similarTrack,similarArtist,similarPlaylist,similarAlbum});
+    return res.status(200).json({similarTrack,similarArtist,similarPlaylist,similarAlbum , data});
   }
   else {
     return res.status(200).json({ status: true, message: "No record found" });
