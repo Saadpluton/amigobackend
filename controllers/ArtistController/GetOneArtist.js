@@ -83,6 +83,6 @@ if (artist) {
     return res.status(200).json({ artist: artist, artistTrack: artistTrack, artistAlbum: artistAlbum, artistPlaylist: artistPlaylist, similarArtist: similarArtist, artistComment: artistComment });
   }
   else {
-    res.status(200).json({ status: true, message: "No record found" });
+    return res.status(200).json({ status: true, message: "No record found" });
   }
 });
