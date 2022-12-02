@@ -24,10 +24,6 @@ const playlistCommentsSchema = new mongoose.Schema({
   comments: {
     type: String
   },
-  createAt: {
-    type: Date,
-    default: Date.now()
-  }
-});
+},{timestamps : true});
 
 export const PlaylistComments = mongoose.model("playlistcomment", playlistCommentsSchema)

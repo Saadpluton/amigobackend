@@ -28,10 +28,7 @@ const artistCommentsSchema = new mongoose.Schema({
     type: Number,
     default : 0
   },
-  createAt: {
-    type: Date,
-    default: Date.now()
-  }
-});
+
+},{timestamps : true});
 
 export const ArtistComments = mongoose.model("artistcomment", artistCommentsSchema)
