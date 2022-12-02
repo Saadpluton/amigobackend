@@ -1,6 +1,5 @@
 import asyncHandler from "#middlewares/asyncHandler";
 import { User } from "#models/UserModel/user";
-import { Song } from "#models/SongModel/song";
 import { ArtistComments } from "#models/CommentsModel/artist_comments";
 import { Artist } from "#models/ArtistModel/artist"
 import mongoose from "mongoose";
@@ -29,11 +28,7 @@ export const artistComments = asyncHandler(async (req, res) => {
   }
   
   const user = await User.findById(req.body.userId);
-  if (!user) {
-    return res
-      .status(200)
-      .json({ status: true, message: "User record not found" });
-  }
+  const artistFind = await Artist.findById(req.body.userId);
   const artist = await Artist.findById(req.body.artistId);
 
   if (!artist) {
@@ -52,7 +47,8 @@ export const artistComments = asyncHandler(async (req, res) => {
 
     }
   }
-
+if(user || artistFind)
+{
   const parentId = req.body.parentId && req.parentId != "" ? req.body.parentId : undefined
 
   let comments = new ArtistComments({ userId: req.body.userId, artistId: req.body.artistId, comments: req.body.comments, parentId });
@@ -63,5 +59,11 @@ export const artistComments = asyncHandler(async (req, res) => {
   return res
     .status(201)
     .json({ status: true, message: "Artist comments created successfully" });
-
+}
+else{
+  return res
+  .status(200)
+  .json({ status: true, message: "Record not found" });
+}
+  
 });

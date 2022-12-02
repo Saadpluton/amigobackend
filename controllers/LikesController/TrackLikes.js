@@ -2,6 +2,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 import { Likes } from "#models/LikesModel/likes";
 import { User } from "#models/UserModel/user";
 import { Song } from "#models/SongModel/song";
+import {Artist} from "#models/ArtistModel/artist"
 import mongoose from "mongoose";
 
 //@desc  Likes Create And Remove
@@ -16,11 +17,7 @@ export const trackLikes = asyncHandler(async (req, res) => {
   }
 
   const user = await User.findById(req.params.id);
-  if (!user) {
-    return res
-      .status(200)
-      .json({ status: true, message: "User record not found" });
-  }
+  const artist = await Artist.findById(req.params.id);
   const song = await Song.findById(req.body.trackId);
 
   if (!song) {
@@ -28,11 +25,14 @@ export const trackLikes = asyncHandler(async (req, res) => {
       .status(200)
       .json({ status: true, message: "Track record not found" });
   }
-  const likesValid = await Likes.findOne({
+
+  if(artist || user)
+  {
+   const likesValid = await Likes.findOne({
     userId: req.params.id,
     trackId: req.body.trackId,
   });
-
+if(artist || user)
   if (likesValid) {
     await Likes.findOneAndDelete({
       userId: req.params.id,
@@ -57,4 +57,10 @@ export const trackLikes = asyncHandler(async (req, res) => {
       .status(201)
       .json({ status: true, message: "Track likes created successfully" });
   }
+}
+else{
+  return res
+      .status(200)
+      .json({ status: true, message: "Record not found" });
+}
 });

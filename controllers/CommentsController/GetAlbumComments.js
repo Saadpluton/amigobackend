@@ -9,8 +9,6 @@ import { AlbumComments } from "#models/CommentsModel/album_comments";
 
 export const getAlbumComments = asyncHandler(async (req, res) => {
  
-  const comments = await AlbumComments.find();
- 
   const result  = await AlbumComments.aggregate([
     //{ "$match": { "userId": req.body.userId }},
     { "$lookup": {
@@ -21,18 +19,6 @@ export const getAlbumComments = asyncHandler(async (req, res) => {
     }},
     
   ])
-
-  
-  const netedComments  = await AlbumComments.aggregate([
-    { "$lookup": {
-      "from": "albumcomments",
-      "localField": "parentId",
-      "foreignField": "parentId",
-      "as": "Nestedchild"
-    }},
-  ])
-
-  //console.log(netedComments)
 
   result.filter((item,index) => {
     if(item.parentId)
@@ -52,6 +38,5 @@ export const getAlbumComments = asyncHandler(async (req, res) => {
       return item
     }
   })
-  //return res.send(albumCommentsGet)
   return albumCommentsGet
 });

@@ -1,7 +1,8 @@
 import asyncHandler from "#middlewares/asyncHandler";
 import { Shares } from "#models/SharesModel/shares"
 import { User } from "#models/UserModel/user";
-import {Song , validate} from "#models/SongModel/song"
+import {Song} from "#models/SongModel/song"
+import { Artist } from "#models/ArtistModel/artist"
 
 ///@desc  Track Shares Create
 //@route  /trackShares
@@ -10,12 +11,8 @@ import {Song , validate} from "#models/SongModel/song"
 
 export const trackShares = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
- console.log(req.body);
-  if (!user) {
-    return res
-      .status(200)
-      .json({ status: true, message: "User record not found" });
-  }
+  const artist = await Artist.findById(req.params.id);
+
   const track = await Song.findById(req.body.trackId);
 
   if (!track) {
@@ -23,8 +20,9 @@ export const trackShares = asyncHandler(async (req, res) => {
       .status(200)
       .json({ status: true, message: "track record not found" });
   }
-
-  const sharesValid = await Shares.findOne({ userId: req.params.id, trackId: req.body.trackId });
+  if(user || artist)
+  {
+    const sharesValid = await Shares.findOne({ userId: req.params.id, trackId: req.body.trackId });
 
     if (!sharesValid) {
         let shares = new Shares({ userId: req.params.id, trackId: req.body.trackId })
@@ -37,4 +35,12 @@ export const trackShares = asyncHandler(async (req, res) => {
     else {
         return res.status(200).json({ status: true, message: "Track Shares sent Already" })
     }
+  }
+  else{
+    return res
+    .status(200)
+    .json({ status: true, message: "Record not found" });
+  }
+
+  
 });

@@ -1,7 +1,8 @@
 import asyncHandler from "#middlewares/asyncHandler";
 import { Likes } from "#models/LikesModel/likes";
 import { User } from "#models/UserModel/user";
-import {Playlist , validate} from "#models/PlayListModel/playlist"
+import {Playlist} from "#models/PlayListModel/playlist"
+import {Artist} from "#models/ArtistModel/artist"
 import mongoose from "mongoose";
 
 
@@ -18,11 +19,7 @@ export const PlaylistLikes = asyncHandler(async (req, res) => {
   }
 
   const user = await User.findById(req.params.id);
-  if (!user) {
-    return res
-      .status(200)
-      .json({ status: true, message: "User record not found" });
-  }
+  const artist = await Artist.findById(req.params.id);
   const playlist = await Playlist.findById(req.body.playlistId);
 
   if (!playlist) {
@@ -30,33 +27,43 @@ export const PlaylistLikes = asyncHandler(async (req, res) => {
       .status(200)
       .json({ status: true, message: "Playlist record not found" });
   }
-  const likesValid = await Likes.findOne({
-    userId: req.params.id,
-    playlistId: req.body.playlistId,
-  });
-
-  if (likesValid) {
-    await Likes.findOneAndDelete({
+  
+  if(artist || user)
+  {
+    const likesValid = await Likes.findOne({
       userId: req.params.id,
       playlistId: req.body.playlistId,
     });
-    if(playlist.totalLikes !== 0)
-    {
-      await Playlist.findByIdAndUpdate(req.body.playlistId, {
-        totalLikes: playlist.totalLikes - 1,
+  
+    if (likesValid) {
+      await Likes.findOneAndDelete({
+        userId: req.params.id,
+        playlistId: req.body.playlistId,
       });
+      if(playlist.totalLikes !== 0)
+      {
+        await Playlist.findByIdAndUpdate(req.body.playlistId, {
+          totalLikes: playlist.totalLikes - 1,
+        });
+      }
+      return res
+        .status(200)
+        .json({ status: true, message: "likes remove successfully" });
+    } else {
+      let likes = new Likes({ userId: req.params.id, playlistId: req.body.playlistId });
+      await likes.save();
+      await Playlist.findByIdAndUpdate(req.body.playlistId, {
+        totalLikes: playlist.totalLikes + 1,
+      });
+      return res
+        .status(201)
+        .json({ status: true, message: "Playlist likes created successfully" });
     }
-    return res
-      .status(200)
-      .json({ status: true, message: "likes remove successfully" });
-  } else {
-    let likes = new Likes({ userId: req.params.id, playlistId: req.body.playlistId });
-    await likes.save();
-    await Playlist.findByIdAndUpdate(req.body.playlistId, {
-      totalLikes: playlist.totalLikes + 1,
-    });
-    return res
-      .status(201)
-      .json({ status: true, message: "Playlist likes created successfully" });
   }
+  else{
+    return res
+    .status(200)
+    .json({ status: true, message: "Record not found" });
+  }
+ 
 });

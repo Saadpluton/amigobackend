@@ -1,7 +1,8 @@
 import asyncHandler from "#middlewares/asyncHandler";
 import { Shares } from "#models/SharesModel/shares"
 import { User } from "#models/UserModel/user";
-import {Album , validate} from "#models/AlbumModel/album"
+import {Album} from "#models/AlbumModel/album"
+import { Artist } from "#models/ArtistModel/artist"
 
 ///@desc  Artsit Shares Create
 //@route  /AlbumShares
@@ -10,19 +11,15 @@ import {Album , validate} from "#models/AlbumModel/album"
 
 export const albumShares = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
-  if (!user) {
-    return res
-      .status(200)
-      .json({ status: true, message: "User record not found" });
-  }
+  const artist = await Artist.findById(req.params.id);
   const album = await Album.findById(req.body.albumId);
-
   if (!album) {
     return res
       .status(200)
       .json({ status: true, message: "Album record not found" });
   }
-
+if(artist || user)
+{
   const sharesValid = await Shares.findOne({ userId: req.params.id, albumId: req.body.albumId });
 
     if (!sharesValid) {
@@ -36,4 +33,10 @@ export const albumShares = asyncHandler(async (req, res) => {
     else {
         return res.status(200).json({ status: true, message: "Album Shares sent Already" })
     }
+  }
+  else{
+    return res
+    .status(200)
+    .json({ status: true, message: "Record not found" });
+  }
 });

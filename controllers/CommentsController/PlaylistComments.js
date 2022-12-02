@@ -1,7 +1,8 @@
 import asyncHandler from "#middlewares/asyncHandler";
 import { PlaylistComments } from "#models/CommentsModel/playlist_comments";
 import { User } from "#models/UserModel/user";
-import {Playlist , validate} from "#models/PlayListModel/playlist"
+import {Playlist} from "#models/PlayListModel/playlist"
+import { Artist } from "#models/ArtistModel/artist"
 import mongoose from "mongoose";
 
 //@desc  Comments Create And Remove
@@ -27,11 +28,7 @@ export const playlistComments = asyncHandler(async (req, res) => {
     }
   }
   const user = await User.findById(req.body.userId);
-  if (!user) {
-    return res
-      .status(200)
-      .json({ status: true, message: "User record not found" });
-  }
+  const artist = await Artist.findById(req.body.userId);
   const playlist = await Playlist.findById(req.body.playlistId);
 
   if (!playlist) {
@@ -52,7 +49,8 @@ export const playlistComments = asyncHandler(async (req, res) => {
    
     }
   }
-
+if(user || artist)
+{
   const parentId = req.body.parentId && req.parentId != "" ? req.body.parentId : undefined
 
   let comments = new PlaylistComments({ userId: req.body.userId, playlistId: req.body.playlistId , comments : req.body.comments , parentId });
@@ -63,5 +61,10 @@ export const playlistComments = asyncHandler(async (req, res) => {
     return res
       .status(201)
       .json({ status: true, message: "Playlist comments created successfully" });
-  
+}
+else{
+  return res
+  .status(200)
+  .json({ status: true, message: "Record not found" });
+}
 });

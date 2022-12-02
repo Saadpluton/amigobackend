@@ -3,6 +3,7 @@ import { Likes } from "#models/LikesModel/likes";
 import { User } from "#models/UserModel/user";
 import mongoose from "mongoose";
 import { ArtistComments } from "#models/CommentsModel/artist_comments";
+import {Artist} from "#models/ArtistModel/artist"
 
 //@desc  Likes Create And Remove
 //@route  /artistlikes
@@ -17,18 +18,17 @@ export const artistCommentsLikes = asyncHandler(async (req, res) => {
   }
 
   const user = await User.findById(req.params.id);
-  if (!user) {
-    return res
-      .status(200)
-      .json({ status: true, message: "User record not found" });
-  }
+  const artistFind = await Artist.findById(req.params.id);
   const artist = await ArtistComments.findById(req.body.artistCommentId);
-
+  
   if (!artist) {
     return res
       .status(200)
       .json({ status: true, message: "Artist Comments record not found" });
   }
+
+if(artistFind || user)
+{
   const likesValid = await Likes.findOne({
     userId: req.params.id,
     artistCommentId: req.body.artistCommentId,
@@ -57,4 +57,10 @@ export const artistCommentsLikes = asyncHandler(async (req, res) => {
       .status(201)
       .json({ status: true, message: "Artist Comments likes created successfully" });
   }
+}
+else{
+  return res
+      .status(200)
+      .json({ status: true, message: "Record not found" });
+}
 });
