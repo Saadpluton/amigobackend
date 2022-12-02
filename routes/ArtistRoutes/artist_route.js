@@ -10,6 +10,7 @@ import { updateArtistProfile } from "#controllers/ArtistController/updateArtistP
 import { suspendArtist } from "#controllers/ArtistController/suspendArtist";
 import { topArtists } from "#controllers/ArtistController/TopArtist";
 import { getArtistsByName } from "#controllers/ArtistController/GetArtistByName";
+import { recentArtists } from "#controllers/ArtistController/RecenttlyAdded";
 
 const artistRoute = express.Router();
 
@@ -42,6 +43,9 @@ artistRoute.put("/artist/update/:id",multerUpload.fields([
 
 // //Suspend Artist
 artistRoute.put("/artist/suspend/:id",validateObjectId, suspendArtist);
+
+// //GET recent Artist
+artistRoute.get("/recent-artist", recentArtists);
 
 
 export default artistRoute;
