@@ -4,7 +4,7 @@ import asyncHandler from "#middlewares/asyncHandler";
 import otpGenerator from 'otp-generator';
 import nodemailer from "nodemailer";
 import { Artist } from "#models/ArtistModel/artist";
-
+import { PATH } from "#constant/constant";
 //@desc  forget User Password
 //@route  /user/forget
 //@request Post Request
@@ -46,7 +46,7 @@ export const forgetPassword = asyncHandler(async (req, res) => {
         digits: true, upperCaseAlphabets: false, lowerCaseAlphabets: true, specialChars: false
     })
 
-    let currentUrl = "https://amigobackend.herokuapp.com/";
+    let currentUrl = PATH;
     
     //let currentUrl = "http://localhost:5000/";
     

@@ -15,7 +15,6 @@ import nodemailer from "nodemailer";
 export const createUser = asyncHandler(async (req, res) => {
 
   const obj = JSON.parse(JSON.stringify(req.body));
-console.log(req.file);
   const checkedvalid = await UserVerification.findOne({ email: obj.email, role: obj.role, resetId: obj.resetId })
   if (!checkedvalid) {
     return res.status(404).json({ status: true, message: "Please verify email!" })

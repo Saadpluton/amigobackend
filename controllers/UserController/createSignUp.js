@@ -3,6 +3,7 @@ import {UserVerification} from "#models/UserModel/userVerification"
 import asyncHandler from "#middlewares/asyncHandler";
 import otpGenerator from 'otp-generator';
 import nodemailer from "nodemailer";
+import { PATH } from "#constant/constant";
 
 //@desc  forget User Password
 //@route  /user/forget
@@ -29,8 +30,6 @@ export const createSignUp = asyncHandler(async (req, res) => {
         digits: true, upperCaseAlphabets: false, lowerCaseAlphabets: true, specialChars: false
     })
 
-    let currentUrl = "https://amigobackend.herokuapp.com/";
-    
     let verification = new UserVerification({
         //userId: emailValid._id,
         role : req.body.role,
@@ -45,7 +44,7 @@ export const createSignUp = asyncHandler(async (req, res) => {
         to: req.body.email,
         subject: "Verify Your Email",
         html : `<p>Verify your email address to create a account</p><p>This link 
-        <b>expires in 5 minutes</b></p><p>Press <a href=${currentUrl + "api/user/create/verify/" +verification._id +"/"+ uniqueString}>here </a>to proceed </p>`,
+        <b>expires in 5 minutes</b></p><p>Press <a href=${PATH + "api/user/create/verify/" +verification._id +"/"+ uniqueString}>here </a>to proceed </p>`,
     }
     let transport = nodemailer.createTransport({
         service: "gmail",
