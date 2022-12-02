@@ -11,6 +11,12 @@ const trackCommentsSchema = new mongoose.Schema({
     ref: "TrackComment",
     //required: [true, "userId field is required"]
   },
+  name : {
+    type : String,
+  },
+  image : {
+    type : String,
+  },
   trackId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Song",

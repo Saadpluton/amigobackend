@@ -47,15 +47,21 @@ export const artistComments = asyncHandler(async (req, res) => {
 
     }
   }
+
 if(user || artistFind)
 {
+  
+  let image = user ? {image : user?.image} : {image : artist?.image}
+  let name = user ? {name : user?.name} : {name : artist?.name}
+  
   const parentId = req.body.parentId && req.parentId != "" ? req.body.parentId : undefined
 
-  let comments = new ArtistComments({ userId: req.body.userId, artistId: req.body.artistId, comments: req.body.comments, parentId });
+  let comments = new ArtistComments({ userId: req.body.userId, artistId: req.body.artistId, comments: req.body.comments,...name,...image, parentId });
   await comments.save();
   await Artist.findByIdAndUpdate(req.body.artistId, {
     totalComments: artist.totalComments + 1,
   });
+
   return res
     .status(201)
     .json({ status: true, message: "Artist comments created successfully" });

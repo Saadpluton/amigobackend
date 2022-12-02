@@ -15,6 +15,12 @@ const artistCommentsSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Artist",
   },
+  name : {
+    type : String,
+  },
+  image : {
+    type : String,
+  },
   comments: {
     type: String
   },

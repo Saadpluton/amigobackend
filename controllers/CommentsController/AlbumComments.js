@@ -51,8 +51,11 @@ export const albumComments = asyncHandler(async (req, res) => {
   }
 if(user || artist)
 {
+  let image = user ? {image : user?.image} : {image : artist?.image}
+  let name = user ? {name : user?.name} : {name : artist?.name}
+  
   const parentId = req.body.parentId && req.parentId != "" ? req.body.parentId : undefined
-  let comments = new AlbumComments({ userId: req.body.userId, albumId: req.body.albumId, comments: req.body.comments, parentId });
+  let comments = new AlbumComments({ userId: req.body.userId, albumId: req.body.albumId, comments: req.body.comments , ...image,...name, parentId });
   await comments.save();
   await Album.findByIdAndUpdate(req.body.albumId, {
     totalComments: album.totalComments + 1,

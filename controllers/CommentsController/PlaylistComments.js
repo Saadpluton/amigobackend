@@ -51,9 +51,12 @@ export const playlistComments = asyncHandler(async (req, res) => {
   }
 if(user || artist)
 {
+  let image = user ? {image : user?.image} : {image : artist?.image}
+  let name = user ? {name : user?.name} : {name : artist?.name}
+  
   const parentId = req.body.parentId && req.parentId != "" ? req.body.parentId : undefined
 
-  let comments = new PlaylistComments({ userId: req.body.userId, playlistId: req.body.playlistId , comments : req.body.comments , parentId });
+  let comments = new PlaylistComments({ userId: req.body.userId, playlistId: req.body.playlistId , comments : req.body.comments,...image,...name , parentId });
     await comments.save();
     await Playlist.findByIdAndUpdate(req.body.playlistId, {
       totalComments: playlist.totalComments + 1,

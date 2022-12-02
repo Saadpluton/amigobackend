@@ -1,4 +1,3 @@
-import {User , validate} from "#models/UserModel/user"
 import asyncHandler from "#middlewares/asyncHandler";
 
 import { AlbumComments } from "#models/CommentsModel/album_comments";
@@ -39,4 +38,5 @@ export const getAlbumComments = asyncHandler(async (req, res) => {
     }
   })
   return albumCommentsGet
+
 });

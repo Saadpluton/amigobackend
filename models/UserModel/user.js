@@ -97,7 +97,6 @@ function validateUser(user) {
       cover: Joi.string(),
       country: Joi.string(),
       url : Joi.string(),
-   
   });
 
   return schema.validate(user);

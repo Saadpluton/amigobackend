@@ -52,6 +52,9 @@ export const getArtistComments = asyncHandler(async (req, res) => {
       return item
     }
   })
-  
-  return artistCommentsGet
+  //await ArtistComments.populate(artistCommentsGet, {path: "userId"});
+
+  res.send(artistCommentsGet)
+
+  //return artistCommentsGet
 });

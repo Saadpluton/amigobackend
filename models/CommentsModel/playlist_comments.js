@@ -11,6 +11,12 @@ const playlistCommentsSchema = new mongoose.Schema({
     ref: "playlistcomment",
     //required: [true, "userId field is required"]
   },
+  name : {
+    type : String,
+  },
+  image : {
+    type : String,
+  },
   playlistId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Playlist",
