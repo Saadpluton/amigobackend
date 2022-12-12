@@ -19,7 +19,7 @@ export const deleteTrack = async (req, res, next) => {
       
       if(songFind)
       {
-        await Song.findOneAndDelete(id);
+        await Song.findOneAndDelete({_id : id});
        return res.status(200).json({status : true , message : "Track has been deleted."});  
       }
      
