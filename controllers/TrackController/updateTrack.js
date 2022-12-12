@@ -50,7 +50,7 @@ export const updateTrack = asyncHandler(async (req, res) => {
     });
   }
 
-  let image1 = req.files ? `${PATH}uploads/${file?.filename}` : undefined
+  let image = req.files ? `${PATH}uploads/${file?.filename}` : undefined
 
   let audio1 = req.files ? `${PATH}uploads/${audio?.filename}` : undefined
 
@@ -90,7 +90,7 @@ export const updateTrack = asyncHandler(async (req, res) => {
             $set: {
               ...req.body,
               //duration: fixedCurrentTime,
-              image: image1,
+              ...image,
               //audio: audio1,
             },
           }).then((res) => {
@@ -104,7 +104,7 @@ export const updateTrack = asyncHandler(async (req, res) => {
 
   }
   else {
-    const update = await Song.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, image : image1 ,}},{new : true});
+    const update = await Song.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, ...image ,}},{new : true});
    
   }
  
