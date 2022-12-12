@@ -50,9 +50,9 @@ export const updateTrack = asyncHandler(async (req, res) => {
     });
   }
 
-  let image = req.files ? `${PATH}uploads/${file?.filename}` : undefined
+  let image = file? `${PATH}uploads/${file?.filename}` : undefined
 
-  let audio1 = req.files ? `${PATH}uploads/${audio?.filename}` : undefined
+  let audio1 = audio ? `${PATH}uploads/${audio?.filename}` : undefined
 
   if (audio) {
     let parser = musicData(
