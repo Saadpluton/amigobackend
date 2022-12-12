@@ -56,7 +56,6 @@ export const updateTrack = asyncHandler(async (req, res) => {
           fs.createReadStream(`uploads/${audio?.filename}`),
       { duration: true },
       async function (err, metadata) {
-        console.log("Hello");
 
         let fixedCurrentTime;
         let duration = 0;
