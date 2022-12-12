@@ -14,7 +14,6 @@ import mongoose from "mongoose";
 //@acess  public
 
 export const updateTrack = asyncHandler(async (req, res) => {
-  console.log(req.body);
   const song = await Song.findById(req.params.id);
   if (req.body.artistId) {
     if (!mongoose.Types.ObjectId.isValid(req.body.artistId)) {
@@ -49,16 +48,14 @@ export const updateTrack = asyncHandler(async (req, res) => {
       message: "Upload audio type should be mp3, mpeg",
     });
   }
-
-  let image = file? `${PATH}uploads/${file?.filename}` : undefined
-
-  let audio1 = audio ? `${PATH}uploads/${audio?.filename}` : undefined
-
+  
+  let image = file? {image : `${PATH}uploads/${file?.filename}` } : undefined
+   
   if (audio) {
     let parser = musicData(
           fs.createReadStream(`uploads/${audio?.filename}`),
       { duration: true },
-      function (err, metadata) {
+      async function (err, metadata) {
         console.log("Hello");
 
         let fixedCurrentTime;
@@ -84,28 +81,16 @@ export const updateTrack = asyncHandler(async (req, res) => {
           } else {
             fixedCurrentTime = minutes + ":" + seconds;
           }
-          //console.log(fixedCurrentTime);
-
-          const update = Song.findByIdAndUpdate(req.params.id, {
-            $set: {
-              ...req.body,
-              //duration: fixedCurrentTime,
-              ...image,
-              //audio: audio1,
-            },
-          }).then((res) => {
-            if (res) {
-              true;
-            }
-          });
+          await Song.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, ...image}},{new : true});
         }
       }
     );
 
   }
   else {
-    const update = await Song.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, ...image ,}},{new : true});
-   
+    
+    await Song.findByIdAndUpdate(req.params.id, {$set :{ ...req.body, ...image}},{new : true});
+    
   }
  
   return res
