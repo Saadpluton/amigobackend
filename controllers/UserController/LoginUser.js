@@ -45,7 +45,7 @@ export const loginUser = asyncHandler(async (req, res) => {
   if (!userFind) {
     return res
       .status(400)
-      .json({ status: true, message: "Email does not exists!" });
+      .json({ status: true, message: "Email or password incorrect!" });
   }
 
   let valid;
@@ -60,7 +60,7 @@ export const loginUser = asyncHandler(async (req, res) => {
   if(userFind.isSuspend === true){
     return res
       .status(400)
-      .json({ status: true, message: "You status is suspend!" });
+      .json({ status: true, message: "You status is suspend!"});
   
   }
   if (valid) {
