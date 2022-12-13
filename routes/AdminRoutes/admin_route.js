@@ -11,6 +11,13 @@ import { getFeatureArtist } from "#controllers/AdminController/getAllFeatureArti
 import { createFeatureArtist } from "#controllers/AdminController/CreateFeatureArtist";
 import { createUserAdminRegistration } from "#controllers/AdminController/createUserRegistration";
 import { getPlaylistsAdmin } from "#controllers/AdminController/GetPlayListAdmin";
+import { deleteArtist } from "#controllers/AdminController/ArtistDelete";
+import { deleteUser } from "#controllers/AdminController/Userdelete";
+import { deleteGenre } from "#controllers/AdminController/GenreDelete";
+import { deletePlaylist } from "#controllers/AdminController/DeletePlaylist";
+import { getOneGenre } from "#controllers/AdminController/GetOneGenre";
+import { getOneArtist } from "#controllers/AdminController/GetOneArtist";
+import { getOneUser } from "#controllers/AdminController/GetOneUser";
 
 const AdminRoute = express.Router();
 
@@ -50,5 +57,27 @@ AdminRoute.post("/adminCreate",multerUpload.fields([
       maxCount: 1,
     },
   ]), createUserAdminRegistration);
+
+  // Admin Delete Artist
+  AdminRoute.delete("/admin-remove-artist/:id", validateObjectId,deleteArtist);
+
+
+ // Admin Delete User
+  AdminRoute.delete("/admin-remove-user/:id", validateObjectId,deleteUser);
+
+   // Admin Delete Genre
+   AdminRoute.delete("/admin-remove-genre/:id", validateObjectId,deleteGenre);
+
+   // Admin Delete Playlist
+   AdminRoute.delete("/admin-remove-playlist/:id", validateObjectId,deletePlaylist);
+
+   // Admin Get One Genre
+AdminRoute.get("/admin-one-genre/:id",  validateObjectId, getOneGenre);
+
+   // Admin Get One Artist
+   AdminRoute.get("/admin-one-artist/:id",  validateObjectId, getOneArtist);
+
+     // Admin Get One User
+     AdminRoute.get("/admin-one-user/:id",  validateObjectId, getOneUser);
 
 export default AdminRoute;

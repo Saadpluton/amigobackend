@@ -46,5 +46,4 @@ PlaylistRoute.put("/playlist/suspend/:id", validateObjectId, suspendPlaylist);
 // //delete Track In playlist
 PlaylistRoute.delete("/playlist/delete/:id",validateObjectId, deletePlaylistTrack);
 
-
 export default PlaylistRoute;
