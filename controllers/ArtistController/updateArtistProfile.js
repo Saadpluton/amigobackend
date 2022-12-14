@@ -10,7 +10,7 @@ import { PNG, JPG, JPEG, MP3, MPEG, PATH } from "#constant/constant";
 
 export const updateArtistProfile = asyncHandler(async (req, res) => {
 console.log(req.files);
-
+console.log(req.body)
     const artist = await Artist.findById(req.params.id);
      
     let imageFile = req.files?.image?.[0];
