@@ -12,7 +12,7 @@ import { createFeatureArtist } from "#controllers/AdminController/CreateFeatureA
 import { createUserAdminRegistration } from "#controllers/AdminController/createUserRegistration";
 import { getPlaylistsAdmin } from "#controllers/AdminController/GetPlayListAdmin";
 import { deleteArtist } from "#controllers/AdminController/ArtistDelete";
-import { deleteUser } from "#controllers/AdminController/Userdelete";
+import { deleteUser } from "#controllers/AdminController/UserDelete";
 import { deleteGenre } from "#controllers/AdminController/GenreDelete";
 import { deletePlaylist } from "#controllers/AdminController/DeletePlaylist";
 import { getOneGenre } from "#controllers/AdminController/GetOneGenre";
