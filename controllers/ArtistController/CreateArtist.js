@@ -7,6 +7,8 @@ import bcrypt from "bcrypt";
 //@desc  Artist Create
 //@route  /artist
 //@request Post Request
+
+
 //@acess  public
 
 export const createArtist = asyncHandler(async (req, res) => {

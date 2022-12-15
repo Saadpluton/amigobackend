@@ -18,6 +18,7 @@ import { deletePlaylist } from "#controllers/AdminController/DeletePlaylist";
 import { getOneGenre } from "#controllers/AdminController/GetOneGenre";
 import { getOneArtist } from "#controllers/AdminController/GetOneArtist";
 import { getOneUser } from "#controllers/AdminController/GetOneUser";
+import { getTotalListeners } from "#controllers/AdminController/Analytics";
 
 const AdminRoute = express.Router();
 
@@ -79,5 +80,8 @@ AdminRoute.get("/admin-one-genre/:id",  validateObjectId, getOneGenre);
 
      // Admin Get One User
      AdminRoute.get("/admin-one-user/:id",  validateObjectId, getOneUser);
+
+     // Admin Get One User
+     AdminRoute.get("/totalListeners", getTotalListeners);
 
 export default AdminRoute;
