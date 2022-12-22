@@ -4,6 +4,9 @@ import asyncHandler from "#middlewares/asyncHandler";
 import {User} from "#models/UserModel/user"
 import { Song } from "#models/SongModel/song";
 import { Artist } from "#models/ArtistModel/artist";
+
+import { PNG, JPG, JPEG, MP3, MPEG, PATH } from "#constant/constant";
+
 import mongoose from "mongoose";
 
 //@desc  update Playlist
@@ -12,7 +15,7 @@ import mongoose from "mongoose";
 //@acess  public
 
 export const updatePlaylist = asyncHandler(async (req, res) => {
-console.log(req.body);
+// console.log(req.body);
     if(req.body.userId)
     {
     if (!mongoose.Types.ObjectId.isValid(req.body.userId))
@@ -41,12 +44,11 @@ console.log(req.body);
       return res.status(200).json({ status: true, message: "User record not found" })
     }
 
-    //const image = req.file ? `uploads/${req.file?.filename}` : undefined
-  
+    let image = req.file ? {image : `${PATH}uploads/${req.file?.filename}` } : undefined 
     const trackId = req.body.trackId ? {trackName : track?.name ,trackDuration : track?.duration, trackGenre : track?.genre}  : undefined
     const artistId = req.body.artistId ? {artistName : artist?.name}  : undefined
  
-    const update = await Playlist.findByIdAndUpdate(req.params.id,{$set : {...req.body,...trackId,...artistId}})
+    const update = await Playlist.findByIdAndUpdate(req.params.id,{$set : {...req.body,...trackId,...artistId,...image}})
 
     return res.status(200).json({ status: true, message: "Playlist updated successfully" })
 
