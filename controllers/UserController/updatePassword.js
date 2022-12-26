@@ -1,7 +1,7 @@
 import { User, validate } from "#models/UserModel/user"
 import { UserVerification } from "#models/UserModel/userVerification"
 import asyncHandler from "#middlewares/asyncHandler";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { Artist } from "#models/ArtistModel/artist";
 
 //@desc  update Password

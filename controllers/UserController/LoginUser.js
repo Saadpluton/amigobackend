@@ -1,6 +1,6 @@
 import { User, validate } from "#models/UserModel/user";
 import asyncHandler from "#middlewares/asyncHandler";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import Joi from "joi";
 import { Artist } from "#models/ArtistModel/artist";
 import e from "express";

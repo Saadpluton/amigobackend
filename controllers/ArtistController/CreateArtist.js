@@ -2,7 +2,7 @@ import { Artist, validate } from "#models/ArtistModel/artist";
 import _ from "lodash";
 import asyncHandler from "#middlewares/asyncHandler";
 import { PATH } from "#constant/constant";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 //@desc  Artist Create
 //@route  /artist

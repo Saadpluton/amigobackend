@@ -1,5 +1,5 @@
 import { User, validate } from "#models/UserModel/user"
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import _ from "lodash";
 import asyncHandler from "#middlewares/asyncHandler";
 import { PATH } from "#constant/constant";
