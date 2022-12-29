@@ -10,29 +10,27 @@ const ArtistSchema = new mongoose.Schema({
    },
   email: {
     type: String,
-    validate: {
+    /*validate: {
       validator: function (v) {
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
       },
       message: "Please enter a valid email",
     },
-    required: [true, "email field is required"],
+    required: [true, "email field is required"],*/
   },
   password: {
     type: String,
     minlength: 5,
     maxlength: 255,
-    required: [true, "password field is required"],
+    // required: [true, "password field is required"],
   },
   name: {
-    type: String,
-  },
-  gender: {
     type: String,
   },
   country: {
     type: String,
   },
+  address: String,
   description: {
     type: String,
   },

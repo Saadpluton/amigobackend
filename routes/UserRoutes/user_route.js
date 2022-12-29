@@ -14,6 +14,8 @@ import { updatePassword } from "#controllers/UserController/updatePassword";
 import { updateProfile } from "#controllers/UserController/updateUserProfile";
 import { createSignUp } from "#controllers/UserController/createSignUp";
 import { verifyEmailSignUp } from "#controllers/UserController/VerificationEmailSignUp";
+import saveKeplrUser from "#controllers/UserController/saveKeplrUser";
+import loginKeplrUser from "#controllers/UserController/loginKeplrUser";
 
 const userRoute = express.Router();
 
@@ -76,4 +78,8 @@ userRoute.put("/user/update/:id",validateObjectId ,multerUpload.fields([
     },
   ]),updateProfile);
 
-export default userRoute;
+//Save User with Keplr
+userRoute.post("/user/keplr",saveKeplrUser);
+userRoute.post("/user/keplr/login",loginKeplrUser);
+
+  export default userRoute;
