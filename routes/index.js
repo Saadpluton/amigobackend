@@ -13,6 +13,7 @@ import GenreRoute from "#routes/GenreRoutes/genre_route";
 import ListenerRoute from "#routes/ListenerRoutes/listeners_route";
 import CommentsRoute from "#routes/CommentsRoutes/comments_route";
 import AdminRoute from "#routes/AdminRoutes/admin_route";
+import express from "express";
 
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -56,6 +57,12 @@ const routes = (app) => {
  
   //Admin
  app.use("/api",AdminRoute);
+
+  app.use(express.static(path.resolve(__dirname, "../build")));
+
+  app.get('*', (req, res) =>
+      res.sendFile(path.resolve(__dirname, '../', 'build', 'index.html'))
+  )
 
   app.use(error);
 };

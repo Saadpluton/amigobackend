@@ -3,7 +3,7 @@ const JPG = 'image/jpg'
 const JPEG = 'image/jpeg'
 const MP3 = 'audio/mp3'
 const MPEG = 'audio/mpeg'
-const PATH = "https://amigosound-backend.herokuapp.com/"
+const PATH = "http://146.190.52.214:5000/"
 const TOTALLISTENERS = 500
 const TOTALLIKES = 301
 
