@@ -19,11 +19,15 @@ import { getOneGenre } from "#controllers/AdminController/GetOneGenre";
 import { getOneArtist } from "#controllers/AdminController/GetOneArtist";
 import { getOneUser } from "#controllers/AdminController/GetOneUser";
 import { getTotalListeners } from "#controllers/AdminController/Analytics";
+import {toggleTrending} from "#controllers/AdminController/toggleTrending";
 
 const AdminRoute = express.Router();
 
 // Track Trending Added
 AdminRoute.get("/trackTrending/:id",validateObjectId, createTrendingTrack);
+
+// Playlist Trending Added
+AdminRoute.get("/playlistTrending/:id",validateObjectId, toggleTrending);
 
 // Admin All Playlist
 AdminRoute.get("/playlistAdmin", getPlaylists);

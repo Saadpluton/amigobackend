@@ -13,6 +13,7 @@ import { getPlaylistsByUserId } from "#controllers/PlaylistController/getPlaylis
 import { suspendPlaylist } from "#controllers/PlaylistController/suspendPlaylist";
 import { deletePlaylistTrack } from "#controllers/PlaylistController/DeletePlaylistTrack";
 import { weeklyGetPlaylist } from "#controllers/PlaylistController/WeeklyGetPlaylist";
+import {getTrendingPlaylists} from "#controllers/PlaylistController/GetTrendingPlaylist";
 
 
 const PlaylistRoute = express.Router();
@@ -22,6 +23,9 @@ PlaylistRoute.post("/playlist",multerUpload.single("image"),createPlaylist);
 
 // // //GET All Playlist
 PlaylistRoute.get("/playlist",getPlaylists );
+
+// // //GET All Playlist
+PlaylistRoute.get("/playlist/trending",getTrendingPlaylists);
 
 // // //Add Track Playlist
 PlaylistRoute.post("/addtrackplaylist",addTrackPlaylist );
