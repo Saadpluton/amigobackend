@@ -47,7 +47,7 @@ export const getArtistComments = asyncHandler(async (req, res) => {
   })
 
   const artistCommentsGet = artistComment.filter((item) => {   
-    if(item.artistId.toString() === req.query.artistId)
+    if(item.artistId.toString() === req.params.id)
     {
       return item
     }

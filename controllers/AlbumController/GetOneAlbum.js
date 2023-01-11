@@ -60,6 +60,14 @@ export const getOneAlbum = asyncHandler(async (req, res) => {
           }
         })
       })
+
+  if (likes?.length > 0) {
+    likes?.map((x) => {
+      if (album?._id.equals(x?.albumId)) {
+        album.isLiked = true
+      }
+    })
+  }
    
     const albumComments = await getAlbumComments(req,res)
 
