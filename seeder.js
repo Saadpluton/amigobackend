@@ -27,10 +27,18 @@ const importData = async () => {
             password: bcrypt.hashSync('12345678', 10),
             role: 'admin',
         }).save();
+        
+        await new User({
+            name: 'Amigo',
+            email: 'expertmaster30@gmail.com',
+            password: bcrypt.hashSync('12345678', 10),
+            role: 'admin',
+        }).save();
 
         console.log('Data Imported!');
         process.exit();
-    } catch (e) {
+    }
+     catch (e) {
         console.log(`Error: ${e}`);
         process.exit(1);
     }
